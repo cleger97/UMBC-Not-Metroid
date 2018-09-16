@@ -616,7 +616,7 @@ PlayerSettings:
   cloudServicesEnabled:
     UNet: 1
   facebookSdkVersion: 7.9.4
-  apiCompatibilityLevel: 2
+  apiCompatibilityLevel: 3
   cloudProjectId: 24b6acb3-5266-4c4e-8eb3-dd2c56fbff56
   projectName: Not Metroid
   organizationId: gdc-2018-not-metroid
