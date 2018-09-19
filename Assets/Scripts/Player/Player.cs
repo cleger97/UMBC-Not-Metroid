@@ -49,8 +49,8 @@ public class Player : MonoBehaviour {
         groundCheckPosition = new Vector2(boxCheckX, boxCheckY);
 
         bool isDash = false;
-        
-        bool isJump = HandleJumpInput();
+
+        bool isJump = HandleJumpInput(out isDash);
 
         // -1 for left, 0 for not moving, 1 for right
         int direction = (horiz != 0) ? (int)Mathf.Sign(horiz) : 0;
@@ -66,8 +66,9 @@ public class Player : MonoBehaviour {
         rb2D.velocity = velocity;
 	}
 
-    public bool HandleJumpInput() {
+    public bool HandleJumpInput(out bool isDash) {
         bool jumpInput = Input.GetButtonDown("Jump");
+        isDash = Input.GetButtonDown("Dash");
         bool grounded = (checkCollide(groundCheckPosition, 0.5f, groundMask)) ? true : false;
         
         // isGrounded = airborne;
