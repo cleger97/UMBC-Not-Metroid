@@ -11,6 +11,9 @@ public class PlayerWeapon : MonoBehaviour {
     bool hasPrimaryWeapon;
     bool hasSecondaryWeapon;
 
+    int currentPrimaryWeapon = 0;
+    int currentSecondaryWeapon = -1;
+
     public void Activate (int id) {
         switch (id) {
             case 0: {hasPrimaryWeapon = true; return;}
@@ -25,7 +28,21 @@ public class PlayerWeapon : MonoBehaviour {
             //TODO: Sound/Text that indicates not unlocked
             return false;
         }
-
+        
+        //TODO: Actual fire.
+        switch(currentPrimaryWeapon) {
+            case 0: {
+                // do beam stuff
+                break;
+            }
+            case 1: {
+                // do laser sword stuff
+                break;
+            }
+            default: {
+                break;
+            }
+        }
 
         return true;
     }

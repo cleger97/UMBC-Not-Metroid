@@ -13,6 +13,7 @@ public class Player : MonoBehaviour {
 
     float moveSpeed = 3f;
     float jump = 5f;
+    bool doubleJumped = false;
 
     bool isGrounded;
 
@@ -42,31 +43,53 @@ public class Player : MonoBehaviour {
 	void Update () {
         float vert = Input.GetAxisRaw("Vertical");
         float horiz = Input.GetAxisRaw("Horizontal");
-        bool isJump = Input.GetButtonDown("Jump");
+
+        float boxCheckX = transform.position.x;
+        float boxCheckY = transform.position.y - (boxColl.size.y / 2);
+        groundCheckPosition = new Vector2(boxCheckX, boxCheckY);
+
+        bool isDash = false;
+        
+        bool isJump = HandleJumpInput();
 
         // -1 for left, 0 for not moving, 1 for right
         int direction = (horiz != 0) ? (int)Mathf.Sign(horiz) : 0;
 
         // calculate position of check
-        float boxCheckX = transform.position.x;
-        float boxCheckY = transform.position.y - (boxColl.size.y / 2);
-        groundCheckPosition = new Vector2(boxCheckX, boxCheckY);
-               
-        isGrounded = (checkCollide(groundCheckPosition, 0.5f, groundMask)) ? true : false;     
-        float vertModifier = (isJump && isGrounded) ? jump : 0;
+        
+
+
+        float vertModifier = (isJump) ? jump : 0;
         
         
         Vector2 velocity = new Vector2(moveSpeed * direction, rb2D.velocity.y + vertModifier);
         rb2D.velocity = velocity;
 	}
 
+    public bool HandleJumpInput() {
+        bool jumpInput = Input.GetButtonDown("Jump");
+        bool grounded = (checkCollide(groundCheckPosition, 0.5f, groundMask)) ? true : false;
+        
+        // isGrounded = airborne;
+        Debug.Log("Airborne: " + !grounded);
+
+        // if grounded reset double jump
+        if (grounded) { doubleJumped = false; }
+
+        if (grounded && jumpInput) { return true; }
+
+        else if (doubleJumped == false && jumpInput) { doubleJumped = true; return true; }
+
+        return false;
+    }
+
     public void HandleFireInput() {
         bool isPrimaryFire = Input.GetButtonDown("PrimaryFire");
         //bool isSecondaryFire = Input.GetButtonDown("SecondaryFire");
         //bool isSwitch = Input.GetButtonDown("SwitchWeapon");
-
-
     }
+
+
 
     // Functionality - What the player can do
     public void Activate(int id) {
