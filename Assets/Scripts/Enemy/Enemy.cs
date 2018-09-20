@@ -10,13 +10,17 @@ public class Enemy : MonoBehaviour
     public float activeDistance;
     public float stoppingDistance;
     public float retreatDistance;
-    public bool patrol = true;
+    public float shootingDistance;
+    public bool patrol = false;
+    public bool sniper;
+    public bool canShoot = false;
+    public float shotReset = 3f;
 
     private bool movingRight = true;
     [SerializeField]
     private GameObject player;
-    //[SerializeField]
-    //private GameObject _fistPrefab;
+    [SerializeField]
+    private GameObject _laserPrefab;
     public Transform groundDetection;
 
     // Use this for initialization
@@ -58,7 +62,6 @@ public class Enemy : MonoBehaviour
         }
         if (!patrol)
         {
-            //rotate to look at the player
             if (Vector2.Distance(transform.position, player.transform.position) < 0)
             {
                 movingRight = false;
@@ -81,18 +84,32 @@ public class Enemy : MonoBehaviour
             }
 
         }
+        if (sniper)
+        {
+            if (Vector2.Distance(transform.position, player.transform.position) < shootingDistance)
+            {
+                if (canShoot)
+                {
+                    Instantiate(_laserPrefab, transform.position, Quaternion.identity);
+                    canShoot = false;
+
+                }
+                shotReset -= Time.deltaTime;
+                if (shotReset <= 0)
+                {
+                    shotReset = 2f;
+                    canShoot = true;
+                }
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
         {
-            /*if(movingRight)
-                Instantiate(_fistPrefab, transform.position + new Vector3(1, 0, 0), Quaternion.identity);
-            if(!movingRight)
-                Instantiate(_fistPrefab, transform.position - new Vector3(1, 0, 0), Quaternion.identity);
-                */
-            player.GetComponent<Player>();
+            
+            //player.GetComponent<Player>().health--;
 
         }
     }
