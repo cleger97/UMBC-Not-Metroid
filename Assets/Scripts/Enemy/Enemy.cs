@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     public float stoppingDistance;
     public float retreatDistance;
     public float shootingDistance;
+    public int enemyHealth;
     public bool patrol = true;
     public bool sniper = false;
     public bool copyCat = false;
@@ -131,7 +132,17 @@ public class Enemy : MonoBehaviour
             Attack();
         }
     }
-
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        if(col.gameObject.tag == "Player")
+        {
+            enemyHealth--;
+            if (enemyHealth <= 0)
+            {
+                Destroy(this.gameObject);
+            }
+        }
+    }
     private void Attack()
     {
         Debug.Log("Attacking!");
