@@ -60,9 +60,11 @@ public class Player : MonoBehaviour {
 
 
         float vertModifier = (isJump) ? jump : 0;
+
+        float totalVSpeed = (vertModifier > 0) ? vertModifier : rb2D.velocity.y;
         
         
-        Vector2 velocity = new Vector2(moveSpeed * direction, rb2D.velocity.y + vertModifier);
+        Vector2 velocity = new Vector2(moveSpeed * direction, totalVSpeed);
         rb2D.velocity = velocity;
 	}
 
