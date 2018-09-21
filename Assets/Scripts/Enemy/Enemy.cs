@@ -11,8 +11,9 @@ public class Enemy : MonoBehaviour
     public float stoppingDistance;
     public float retreatDistance;
     public float shootingDistance;
-    public bool patrol = false;
-    public bool sniper;
+    public bool patrol = true;
+    public bool sniper = false;
+    public bool copyCat = false;
     public bool canShoot = false;
     public float shotReset = 3f;
 
@@ -103,6 +104,11 @@ public class Enemy : MonoBehaviour
                 }
             }
         }
+        if (copyCat)
+        {
+           
+
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -120,6 +126,15 @@ public class Enemy : MonoBehaviour
                 movingRight = true;
             }
         }
+        if(other.tag == "Player")
+        {
+            Attack();
+        }
+    }
+
+    private void Attack()
+    {
+        Debug.Log("Attacking!");
     }
 }
 

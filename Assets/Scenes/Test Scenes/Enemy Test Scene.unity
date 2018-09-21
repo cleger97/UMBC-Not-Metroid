@@ -667,7 +667,7 @@ MonoBehaviour:
   shootingDistance: 5
   patrol: 0
   sniper: 1
-  canShoot: 0
+  canShoot: 1
   shotReset: 3
   player: {fileID: 225639300}
   _laserPrefab: {fileID: 1670236163638520, guid: 580c5023f7da36c4b83b2b23d8f7fead,
