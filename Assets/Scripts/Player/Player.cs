@@ -10,9 +10,16 @@ public class Player : MonoBehaviour {
     BoxCollider2D boxColl;
     Rigidbody2D rb2D;
     PlayerAugments augmentList;
+    // external variable
+    // will be changed by collisions with walls
+    public bool isOnWall = false;
 
     float moveSpeed = 3f;
     float jump = 5f;
+
+    float movementLockOut = 0.0f;
+
+    float wallSlideSpeed = 1f;
     bool doubleJumped = false;
 
     bool isGrounded;
@@ -28,11 +35,13 @@ public class Player : MonoBehaviour {
         } else {
             DontDestroyOnLoad(this);
         }
-    }
-    void Start () {
+
         boxColl = GetComponent<BoxCollider2D>();
         rb2D = GetComponent<Rigidbody2D>();
         weapon = GetComponent<PlayerWeapon>();
+    }
+    void Start () {
+        
         groundMask = LayerMask.GetMask("Ground");
         groundCheckPosition = Vector2.zero;
 
@@ -41,6 +50,11 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (movementLockOut > 0) {
+            movementLockOut -= Time.deltaTime;
+            return;
+        }
+
         float vert = Input.GetAxisRaw("Vertical");
         float horiz = Input.GetAxisRaw("Horizontal");
 
@@ -61,20 +75,31 @@ public class Player : MonoBehaviour {
 
         float vertModifier = (isJump) ? jump : 0;
 
-        float totalVSpeed = (vertModifier > 0) ? vertModifier : rb2D.velocity.y;
+        float vSpeed = (vertModifier > 0) ? vertModifier : rb2D.velocity.y;
+        
+        if (isOnWall && !isJump) {
+            vSpeed = -wallSlideSpeed;
+        } else if (isOnWall && isJump) {
+            direction = -1 * direction;
+            movementLockOut = 0.2f;
+        }
         
         
-        Vector2 velocity = new Vector2(moveSpeed * direction, totalVSpeed);
+        Vector2 velocity = new Vector2(moveSpeed * direction, vSpeed);
+
+        Debug.Log("velocity = " + velocity.y);
         rb2D.velocity = velocity;
 	}
 
     public bool HandleJumpInput(out bool isDash) {
         bool jumpInput = Input.GetButtonDown("Jump");
         isDash = Input.GetButtonDown("Dash");
-        bool grounded = (checkCollide(groundCheckPosition, 0.5f, groundMask)) ? true : false;
+        bool grounded = (checkCollide(groundCheckPosition, boxColl.size.x / 2, groundMask)) ? true : false;
         
         // isGrounded = airborne;
         Debug.Log("Airborne: " + !grounded);
+
+        if (isOnWall && jumpInput) { return true; }
 
         // if grounded reset double jump
         if (grounded) { doubleJumped = false; }
@@ -100,13 +125,14 @@ public class Player : MonoBehaviour {
     }
 
     // Tools to use in debugging/getting information
-    public static bool checkCollide(Vector2 position, float radius, LayerMask layer) {
-        return Physics2D.OverlapCircle(position, radius, layer);
+    public static bool checkCollide(Vector2 position, float rad, LayerMask layer) {
+        return Physics2D.OverlapCircle(position, rad , layer);
     }
 
     void OnDrawGizmos() {
         Gizmos.color = (isGrounded) ? Color.green : Color.red;
-		Gizmos.DrawWireSphere (groundCheckPosition, 0.5f);
+        float rad = (boxColl == null) ? 0.3f : (float)boxColl.size.x / 2;
+		Gizmos.DrawWireSphere (groundCheckPosition, rad);
     }
 
 }
