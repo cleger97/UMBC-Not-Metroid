@@ -17,6 +17,8 @@ public class Player : MonoBehaviour {
     float moveSpeed = 3f;
     float jump = 5f;
 
+    int horizontalDirection = 0;
+
     float movementLockOut = 0.0f;
 
     float wallSlideSpeed = 1f;
@@ -68,7 +70,7 @@ public class Player : MonoBehaviour {
 
         // -1 for left, 0 for not moving, 1 for right
         int direction = (horiz != 0) ? (int)Mathf.Sign(horiz) : 0;
-
+        horizontalDirection = direction;
         // calculate position of check
         
 
@@ -81,7 +83,7 @@ public class Player : MonoBehaviour {
             vSpeed = -wallSlideSpeed;
         } else if (isOnWall && isJump) {
             direction = -1 * direction;
-            movementLockOut = 0.2f;
+            movementLockOut = 0.4f;
         }
         
         
@@ -112,7 +114,7 @@ public class Player : MonoBehaviour {
     }
 
     public void HandleFireInput() {
-        bool isPrimaryFire = Input.GetButtonDown("PrimaryFire");
+        //bool isPrimaryFire = Input.GetButtonDown("PrimaryFire");
         //bool isSecondaryFire = Input.GetButtonDown("SecondaryFire");
         //bool isSwitch = Input.GetButtonDown("SwitchWeapon");
     }
@@ -134,5 +136,36 @@ public class Player : MonoBehaviour {
         float rad = (boxColl == null) ? 0.3f : (float)boxColl.size.x / 2;
 		Gizmos.DrawWireSphere (groundCheckPosition, rad);
     }
+
+    void OnCollisionEnter2D(Collision2D collision) {
+        Debug.Log("Collision Entered");
+        Collider2D otherColl = collision.collider;
+        float distance = (boxColl.size.x / 2) + 0.1f;
+        if (otherColl.tag.Equals("Wall")) {
+            if (horizontalDirection == 0) {return;} // will never be true if falling, and should never hit a wall otherwise
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right * horizontalDirection, distance, LayerMask.GetMask("Ground"));  
+
+            if (hit != false) {
+                isOnWall = true;
+            }
+
+        }
+
+    }
+
+    void OnCollisionExit2D(Collision2D collision) {
+        Collider2D otherColl = collision.collider;
+        float distance = (boxColl.size.x / 2) + 0.1f;
+        if (otherColl.tag.Equals("Wall")) {
+            if (horizontalDirection == 0) {return;} // will never be true if falling, and should never hit a wall otherwise
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right * -1 * horizontalDirection, distance, LayerMask.GetMask("Ground"));  
+
+            if (hit == false) {
+                isOnWall = false;
+            }
+
+        }
+    }
+
 
 }
