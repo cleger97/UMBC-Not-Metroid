@@ -14,13 +14,17 @@ public class Projectile : MonoBehaviour {
     {
         player = GameObject.FindGameObjectWithTag("Player");
         projectilePath = player.transform.position;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         transform.position = Vector2.MoveTowards(transform.position, projectilePath, _speed * Time.deltaTime);
-
+        if(transform.position == projectilePath)
+        {
+            Destroy(this.gameObject);
+        }
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
