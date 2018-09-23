@@ -7,17 +7,21 @@ public class Enemy : MonoBehaviour
 {
 
     public float speed;
+    //public float dashSpeed;
+    //public float dashDistance;
     public float activeDistance;
     public float stoppingDistance;
     public float retreatDistance;
     public float shootingDistance;
     public int enemyHealth;
+    //public bool dash = false;
     public bool patrol = true;
     public bool sniper = false;
     public bool copyCat = false;
     public bool canShoot = false;
     public float shotReset = 3f;
-
+    //private float canDash = 3f;
+    //loat reset = 3f;
     private bool movingRight = true;
     [SerializeField]
     private GameObject player;
@@ -105,13 +109,38 @@ public class Enemy : MonoBehaviour
                 }
             }
         }
-        if (copyCat)
+        ////////////stuff for a dashing enemy
+        /*canDash -= Time.deltaTime;
+        if (canDash <= 0)
         {
-           
-
+            canDash = 3f;
+            dash = true;
         }
+        if (dash)
+        {
+            
+            if (Vector2.Distance(transform.position, player.transform.position) < dashDistance && canDash >= 3f && reset >= 3f)
+            {
+                Dash();
+            }
+
+        }*/
     }
 
+    /*private void Dash()
+    {
+        
+        // Vector2 dashPath = player.transform.position;
+        // transform.position = dashPath * dashSpeed;
+        speed = speed * dashSpeed;
+        dash = false;
+        reset -= Time.deltaTime;
+        if(reset == 0)
+        {
+            speed = speed/dashSpeed;
+            reset = 3f;
+        }
+    }*/
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Wall")
