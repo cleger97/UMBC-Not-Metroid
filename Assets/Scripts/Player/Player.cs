@@ -147,6 +147,7 @@ public class Player : MonoBehaviour {
 
             if (hit != false) {
                 isOnWall = true;
+                movementLockOut = 0f;
             }
 
         }
