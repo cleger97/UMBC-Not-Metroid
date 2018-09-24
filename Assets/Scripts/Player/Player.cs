@@ -5,6 +5,8 @@ using UnityEngine;
 public class Player : MonoBehaviour {
 
     static public Player instance = null;
+    public GameObject platform;
+    public float pOffsetDistance = 1.6f;
 
     PlayerWeapon weapon;
     BoxCollider2D boxColl;
@@ -52,7 +54,14 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (movementLockOut > 0) {
+        HandleMovement();
+
+        HandlePlatform();
+
+	}
+
+    private void HandleMovement() {
+         if (movementLockOut > 0) {
             movementLockOut -= Time.deltaTime;
             return;
         }
@@ -86,14 +95,16 @@ public class Player : MonoBehaviour {
             movementLockOut = 0.4f;
         }
         
-        
         Vector2 velocity = new Vector2(moveSpeed * direction, vSpeed);
 
         Debug.Log("velocity = " + velocity.y);
         rb2D.velocity = velocity;
-	}
+
+
+    }
 
     public bool HandleJumpInput(out bool isDash) {
+    
         bool jumpInput = Input.GetButtonDown("Jump");
         isDash = Input.GetButtonDown("Dash");
         bool grounded = (checkCollide(groundCheckPosition, boxColl.size.x / 2, groundMask)) ? true : false;
@@ -113,6 +124,22 @@ public class Player : MonoBehaviour {
         return false;
     }
 
+    public void HandlePlatform() {
+        bool isPlatforming = Input.GetButtonDown("Platform");
+        Vector2 direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+
+        // calculate direction
+        
+        Vector3 offset = new Vector3(Mathf.Sign(direction.x) * pOffsetDistance, Mathf.Sign(direction.y) * pOffsetDistance, transform.position.z);
+
+        if (isPlatforming) {
+            if (direction.x == 0 && direction.y == 0) { return; }
+
+            GameObject newPlatform = Instantiate(platform, transform.position + offset, Quaternion.identity);
+
+        }
+
+    }
     public void HandleFireInput() {
         //bool isPrimaryFire = Input.GetButtonDown("PrimaryFire");
         //bool isSecondaryFire = Input.GetButtonDown("SecondaryFire");
