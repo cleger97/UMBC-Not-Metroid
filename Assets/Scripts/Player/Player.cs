@@ -6,6 +6,7 @@ public class Player : MonoBehaviour {
 
     static public Player instance = null;
     public GameObject platform;
+    public GameObject platformContainer;
     public float pOffsetDistance = 1.6f;
 
     PlayerWeapon weapon;
@@ -16,17 +17,20 @@ public class Player : MonoBehaviour {
     // will be changed by collisions with walls
     public bool isOnWall = false;
 
-    float moveSpeed = 3f;
-    float jump = 5f;
+    public float moveSpeed = 3f;
+    public float jump = 5f;
 
-    int horizontalDirection = 0;
+    public float dashDistance = 5f;
+    public float dashSpeed = 1f;
 
-    float movementLockOut = 0.0f;
+    private int horizontalDirection = 0;
 
-    float wallSlideSpeed = 1f;
-    bool doubleJumped = false;
+    public float movementLockOut = 0.0f;
 
-    bool isGrounded;
+    public float wallSlideSpeed = 1f;
+    private bool doubleJumped = false;
+
+    public bool isGrounded;
 
     Vector2 groundCheckPosition;
     LayerMask groundMask;
@@ -73,40 +77,78 @@ public class Player : MonoBehaviour {
         float boxCheckY = transform.position.y - (boxColl.size.y / 2);
         groundCheckPosition = new Vector2(boxCheckX, boxCheckY);
 
-        bool isDash = false;
+        bool isDash = HandleDashInput();
 
-        bool isJump = HandleJumpInput(out isDash);
+        bool isJump = HandleJumpInput();
 
         // -1 for left, 0 for not moving, 1 for right
         int direction = (horiz != 0) ? (int)Mathf.Sign(horiz) : 0;
         horizontalDirection = direction;
         // calculate position of check
         
-
-
-        float vertModifier = (isJump) ? jump : 0;
-
-        float vSpeed = (vertModifier > 0) ? vertModifier : rb2D.velocity.y;
+        Vector2 velocity = Vector2.zero;
         
-        if (isOnWall && !isJump) {
-            vSpeed = -wallSlideSpeed;
-        } else if (isOnWall && isJump) {
-            direction = -1 * direction;
-            movementLockOut = 0.4f;
+        if (isDash) {
+            velocity = HandleDashMovement(horiz, vert);
+            movementLockOut = dashSpeed;
+        } else {
+            float vertModifier = (isJump) ? jump : 0;
+
+            float vSpeed = (vertModifier > 0) ? vertModifier : rb2D.velocity.y;
+        
+            if (isOnWall && !isJump) {
+                vSpeed = -wallSlideSpeed;
+            } else if (isOnWall && isJump) {
+                direction = -1 * direction;
+                movementLockOut = 0.4f;
+            }
+            velocity = new Vector2(moveSpeed * direction, vSpeed);
         }
-        
-        Vector2 velocity = new Vector2(moveSpeed * direction, vSpeed);
 
-        Debug.Log("velocity = " + velocity.y);
         rb2D.velocity = velocity;
 
 
     }
 
-    public bool HandleJumpInput(out bool isDash) {
+    private bool HandleDashInput() {
+        bool isDash = Input.GetButtonDown("Dash");
+
+        // TODO: Mid-Air Dash Lock (i.e. you can't dash infinite times in air)
+
+        return isDash;
+    }
+
+    private Vector2 HandleDashMovement(float horiz, float vert) {
+        Vector2 endMovement = Vector2.zero;
+
+        float speedOfDash = (dashDistance / dashSpeed);
+        
+        if (horiz == 0 && vert == 0) {
+            //Debug.Log("Case 1: no direction");
+            return Vector2.zero;
+            
+        }
+        else if (horiz == 0 ^ vert == 0) { // exclusive or: if horizontal or vertical are 0, but not both and not neither.
+            endMovement = (vert == 0) ? new Vector2( Mathf.Sign(horiz) * speedOfDash , 0f) : new Vector2(0f, Mathf.Sign(vert) * speedOfDash );
+            //Debug.Log("Speed Of Dash: " + speedOfDash);
+            //Debug.Log("Directions: " + Mathf.Sign(horiz) + " : " + Mathf.Sign(vert));
+            //Debug.Log("Case 2: One Direction");
+        } else { 
+            float angle45 = (Mathf.Sqrt(2)) / 2f; // On a unit circle, the 45 degree angle to create a line of size 1 has both X and Y of sqrt(2)/2.
+            endMovement = new Vector2(Mathf.Sign(horiz) * speedOfDash * angle45, Mathf.Sign(vert) * speedOfDash * angle45 );
+            //Debug.Log("Case 3: Both Directions");
+        }
+
+        // dash velocity shouldn't drop all the aerial velocity
+        endMovement.y += rb2D.velocity.y;
+
+        return endMovement;
+    }
+
+    private bool HandleJumpInput() {
     
         bool jumpInput = Input.GetButtonDown("Jump");
-        isDash = Input.GetButtonDown("Dash");
+        
         bool grounded = (checkCollide(groundCheckPosition, boxColl.size.x / 2, groundMask)) ? true : false;
         
         // isGrounded = airborne;
@@ -135,8 +177,9 @@ public class Player : MonoBehaviour {
         if (isPlatforming) {
             if (direction.x == 0 && direction.y == 0) { return; }
 
-            GameObject newPlatform = Instantiate(platform, transform.position + offset, Quaternion.identity);
-
+            GameObject newPlatform = Instantiate(platform, transform.position + offset, Quaternion.identity, platformContainer.transform);
+            platformContainer.GetComponent<DynamicPlatformContainer>().ValidateCount();
+            
         }
 
     }
