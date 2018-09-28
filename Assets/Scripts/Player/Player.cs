@@ -33,6 +33,7 @@ public class Player : MonoBehaviour
     bool dashOnCooldown = false;
     bool doubleJump = false;
     Controller2D controller;
+    private Animator animator;
 
     private void Awake()
     {
@@ -48,7 +49,7 @@ public class Player : MonoBehaviour
     {
 
         controller = GetComponent<Controller2D>();
-
+        animator = GetComponent<Animator>();
         gravity = -(2 * jumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
         print("Gravity: " + gravity + "  Jump Velocity: " + jumpVelocity);
@@ -132,9 +133,9 @@ public class Player : MonoBehaviour
             GameObject newPlatform = Instantiate(platform, transform.position + offset, Quaternion.identity, platformContainer.transform);
             platformContainer.GetComponent<DynamicPlatformContainer>().ValidateCount();
         }
-        if (Input.GetButtonDown("Attack"))
+        if (Input.GetButtonDown("Fire1"))
         {
-            
+            animator.SetTrigger("Attack");
         }
     }
 
