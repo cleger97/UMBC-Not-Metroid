@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4916236590212496}
   - component: {fileID: 212397794824548792}
   - component: {fileID: 61094085789194796}
-  - component: {fileID: 50317025972056452}
   - component: {fileID: 114891426085680746}
   - component: {fileID: 114573432671248324}
   m_Layer: 9
@@ -44,26 +43,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &50317025972056452
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1717481386824200}
-  m_BodyType: 2
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
 --- !u!61 &61094085789194796
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -116,8 +95,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpHeight: 3
   timeToJumpApex: 0.4
-  baseAccelerationTimeAirborne: 0.2
-  baseAccelerationTimeGrounded: 0.1
+  baseAccelerationTimeAirborne: 0.15
+  baseAccelerationTimeGrounded: 0.05
   moveSpeed: 8
   dashCooldown: 0.5
   platform: {fileID: 1627975833962628, guid: 88e35cf766c5b5c4fb266df66d5e0b62, type: 2}

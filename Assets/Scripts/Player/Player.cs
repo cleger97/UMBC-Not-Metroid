@@ -28,6 +28,7 @@ public class Player : MonoBehaviour
     float velocityXSmoothing;
     bool facingRight = true;
     bool dashOnCooldown = false;
+    bool doubleJump = false;
     Controller2D controller;
 
     void Start()
@@ -44,11 +45,15 @@ public class Player : MonoBehaviour
     void Update()
     {
 
-        if (controller.collisions.above || controller.collisions.below)
+        if (controller.collisions.above)
         {
             velocity.y = 0;
         }
-
+        if (controller.collisions.below)
+        {
+            velocity.y = 0;
+            doubleJump = false;
+        }
         Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
         if (input.x > 0 && !facingRight)
@@ -63,11 +68,16 @@ public class Player : MonoBehaviour
             transform.localScale = new Vector3(-1, 1, 1);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && controller.collisions.below)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            velocity.y = jumpVelocity;
+            if (controller.collisions.below)
+            {
+                velocity.y = jumpVelocity;
+            } else if (!doubleJump){
+                velocity.y = jumpVelocity;
+                doubleJump = true;
+            }
         }
-
         if (Input.GetKeyDown(KeyCode.Space) && controller.collisions.left && !controller.collisions.below)
         {
             velocity.y = jumpVelocity;
@@ -87,14 +97,14 @@ public class Player : MonoBehaviour
         {
             if (facingRight)
             {
-                velocity.x = jumpVelocity*.75f;
+                velocity.x = jumpVelocity;
 
             }
             else
             {
-                velocity.x = -jumpVelocity*.75f;
+                velocity.x = -jumpVelocity;
             }
-            StartCoroutine(ChangeDrag(.3f, .8f));
+            StartCoroutine(ChangeDrag(.2f, .8f));
             StartCoroutine(SetInputScale(.3f, .1f));
             StartCoroutine(DashCooldown());
         }
