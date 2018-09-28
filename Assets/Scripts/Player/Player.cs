@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿
+/*
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -240,3 +242,138 @@ public class Player : MonoBehaviour {
 
 
 }
+*/
+using UnityEngine;
+using System.Collections;
+using System;
+
+[RequireComponent(typeof(Controller2D))]
+public class Player : MonoBehaviour
+{
+
+    public float jumpHeight = 4;
+    public float timeToJumpApex = .4f;
+    public float baseAccelerationTimeAirborne = .2f;
+    public float baseAccelerationTimeGrounded = .1f;
+    public float moveSpeed = 6;
+
+    public float dashCooldown = 0.5f;
+
+    public GameObject platform;
+    public Transform platformContainer;
+
+    float inputScale = 1f;
+
+    float accelerationTimeAirborne;
+    float accelerationTimeGrounded;
+    float gravity;
+    float jumpVelocity;
+    Vector3 velocity;
+    float velocityXSmoothing;
+    bool facingRight = true;
+    bool dashOnCooldown = false;
+    Controller2D controller;
+
+    void Start()
+    {
+        controller = GetComponent<Controller2D>();
+
+        gravity = -(2 * jumpHeight) / Mathf.Pow(timeToJumpApex, 2);
+        jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
+        print("Gravity: " + gravity + "  Jump Velocity: " + jumpVelocity);
+        accelerationTimeAirborne = baseAccelerationTimeAirborne;
+        accelerationTimeGrounded = baseAccelerationTimeGrounded;
+    }
+
+    void Update()
+    {
+
+        if (controller.collisions.above || controller.collisions.below)
+        {
+            velocity.y = 0;
+        }
+
+        Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+
+        if (input.x > 0 && !facingRight)
+        {
+            facingRight = true;
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+
+        if (input.x < 0 && facingRight)
+        {
+            facingRight = false;
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) && controller.collisions.below)
+        {
+            velocity.y = jumpVelocity;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) && controller.collisions.left && !controller.collisions.below)
+        {
+            velocity.y = jumpVelocity;
+            velocity.x = jumpVelocity/3f;
+            StartCoroutine(ChangeDrag(.3f, .8f));
+        }
+        if (Input.GetKeyDown(KeyCode.Space) && controller.collisions.right && !controller.collisions.below)
+        {
+            velocity.y = jumpVelocity;
+            velocity.x = -jumpVelocity/3f;
+            StartCoroutine(ChangeDrag(.3f, .8f));
+        }
+
+        float targetVelocityX = input.x * moveSpeed * inputScale;
+        velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
+        if (Input.GetButtonDown("Dash"))
+        {
+            if (facingRight)
+            {
+                velocity.x = jumpVelocity*.75f;
+
+            }
+            else
+            {
+                velocity.x = -jumpVelocity*.75f;
+            }
+            StartCoroutine(ChangeDrag(.3f, .8f));
+            StartCoroutine(SetInputScale(.3f, .1f));
+            StartCoroutine(DashCooldown());
+        }
+        controller.ignorePlatform = input.y < 0;
+        velocity.y += gravity * Time.deltaTime;
+        controller.Move(velocity * Time.deltaTime);
+
+        if (Input.GetButtonDown("Platform"))
+        {
+            Vector3 offset = velocity / moveSpeed + Vector3.down;
+            GameObject newPlatform = Instantiate(platform, transform.position + offset, Quaternion.identity, platformContainer.transform);
+            platformContainer.GetComponent<DynamicPlatformContainer>().ValidateCount();
+        }
+    }
+
+    private IEnumerator ChangeDrag(float seconds, float dragAmount)
+    {
+        accelerationTimeAirborne = dragAmount;
+        accelerationTimeGrounded = dragAmount;
+        yield return new WaitForSeconds(seconds);
+        accelerationTimeAirborne = baseAccelerationTimeAirborne;
+        accelerationTimeGrounded = baseAccelerationTimeGrounded;
+    }
+
+    private IEnumerator SetInputScale(float seconds, float scale)
+    {
+        inputScale = scale;
+        yield return new WaitForSeconds(seconds);
+        inputScale = 1f;
+    }
+
+    private IEnumerator DashCooldown(){
+        dashOnCooldown = true;
+        yield return new WaitForSeconds(dashCooldown);
+        dashOnCooldown = false;
+    }
+}
+
