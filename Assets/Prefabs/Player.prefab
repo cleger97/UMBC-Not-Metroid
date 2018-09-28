@@ -99,17 +99,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7be5cd06dc009be4eab32e5122029597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  platform: {fileID: 1627975833962628, guid: 96230c95968ba524aa60c50100b4989a, type: 2}
-  platformContainer: {fileID: 0}
-  pOffsetDistance: 1.6
-  isOnWall: 0
+  jumpHeight: 4
+  timeToJumpApex: 0.4
+  baseAccelerationTimeAirborne: 0.2
+  baseAccelerationTimeGrounded: 0.1
   moveSpeed: 3
-  jump: 7
-  dashDistance: 5
-  dashSpeed: 0.6
-  movementLockOut: 0
-  wallSlideSpeed: 1
-  isGrounded: 0
+  dashCooldown: 0.5
+  platform: {fileID: 1627975833962628, guid: 88e35cf766c5b5c4fb266df66d5e0b62, type: 2}
+  platformContainer: {fileID: 4548858237864126, guid: 078655283dd4dbd4da86499713c891e1,
+    type: 2}
 --- !u!212 &212397794824548792
 SpriteRenderer:
   m_ObjectHideFlags: 1
