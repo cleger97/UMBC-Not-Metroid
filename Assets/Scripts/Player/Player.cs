@@ -6,6 +6,7 @@ using System;
 [RequireComponent(typeof(Controller2D))]
 public class Player : MonoBehaviour
 {
+    public static Player instance;
 
     public float jumpHeight = 4;
     public float timeToJumpApex = .4f;
@@ -17,6 +18,8 @@ public class Player : MonoBehaviour
 
     public GameObject platform;
     public Transform platformContainer;
+
+    public GameObject weapon;
 
     float inputScale = 1f;
 
@@ -31,8 +34,19 @@ public class Player : MonoBehaviour
     bool doubleJump = false;
     Controller2D controller;
 
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Destroy(this);
+        } else {
+            DontDestroyOnLoad(this);
+            instance = this;
+        }
+    }
     void Start()
     {
+
         controller = GetComponent<Controller2D>();
 
         gravity = -(2 * jumpHeight) / Mathf.Pow(timeToJumpApex, 2);
@@ -117,6 +131,10 @@ public class Player : MonoBehaviour
             Vector3 offset = velocity / moveSpeed + Vector3.down;
             GameObject newPlatform = Instantiate(platform, transform.position + offset, Quaternion.identity, platformContainer.transform);
             platformContainer.GetComponent<DynamicPlatformContainer>().ValidateCount();
+        }
+        if (Input.GetButtonDown("Attack"))
+        {
+            
         }
     }
 
