@@ -20,7 +20,7 @@ public class SniperEnemy : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Vector2.Distance(transform.position, player.transform.position) < shootingDistance)
+        if (System.Math.Abs(Vector2.Distance(transform.position, player.transform.position)) < shootingDistance)
         {
             if (canShoot)
             {
@@ -33,6 +33,18 @@ public class SniperEnemy : MonoBehaviour {
             {
                 shotReset = 2f;
                 canShoot = true;
+            }
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.tag == "Player")
+        {
+            enemyHealth--;
+            if (enemyHealth <= 0)
+            {
+                Destroy(this.gameObject);
             }
         }
     }

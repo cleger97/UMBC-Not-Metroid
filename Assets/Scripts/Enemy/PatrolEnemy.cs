@@ -20,11 +20,11 @@ public class PatrolEnemy : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Vector2.Distance(transform.position, player.transform.position) > activeDistance)
+        if (System.Math.Abs(Vector2.Distance(transform.position, player.transform.position)) > activeDistance)
         {
             isPatrol = false;
         }
-        else if (Vector2.Distance(transform.position, player.transform.position) < activeDistance)
+        else if (System.Math.Abs(Vector2.Distance(transform.position, player.transform.position)) < activeDistance)
         {
             isPatrol = true;
         }

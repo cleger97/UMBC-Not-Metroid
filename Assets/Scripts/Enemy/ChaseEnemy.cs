@@ -13,7 +13,6 @@ public class ChaseEnemy : MonoBehaviour {
     [SerializeField]
     private GameObject player;
     [SerializeField]
-    
     public Transform groundDetection;
     // Use this for initialization
     void Start () {
@@ -22,11 +21,11 @@ public class ChaseEnemy : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Vector2.Distance(transform.position, player.transform.position) < activeDistance)
+        if (System.Math.Abs(Vector2.Distance(transform.position, player.transform.position)) < activeDistance)
         {
             isPatrol = true;
         }
-        else if (Vector2.Distance(transform.position, player.transform.position) > activeDistance)
+        else if (System.Math.Abs(Vector2.Distance(transform.position, player.transform.position)) > activeDistance)
         {
             isPatrol = false;
         }
