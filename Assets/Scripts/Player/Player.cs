@@ -1,39 +1,29 @@
-﻿
-using UnityEngine;
-using System.Collections;
-using System;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(Controller2D))]
 public class Player : MonoBehaviour
 {
     public static Player instance;
-
-    public float jumpHeight = 4;
+    public float jumpHeight = 3;
     public float timeToJumpApex = .4f;
-    public float baseAccelerationTimeAirborne = .2f;
-    public float baseAccelerationTimeGrounded = .1f;
-    public float moveSpeed = 6;
-
-    public float dashCooldown = 0.5f;
-
+    public float baseAccelerationTimeAirborne = .15f;
+    public float baseAccelerationTimeGrounded = .05f;
+    public float moveSpeed = 8;
     public GameObject platform;
     public Transform platformContainer;
 
-    public GameObject weapon;
-
-    float inputScale = 1f;
-
-    float accelerationTimeAirborne;
-    float accelerationTimeGrounded;
-    float gravity;
-    float jumpVelocity;
-    Vector3 velocity;
-    float velocityXSmoothing;
-    bool facingRight = true;
-    bool dashOnCooldown = false;
-    bool doubleJump = false;
-    Controller2D controller;
+    private float gravity;
+    private float jumpVelocity;
+    private Vector3 velocity;
+    private float velocityXSmoothing;
+    private bool facingRight = true;
+    private bool doubleJump = false;
+    private Controller2D controller;
     private Animator animator;
+    private FloatTimer inputScale;
+    private FloatTimer accelerationTimeAirborne;
+    private FloatTimer accelerationTimeGrounded;
+    private BoolTimer dashOnCooldown;
 
     private void Awake()
     {
@@ -44,22 +34,21 @@ public class Player : MonoBehaviour
             DontDestroyOnLoad(this);
             instance = this;
         }
-    }
-    void Start()
-    {
-
         controller = GetComponent<Controller2D>();
         animator = GetComponent<Animator>();
         gravity = -(2 * jumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
-        print("Gravity: " + gravity + "  Jump Velocity: " + jumpVelocity);
-        accelerationTimeAirborne = baseAccelerationTimeAirborne;
-        accelerationTimeGrounded = baseAccelerationTimeGrounded;
+
+        inputScale = gameObject.AddComponent<FloatTimer>().Constructor(1f);
+        accelerationTimeAirborne = gameObject.AddComponent<FloatTimer>().Constructor(baseAccelerationTimeAirborne);
+        accelerationTimeGrounded = gameObject.AddComponent<FloatTimer>().Constructor(baseAccelerationTimeGrounded);
+        dashOnCooldown = gameObject.AddComponent<BoolTimer>().Constructor(false);
     }
 
     void Update()
     {
-
+        // Reset velocity if collision above or below
+        // Reset double jump if collision below
         if (controller.collisions.above)
         {
             velocity.y = 0;
@@ -69,8 +58,9 @@ public class Player : MonoBehaviour
             velocity.y = 0;
             doubleJump = false;
         }
-        Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
+        // Get input and flip direction if necessary
+        Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         if (input.x > 0 && !facingRight)
         {
             facingRight = true;
@@ -83,82 +73,67 @@ public class Player : MonoBehaviour
             transform.localScale = new Vector3(-1, 1, 1);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        // Smooth the x velocity
+        float targetVelocityX = input.x * moveSpeed * inputScale.Value;
+        velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded.Value : accelerationTimeAirborne.Value);
+
+        // Handle Dashing
+        if (Input.GetButtonDown("Dash") && !dashOnCooldown.Value)
         {
-            if (controller.collisions.below)
+            velocity.x = (facingRight) ? jumpVelocity * 1.25f : -jumpVelocity * 1.25f;
+
+            accelerationTimeAirborne.UpdateValue(.25f, 1f);
+            accelerationTimeGrounded.UpdateValue(.25f, 1f);
+            inputScale.UpdateValue(.25f, .25f);
+            dashOnCooldown.UpdateValue(.5f, true);
+
+        }
+
+        // Handle jumps
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            if (controller.collisions.below) // Regular jump
             {
                 velocity.y = jumpVelocity;
-            } else if (!doubleJump){
+                accelerationTimeAirborne.UpdateValue(.25f, baseAccelerationTimeAirborne);
+                accelerationTimeGrounded.UpdateValue(.25f, baseAccelerationTimeGrounded);
+            } else if (controller.collisions.left) { // Left wall jump
+                velocity.y = jumpVelocity;
+                velocity.x = jumpVelocity / 4f;
+                accelerationTimeAirborne.UpdateValue(.25f, 1f);
+                accelerationTimeGrounded.UpdateValue(.25f, 1f);
+            } else if (controller.collisions.right) { // Right wall jump
+                velocity.y = jumpVelocity;
+                velocity.x = -jumpVelocity / 4f;
+                accelerationTimeAirborne.UpdateValue(.25f, 1f);
+                accelerationTimeGrounded.UpdateValue(.25f, 1f);
+            } else if (!doubleJump) {    // Double jump
                 velocity.y = jumpVelocity;
                 doubleJump = true;
             }
         }
-        if (Input.GetKeyDown(KeyCode.Space) && controller.collisions.left && !controller.collisions.below)
-        {
-            velocity.y = jumpVelocity;
-            velocity.x = jumpVelocity/3f;
-            StartCoroutine(ChangeDrag(.3f, .8f));
-        }
-        if (Input.GetKeyDown(KeyCode.Space) && controller.collisions.right && !controller.collisions.below)
-        {
-            velocity.y = jumpVelocity;
-            velocity.x = -jumpVelocity/3f;
-            StartCoroutine(ChangeDrag(.3f, .8f));
-        }
-
-        float targetVelocityX = input.x * moveSpeed * inputScale;
-        velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
-        if (Input.GetButtonDown("Dash"))
-        {
-            if (facingRight)
-            {
-                velocity.x = jumpVelocity;
-
-            }
-            else
-            {
-                velocity.x = -jumpVelocity;
-            }
-            StartCoroutine(ChangeDrag(.2f, .8f));
-            StartCoroutine(SetInputScale(.3f, .1f));
-            StartCoroutine(DashCooldown());
-        }
+        // Ignore platform if pressing down
         controller.ignorePlatform = input.y < 0;
+
+        // Add gravity
         velocity.y += gravity * Time.deltaTime;
+
+        // Finally, send movement velocity to controller
         controller.Move(velocity * Time.deltaTime);
 
+        // Handle platform placement
         if (Input.GetButtonDown("Platform"))
         {
             Vector3 offset = velocity / moveSpeed + Vector3.down;
             GameObject newPlatform = Instantiate(platform, transform.position + offset, Quaternion.identity, platformContainer.transform);
             platformContainer.GetComponent<DynamicPlatformContainer>().ValidateCount();
         }
+
+        // Handle attacking
         if (Input.GetButtonDown("Fire1"))
         {
             animator.SetTrigger("Attack");
         }
     }
 
-    private IEnumerator ChangeDrag(float seconds, float dragAmount)
-    {
-        accelerationTimeAirborne = dragAmount;
-        accelerationTimeGrounded = dragAmount;
-        yield return new WaitForSeconds(seconds);
-        accelerationTimeAirborne = baseAccelerationTimeAirborne;
-        accelerationTimeGrounded = baseAccelerationTimeGrounded;
-    }
-
-    private IEnumerator SetInputScale(float seconds, float scale)
-    {
-        inputScale = scale;
-        yield return new WaitForSeconds(seconds);
-        inputScale = 1f;
-    }
-
-    private IEnumerator DashCooldown(){
-        dashOnCooldown = true;
-        yield return new WaitForSeconds(dashCooldown);
-        dashOnCooldown = false;
-    }
 }
 
