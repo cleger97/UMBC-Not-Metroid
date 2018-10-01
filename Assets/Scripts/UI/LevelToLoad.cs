@@ -9,6 +9,7 @@ public class LevelToLoad : MonoBehaviour {
 
 private void OnTriggerEnter2D(Collider2D col)
     {
+        Debug.Log("collision");
         if(col.tag == "Player")
         {
             SceneManager.LoadScene(sceneIndex);

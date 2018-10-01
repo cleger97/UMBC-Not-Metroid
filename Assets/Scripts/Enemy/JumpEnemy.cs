@@ -22,6 +22,7 @@ public class JumpEnemy : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("Player");
         //rb = GetComponent<Rigidbody2D>();
         jumpTimer = jumpResetTime;
+        
     }
 	
 	// Update is called once per frame
