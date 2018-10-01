@@ -2,12 +2,13 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelTransitionHandler : MonoBehaviour {
-    public GameObject[] entryList;
-    public GameObject[] exitList;
-
     public static LevelTransitionHandler instance;
+    // scene+id pair for entrance and exit
+
+    private int idOnLoad = 0;
 
     void Awake() {
         if (instance == null) {
@@ -15,7 +16,17 @@ public class LevelTransitionHandler : MonoBehaviour {
             instance = this;
         } else {
             Destroy(this.gameObject);
-        }
+        } 
+        SceneManager.sceneLoaded += OnSceneLoad;
     }
+
+    void OnSceneLoad(Scene scene, LoadSceneMode mode) {
+        Transform player = Player.instance.transform;
+    }
+
+    void LoadNewScene(int id, string scene) {
+        SceneManager.LoadScene(scene, LoadSceneMode.Single);
+    }
+    
 
 }
