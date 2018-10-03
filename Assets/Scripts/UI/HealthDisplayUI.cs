@@ -7,9 +7,10 @@ public class HealthDisplayUI : MonoBehaviour {
     public Slider healthBar;
     [SerializeField]
     private int health = 5;
+    
 	// Use this for initialization
 	void Start () {
-		
+        
 	}
 	
 	// Update is called once per frame
@@ -20,6 +21,7 @@ public class HealthDisplayUI : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.P))
         {
             health--;
+            
             camShake.Play("CameraShakeAnim");
         }
 	}

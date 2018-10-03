@@ -5,8 +5,10 @@ using UnityEngine;
 public class JumpEnemy : MonoBehaviour {
     public float speed;
     public float jumpSpeed;
+    public float knockBackSpeed;
     public int enemyHealth;
     public float activeDistance = 10;
+    public ParticleSystem ps;
     private float jumpTimer;
     private float jumpResetTime = 2f;
     public bool canJump = true;
@@ -52,15 +54,37 @@ public class JumpEnemy : MonoBehaviour {
         rb.velocity = new Vector2(0, jumpSpeed );
     }
 
-    private void OnCollisionEnter2D(Collision2D col)
+    private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.tag == "Player")
+        if(col.tag == "Weapon")
         {
             enemyHealth--;
+            if (transform.position.x < player.transform.position.x)
+            {
+                rb.velocity = new Vector2(-knockBackSpeed, 1.7f);
+            }
+            else
+            {
+                rb.velocity = new Vector2(knockBackSpeed, 1.7f);
+            }
+            Instantiate(ps, transform.position, Quaternion.identity);
             if (enemyHealth <= 0)
             {
                 Destroy(this.gameObject);
             }
         }
+    }
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.tag == "Player")
+        {
+         
+         
+        }
+    }
+
+    private void Attack()
+    {
+        Debug.Log("Attacking!");
     }
 }
