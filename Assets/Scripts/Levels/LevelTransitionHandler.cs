@@ -21,6 +21,7 @@ public class LevelTransitionHandler : MonoBehaviour {
     }
 
     void OnSceneLoad(Scene scene, LoadSceneMode mode) {
+        
         Transform player = Player.instance.transform;
 
         GameObject[] doors = GameObject.FindGameObjectsWithTag("Door");
@@ -38,6 +39,7 @@ public class LevelTransitionHandler : MonoBehaviour {
     public void LoadNewScene(int id, string scene) {
         Debug.Log("firing");
         idOnLoad = id;
+
         SceneManager.LoadScene(scene, LoadSceneMode.Single);
     }
     

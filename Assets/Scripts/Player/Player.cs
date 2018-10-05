@@ -97,14 +97,17 @@ public class Player : MonoBehaviour
                 accelerationTimeGrounded.UpdateValue(.25f, baseAccelerationTimeGrounded);
             } else if (controller.collisions.left) { // Left wall jump
                 velocity.y = jumpVelocity;
-                velocity.x = jumpVelocity / 4f;
-                accelerationTimeAirborne.UpdateValue(.25f, 1f);
-                accelerationTimeGrounded.UpdateValue(.25f, 1f);
+                velocity.x = jumpVelocity / 1.5f;
+                inputScale.UpdateValue(.1f, 0);
+                //accelerationTimeAirborne.UpdateValue(.25f, 1f);
+                //accelerationTimeGrounded.UpdateValue(.25f, 1f);
             } else if (controller.collisions.right) { // Right wall jump
                 velocity.y = jumpVelocity;
-                velocity.x = -jumpVelocity / 4f;
-                accelerationTimeAirborne.UpdateValue(.25f, 1f);
-                accelerationTimeGrounded.UpdateValue(.25f, 1f);
+                velocity.x = -jumpVelocity / 1.5f;
+                inputScale.UpdateValue(.1f, 0);
+
+                //accelerationTimeAirborne.UpdateValue(.25f, 1f);
+                //accelerationTimeGrounded.UpdateValue(.25f, 1f);
             } else if (!doubleJump) {    // Double jump
                 velocity.y = jumpVelocity;
                 doubleJump = true;
