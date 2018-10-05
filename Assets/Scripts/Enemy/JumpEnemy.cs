@@ -18,17 +18,21 @@ public class JumpEnemy : MonoBehaviour {
     private GameObject player;
     [SerializeField]
     public Transform groundDetection;
-
+    [SerializeField]
+    private GameObject healthBar;
+    private Vector3 localScale;
     // Use this for initialization
     void Start () {
         player = GameObject.FindGameObjectWithTag("Player");
         //rb = GetComponent<Rigidbody2D>();
         jumpTimer = jumpResetTime;
-        
+        localScale = transform.localScale;
     }
 	
 	// Update is called once per frame
 	void Update () {
+        localScale.x = enemyHealth;
+        transform.localScale = localScale;
         jumpTimer -= Time.deltaTime;
         if(jumpTimer < 0)
         {

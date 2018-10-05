@@ -16,15 +16,19 @@ public class SniperEnemy : MonoBehaviour {
     [SerializeField]
     private GameObject _laserPrefab;
     public Transform groundDetection;
+    [SerializeField]
+    private GameObject healthBar;
+    private Vector2 localScale;
     // Use this for initialization
     void Start () {
         player = GameObject.FindGameObjectWithTag("Player");
-        //rb = GetComponent<Rigidbody2D>();
+        localScale = healthBar.transform.localScale;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        
+        localScale.x = enemyHealth;
+        healthBar.transform.localScale = localScale;
         if (System.Math.Abs(Vector2.Distance(transform.position, player.transform.position)) < shootingDistance)
         {
             if (canShoot)
