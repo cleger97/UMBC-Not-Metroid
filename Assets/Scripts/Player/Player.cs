@@ -125,7 +125,8 @@ public class Player : MonoBehaviour
         // Handle platform placement
         if (Input.GetButtonDown("Platform"))
         {
-            Vector3 offset = velocity / moveSpeed + Vector3.down;
+            //Vector3 offset = velocity / moveSpeed + Vector3.down;
+            Vector3 offset = (transform.localScale * Vector2.right + Vector2.up) * 4;
             GameObject newPlatform = Instantiate(platform, transform.position + offset, Quaternion.identity, DynamicPlatformContainer.instance.transform);
             DynamicPlatformContainer.instance.ValidateCount();
         }
