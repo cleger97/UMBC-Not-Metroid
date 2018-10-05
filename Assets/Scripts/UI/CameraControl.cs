@@ -16,7 +16,17 @@ public class CameraControl : MonoBehaviour {
 	}
 
 	public void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
-		GameObject cameraGO = GameObject.FindGameObjectsWithTag("Virtual Camera")[0];
+		GameObject[] cameraGOARR = GameObject.FindGameObjectsWithTag("Virtual Camera");
+
+        GameObject cameraGO = null;
+        foreach (GameObject cameraGOA in cameraGOARR) {
+            if (cameraGOA.scene == scene) {
+                cameraGO = cameraGOA;
+            }
+        }
+
+        if (cameraGO == null) { return;} 
+
 		CinemachineVirtualCamera camera2d = cameraGO.GetComponent<CinemachineVirtualCamera>();
 
 		GameObject p = GameObject.Find("Player");
