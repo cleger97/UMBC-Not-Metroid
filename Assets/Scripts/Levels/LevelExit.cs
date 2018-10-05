@@ -10,12 +10,15 @@ public class LevelExit : MonoBehaviour {
     public int goToID;
     public string otherSceneName;
 
+    public GlobalScene GManager;
+
     void Awake() {
 
     }
 
     void Start () {
-
+        GManager = GlobalScene.instance;
+        
     }
 
     void Update() {

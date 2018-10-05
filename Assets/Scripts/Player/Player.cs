@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
     {
         if (instance != null)
         {
-            Destroy(this);
+            Destroy(this.gameObject);
         } else {
             DontDestroyOnLoad(this);
             instance = this;
@@ -90,7 +90,7 @@ public class Player : MonoBehaviour
         }
 
         // Handle jumps
-        if (Input.GetKeyDown(KeyCode.Space)) {
+        if (Input.GetButtonDown("Jump")) {
             if (controller.collisions.below) // Regular jump
             {
                 velocity.y = jumpVelocity;

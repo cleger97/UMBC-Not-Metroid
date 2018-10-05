@@ -667,6 +667,77 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &1471838001
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4630035595213826, guid: 84399c872ed662a47993f0f04b8ed1cf, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 16.47769
+      objectReference: {fileID: 0}
+    - target: {fileID: 4630035595213826, guid: 84399c872ed662a47993f0f04b8ed1cf, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -1.0332441
+      objectReference: {fileID: 0}
+    - target: {fileID: 4630035595213826, guid: 84399c872ed662a47993f0f04b8ed1cf, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4630035595213826, guid: 84399c872ed662a47993f0f04b8ed1cf, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4630035595213826, guid: 84399c872ed662a47993f0f04b8ed1cf, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4630035595213826, guid: 84399c872ed662a47993f0f04b8ed1cf, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4630035595213826, guid: 84399c872ed662a47993f0f04b8ed1cf, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4630035595213826, guid: 84399c872ed662a47993f0f04b8ed1cf, type: 2}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 114167701991875602, guid: 84399c872ed662a47993f0f04b8ed1cf,
+        type: 2}
+      propertyPath: thisSceneName
+      value: Level Test Scene 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114167701991875602, guid: 84399c872ed662a47993f0f04b8ed1cf,
+        type: 2}
+      propertyPath: otherSceneName
+      value: General Test Scene
+      objectReference: {fileID: 0}
+    - target: {fileID: 1737810386381596, guid: 84399c872ed662a47993f0f04b8ed1cf, type: 2}
+      propertyPath: m_Name
+      value: Door 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 212209098898943416, guid: 84399c872ed662a47993f0f04b8ed1cf,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: de06e2867401dc74fab3c1eaa652dd91,
+        type: 3}
+    - target: {fileID: 114167701991875602, guid: 84399c872ed662a47993f0f04b8ed1cf,
+        type: 2}
+      propertyPath: thisId
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4773326708954854, guid: 84399c872ed662a47993f0f04b8ed1cf, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -1.5
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 84399c872ed662a47993f0f04b8ed1cf, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1001 &1669866713
 Prefab:
   m_ObjectHideFlags: 0
