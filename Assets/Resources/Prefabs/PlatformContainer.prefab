@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4548858237864126}
   - component: {fileID: 114081761964410434}
   m_Layer: 0
-  m_Name: Dynamic Platform Container
+  m_Name: PlatformContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

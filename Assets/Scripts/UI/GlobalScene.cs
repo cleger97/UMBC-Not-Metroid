@@ -7,7 +7,8 @@ public class GlobalScene : MonoBehaviour {
 		get {
 			if (inst == null) {
 				GameObject instanceToMake = Instantiate(Resources.Load("Prefabs/Global")) as GameObject;
-				instanceToMake.GetComponent<GlobalScene>().Load();
+				inst = instanceToMake.GetComponent<GlobalScene>();
+				DontDestroyOnLoad(inst);
 				return inst;
 			} else {
 				return inst;
@@ -21,11 +22,11 @@ public class GlobalScene : MonoBehaviour {
 
 	private static GlobalScene inst = null;
 	// Use this for initialization
-	public static GlobalScene CreateInstance() {
-		GameObject instanceToMake = Instantiate(Resources.Load("Prefabs/Global")) as GameObject;
-		instanceToMake.GetComponent<GlobalScene>().Load();
-		return inst;
-	}
+	// public static GlobalScene CreateInstance() {
+	//	 GameObject instanceToMake = Instantiate(Resources.Load("Prefabs/Global")) as GameObject;
+	//	 instanceToMake.GetComponent<GlobalScene>().Load();
+	//	 return inst;
+	// }
 
 	void Awake () {
 		if (inst != this && inst != null) {
@@ -37,13 +38,6 @@ public class GlobalScene : MonoBehaviour {
 
 	}
 
-	void Load() {
-		if (inst != this && inst != null) {
-			Destroy(this.gameObject);
-		} else {
-			DontDestroyOnLoad(this);
-		}
-	}
 	
 	// Update is called once per frame
 	void Update () {

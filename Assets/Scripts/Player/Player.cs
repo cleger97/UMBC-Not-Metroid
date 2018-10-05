@@ -10,7 +10,6 @@ public class Player : MonoBehaviour
     public float baseAccelerationTimeGrounded = .05f;
     public float moveSpeed = 8;
     public GameObject platform;
-    public Transform platformContainer;
 
     private float gravity;
     private float jumpVelocity;
@@ -124,8 +123,8 @@ public class Player : MonoBehaviour
         if (Input.GetButtonDown("Platform"))
         {
             Vector3 offset = velocity / moveSpeed + Vector3.down;
-            GameObject newPlatform = Instantiate(platform, transform.position + offset, Quaternion.identity, platformContainer.transform);
-            platformContainer.GetComponent<DynamicPlatformContainer>().ValidateCount();
+            GameObject newPlatform = Instantiate(platform, transform.position + offset, Quaternion.identity, DynamicPlatformContainer.instance.transform);
+            DynamicPlatformContainer.instance.ValidateCount();
         }
 
         // Handle attacking

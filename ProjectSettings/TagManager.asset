@@ -9,6 +9,8 @@ TagManager:
   - Door
   - Weapon
   - Sniper
+  - Camera
+  - Virtual Camera
   layers:
   - Default
   - TransparentFX
