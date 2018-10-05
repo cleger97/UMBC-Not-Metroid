@@ -59,7 +59,7 @@ public class Player : MonoBehaviour
         }
 
         // Get input and flip direction if necessary
-        Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        Vector2 input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         if (input.x > 0 && !facingRight)
         {
             facingRight = true;
@@ -73,14 +73,18 @@ public class Player : MonoBehaviour
         }
 
         // Smooth the x velocity
+
+
         float targetVelocityX = input.x * moveSpeed * inputScale.Value;
         velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded.Value : accelerationTimeAirborne.Value);
+
+
 
         // Handle Dashing
         if (Input.GetButtonDown("Dash") && !dashOnCooldown.Value)
         {
-            velocity.x = (facingRight) ? jumpVelocity * 1.25f : -jumpVelocity * 1.25f;
-
+            velocity.x = (facingRight) ? jumpVelocity * 1f : -jumpVelocity * 1f;
+            velocity.y = jumpVelocity * 1.25f;
             accelerationTimeAirborne.UpdateValue(.25f, 1f);
             accelerationTimeGrounded.UpdateValue(.25f, 1f);
             inputScale.UpdateValue(.25f, .25f);
@@ -126,7 +130,7 @@ public class Player : MonoBehaviour
         if (Input.GetButtonDown("Platform"))
         {
             //Vector3 offset = velocity / moveSpeed + Vector3.down;
-            Vector3 offset = (transform.localScale * Vector2.right + Vector2.up) * 4;
+            Vector3 offset = (transform.localScale * Vector2.right * 3 + Vector2.up) * 2;
             GameObject newPlatform = Instantiate(platform, transform.position + offset, Quaternion.identity, DynamicPlatformContainer.instance.transform);
             DynamicPlatformContainer.instance.ValidateCount();
         }
