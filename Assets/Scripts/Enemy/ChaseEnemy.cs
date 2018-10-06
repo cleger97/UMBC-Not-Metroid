@@ -24,13 +24,13 @@ public class ChaseEnemy : MonoBehaviour {
     // Use this for initialization
     void Start () {
         player = GameObject.FindGameObjectWithTag("Player");
-        localScale = transform.localScale;
+        localScale = healthBar.transform.localScale;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        localScale.x = enemyHealth;
-        transform.localScale = localScale;
+        localScale.x = enemyHealth * .05f;
+        healthBar.transform.localScale = localScale;
         if (System.Math.Abs(Vector2.Distance(transform.position, player.transform.position)) < activeDistance)
         {
             isPatrol = true;

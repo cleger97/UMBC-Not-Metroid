@@ -27,7 +27,7 @@ public class SniperEnemy : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        localScale.x = enemyHealth;
+        localScale.x = enemyHealth * .05f;
         healthBar.transform.localScale = localScale;
         if (System.Math.Abs(Vector2.Distance(transform.position, player.transform.position)) < shootingDistance)
         {

@@ -26,13 +26,13 @@ public class JumpEnemy : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("Player");
         //rb = GetComponent<Rigidbody2D>();
         jumpTimer = jumpResetTime;
-        localScale = transform.localScale;
+        localScale = healthBar.transform.localScale;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        localScale.x = enemyHealth;
-        transform.localScale = localScale;
+        localScale.x = enemyHealth * .05f;
+        healthBar.transform.localScale = localScale;
         jumpTimer -= Time.deltaTime;
         if(jumpTimer < 0)
         {
