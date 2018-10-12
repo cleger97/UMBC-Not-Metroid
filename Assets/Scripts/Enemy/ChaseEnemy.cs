@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ChaseEnemy : MonoBehaviour {
     public bool isPatrol = true;
@@ -18,19 +19,24 @@ public class ChaseEnemy : MonoBehaviour {
     private GameObject player;
     [SerializeField]
     public Transform groundDetection;
+    
     [SerializeField]
-    private GameObject healthBar;
-    private Vector3 localScale;
+    private Slider HealthBar;
     // Use this for initialization
     void Start () {
         player = GameObject.FindGameObjectWithTag("Player");
-        localScale = healthBar.transform.localScale;
+        
+        HealthBar.transform.position = transform.position;
+
+        HealthBar.value = enemyHealth;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        localScale.x = enemyHealth * .05f;
-        healthBar.transform.localScale = localScale;
+        Vector3 HBpos = new Vector3(transform.position.x, transform.position.y + .5f, transform.position.z);
+        HealthBar.value = enemyHealth;
+        HealthBar.transform.position = HBpos;
+        
         if (System.Math.Abs(Vector2.Distance(transform.position, player.transform.position)) < activeDistance)
         {
             isPatrol = true;
