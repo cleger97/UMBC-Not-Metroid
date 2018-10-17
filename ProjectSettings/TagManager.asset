@@ -11,6 +11,7 @@ TagManager:
   - Sniper
   - Camera
   - Virtual Camera
+  - UI
   layers:
   - Default
   - TransparentFX

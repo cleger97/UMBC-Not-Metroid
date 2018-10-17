@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System;
+using System.Threading.Tasks;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,7 +11,9 @@ public class LevelTransitionHandler : MonoBehaviour {
 
     public static Scene lastScene;
 
-    private static int idOnLoad = -1;
+    public static int idOnLoad = -1;
+
+    public static int lastLoad = -1;
 
     void Awake() {
         if (instance == null) {
@@ -18,6 +21,7 @@ public class LevelTransitionHandler : MonoBehaviour {
             instance = this;
         } else {
             Destroy(this.gameObject);
+            return;
         } 
         SceneManager.sceneLoaded += OnSceneLoad;
 
@@ -26,22 +30,36 @@ public class LevelTransitionHandler : MonoBehaviour {
 
     void OnSceneLoad(Scene scene, LoadSceneMode mode) {
         
-        Transform player = Player.instance.transform;
-
+        lastLoad = idOnLoad;
         SceneManager.SetActiveScene(scene);
+       
+        if (lastScene != SceneManager.GetActiveScene()) {
+            StartCoroutine(UnloadScene());
+        }
+    }
 
-        GameObject[] doors = GameObject.FindGameObjectsWithTag("Door");
+    // unload scene coroutine
+    // first -> unload the scene completely
+    // second -> wait for scene to finish unload
+    // third -> adjust player position accordingly
+    // fourth -> return.
+    IEnumerator UnloadScene() {
+        AsyncOperation unload = SceneManager.UnloadSceneAsync(lastScene); 
+        yield return unload;
+        FinishLoad();
+        yield break;
+    }
 
-        foreach(GameObject door in doors) {
+    private void FinishLoad() {
+        Transform player = Player.instance.transform;
+         GameObject[] doors = GameObject.FindGameObjectsWithTag("Door");
+
+         foreach(GameObject door in doors) {
             LevelExit doorScript = door.GetComponent<LevelExit>();
             if (doorScript == null) continue;
             if (doorScript.thisId == LevelTransitionHandler.idOnLoad) {
                 player.position = door.transform.GetChild(0).position;
             }
-        }
-
-        if (lastScene != SceneManager.GetActiveScene()) {
-            SceneManager.UnloadSceneAsync(lastScene);
         }
         idOnLoad = -1; // don't move objects that load in other ways
     }
