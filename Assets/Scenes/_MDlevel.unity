@@ -679,7 +679,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 808631425}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.409996, y: -0.5960236, z: -10}
+  m_LocalPosition: {x: -5.409995, y: -0.5960236, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1754190227}
@@ -1112,10 +1112,7 @@ MonoBehaviour:
   baseAccelerationTimeAirborne: 0.2
   baseAccelerationTimeGrounded: 0.1
   moveSpeed: 6
-  dashCooldown: 0.5
   platform: {fileID: 0}
-  platformContainer: {fileID: 0}
-  weapon: {fileID: 0}
 --- !u!50 &980119016
 Rigidbody2D:
   serializedVersion: 4
@@ -1804,7 +1801,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2000770681}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.409996, y: -0.5960236, z: -10}
+  m_LocalPosition: {x: -5.409995, y: -0.5960236, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
