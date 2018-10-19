@@ -69,7 +69,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1717481386824200}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalPosition: {x: 6.31, y: -3.28, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4126436983252672}
@@ -189,13 +189,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7be5cd06dc009be4eab32e5122029597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpHeight: 3
-  timeToJumpApex: 0.4
+  jumpHeight: 2
+  timeToJumpApex: 0.33
   baseAccelerationTimeAirborne: 0.15
   baseAccelerationTimeGrounded: 0.05
   moveSpeed: 6
   platform: {fileID: 1627975833962628, guid: 88e35cf766c5b5c4fb266df66d5e0b62, type: 2}
-  platformContainer: {fileID: 0}
 --- !u!212 &212397794824548792
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -228,9 +227,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 1216742773
+  m_SortingLayer: 1
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 962a62ef5e23e084e92cadb2cf0558fb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
