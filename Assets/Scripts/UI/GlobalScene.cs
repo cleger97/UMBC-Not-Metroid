@@ -37,6 +37,10 @@ public class GlobalScene : MonoBehaviour {
 
 	}
 
+    void Start () {
+        MenuHandle handle = MenuHandle.instance;
+    }
+
 	
 	// Update is called once per frame
 	void Update () {

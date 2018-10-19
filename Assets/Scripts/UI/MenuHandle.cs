@@ -36,7 +36,7 @@ public class MenuHandle : MonoBehaviour {
     public GameObject returnButton;
     public GameObject controlMenu;
 
-
+    private MenuSelect selectInst = null;
 
     void Awake() {
         if (inst != null) {
@@ -51,6 +51,9 @@ public class MenuHandle : MonoBehaviour {
     }
 
     void Start() {
+        selectInst = (MenuSelect) gameObject.GetComponent<MenuSelect>();
+
+        continueButton.transform.GetChild(0).GetComponent<Button>().onClick.AddListener (ResumeGame);
         restartButton.transform.GetChild(0).GetComponent<Button>().onClick.AddListener (RestartLoad);
     }
 
@@ -83,20 +86,32 @@ public class MenuHandle : MonoBehaviour {
 
 		continueButton.SetActive(true);
         restartButton.SetActive(true);
-		returnButton.SetActive(true);
+		//returnButton.SetActive(true); 
 		//controlMenu.SetActive (true); 
-		
+
+        List<Transform> pauseObjects = new List<Transform>() {continueButton.transform, restartButton.transform};
+        selectInst.Pause(pauseObjects);
+
 		select.SetActive (true);
 
 		Time.timeScale = 0;
+    }
 
-
+    public void InputButton(string button) {
+        //Debug.Log(button);
+        if (button.Equals("Restart")) {
+            RestartLoad();
+        }
+        if (button.Equals("Continue")) {
+            ResumeGame();
+        }
     }
 
     public void RestartLoad() {
         Disable();
         LevelTransitionHandler.instance.LoadNewScene(LevelTransitionHandler.lastLoad, SceneManager.GetActiveScene().name);
         Time.timeScale = 1;
+        selectInst.Unpause();
     }
 
     private void ResumeGame() {
@@ -104,5 +119,6 @@ public class MenuHandle : MonoBehaviour {
         Disable();
         paused = false;
         Time.timeScale = 1;
+        selectInst.Unpause();
     }
 }
