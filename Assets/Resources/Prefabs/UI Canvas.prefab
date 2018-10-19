@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 114891369460815594}
   - component: {fileID: 114691245765943358}
   - component: {fileID: 114909202025797078}
+  - component: {fileID: 114548596310700494}
   m_Layer: 5
   m_Name: UI Canvas
   m_TagString: UI
@@ -238,7 +239,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1947260053736822
 GameObject:
   m_ObjectHideFlags: 0
@@ -479,6 +480,18 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Resume Game
+--- !u!114 &114548596310700494
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1582747896148516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93d169afaf6dc2b4b904cdc4cbaeccab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  select: {fileID: 224701824742648800}
 --- !u!114 &114548608515634002
 MonoBehaviour:
   m_ObjectHideFlags: 1
