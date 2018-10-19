@@ -1615,7 +1615,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4100020104312484, guid: 424bb160f7928c549b8111908635cd0b, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -2.342
+      value: -1.79
       objectReference: {fileID: 0}
     - target: {fileID: 4100020104312484, guid: 424bb160f7928c549b8111908635cd0b, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1656,10 +1656,6 @@ Prefab:
       propertyPath: HealthBar
       value: 
       objectReference: {fileID: 479603931}
-    - target: {fileID: 4100020104312484, guid: 424bb160f7928c549b8111908635cd0b, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 6.097
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 424bb160f7928c549b8111908635cd0b, type: 2}
   m_IsPrefabAsset: 0
