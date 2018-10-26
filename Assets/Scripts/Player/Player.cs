@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
     private FloatTimer accelerationTimeAirborne;
     private FloatTimer accelerationTimeGrounded;
     private BoolTimer dashOnCooldown;
-
+    private BoxCollider2D collider;
     private void Awake()
     {
         if (instance != null)
@@ -35,6 +35,7 @@ public class Player : MonoBehaviour
         }
         controller = GetComponent<Controller2D>();
         animator = GetComponent<Animator>();
+        collider = GetComponent<BoxCollider2D>();
         gravity = -(2 * jumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
 
@@ -59,7 +60,7 @@ public class Player : MonoBehaviour
         }
 
         // Get input and flip direction if necessary
-        Vector2 input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxis("Vertical"));
         if (input.x > 0 && !facingRight)
         {
             facingRight = true;
@@ -73,13 +74,13 @@ public class Player : MonoBehaviour
         }
 
         // Smooth the x velocity
-
-
         float targetVelocityX = input.x * moveSpeed * inputScale.Value;
-        velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded.Value : accelerationTimeAirborne.Value);
 
+        if (!dashOnCooldown.Value && Mathf.Abs(input.x) > 0 || controller.collisions.below) {
+            velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded.Value : accelerationTimeAirborne.Value);
 
-
+        }
+        
         // Handle Dashing
         if (Input.GetButtonDown("Dash") && !dashOnCooldown.Value)
         {
@@ -97,21 +98,14 @@ public class Player : MonoBehaviour
             if (controller.collisions.below) // Regular jump
             {
                 velocity.y = jumpVelocity;
-                accelerationTimeAirborne.UpdateValue(.25f, baseAccelerationTimeAirborne);
-                accelerationTimeGrounded.UpdateValue(.25f, baseAccelerationTimeGrounded);
             } else if (controller.collisions.left) { // Left wall jump
                 velocity.y = jumpVelocity;
                 velocity.x = jumpVelocity / 1.5f;
                 inputScale.UpdateValue(.1f, 0);
-                //accelerationTimeAirborne.UpdateValue(.25f, 1f);
-                //accelerationTimeGrounded.UpdateValue(.25f, 1f);
             } else if (controller.collisions.right) { // Right wall jump
                 velocity.y = jumpVelocity;
                 velocity.x = -jumpVelocity / 1.5f;
                 inputScale.UpdateValue(.1f, 0);
-
-                //accelerationTimeAirborne.UpdateValue(.25f, 1f);
-                //accelerationTimeGrounded.UpdateValue(.25f, 1f);
             } else if (!doubleJump) {    // Double jump
                 velocity.y = jumpVelocity;
                 doubleJump = true;
@@ -123,6 +117,16 @@ public class Player : MonoBehaviour
         // Add gravity
         velocity.y += gravity * Time.deltaTime;
 
+        if (input.x > 0 && controller.collisions.right && !Physics2D.Raycast(collider.bounds.max + Vector3.up * 0.1f, Vector2.right, 0.015625f)) {
+            velocity = Vector2.zero;
+            velocity.y = 4f;
+
+        }
+        if (input.x < 0 && controller.collisions.left && !Physics2D.Raycast(collider.bounds.max - new Vector3(collider.bounds.size.x, 0) + Vector3.up * 0.1f, Vector2.left, 0.015625f)) {
+            velocity = Vector2.zero;
+            velocity.y = 4f;
+
+        }
         // Finally, send movement velocity to controller
         controller.Move(velocity * Time.deltaTime);
 

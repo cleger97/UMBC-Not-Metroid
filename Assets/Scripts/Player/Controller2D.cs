@@ -5,7 +5,7 @@ using System.Collections;
 public class Controller2D : MonoBehaviour
 {
 
-    const float skinWidth = .015f;
+    const float skinWidth = 0.015625f;
     public int horizontalRayCount = 4;
     public int verticalRayCount = 4;
 
@@ -55,7 +55,7 @@ public class Controller2D : MonoBehaviour
         {
             VerticalCollisions(ref velocity);
         }
-
+        Debug.Log(velocity);
         transform.Translate(velocity);
     }
 
@@ -74,7 +74,6 @@ public class Controller2D : MonoBehaviour
 
             if (hit)
             {
-
                 float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
 
                 if (i == 0 && slopeAngle <= maxClimbAngle)
