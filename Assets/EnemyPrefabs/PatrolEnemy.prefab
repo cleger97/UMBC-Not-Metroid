@@ -279,7 +279,8 @@ MonoBehaviour:
   knockBackSpeed: 3.23
   activeDistance: 10.3
   enemyHealth: 6
-  ps: {fileID: 198960643568958960, guid: b4434d3fe7549ca46924a73a69cc029f, type: 2}
+  ps1: {fileID: 198960643568958960, guid: b4434d3fe7549ca46924a73a69cc029f, type: 2}
+  ps2: {fileID: 198168223443683460, guid: 02843e33ecd2e3548a1da7f4ccd2e27f, type: 2}
   rb: {fileID: 50422306752227032}
   player: {fileID: 0}
   groundDetection: {fileID: 4852613859495970}

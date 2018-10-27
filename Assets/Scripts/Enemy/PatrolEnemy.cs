@@ -9,7 +9,7 @@ public class PatrolEnemy : MonoBehaviour {
     public float knockBackSpeed;
     public float activeDistance;
     public int enemyHealth;
-    public ParticleSystem ps;
+    public ParticleSystem ps1, ps2;
     private bool isPatrol = false;
     private bool movingRight = true;
     [SerializeField]
@@ -94,9 +94,10 @@ public class PatrolEnemy : MonoBehaviour {
                 rb.velocity = new Vector2(knockBackSpeed, 1.7f);
             }
             
-            Instantiate(ps, transform.position, Quaternion.identity);
+            Instantiate(ps1, transform.position, Quaternion.identity);
             if (enemyHealth <= 0)
             {
+                Instantiate(ps2, transform.position, Quaternion.identity);
                 Destroy(this.gameObject);
             }
         }
