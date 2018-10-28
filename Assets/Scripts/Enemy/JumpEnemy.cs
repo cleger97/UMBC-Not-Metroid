@@ -9,7 +9,7 @@ public class JumpEnemy : MonoBehaviour {
     public float knockBackSpeed;
     public int enemyHealth;
     public float activeDistance = 10;
-    public ParticleSystem ps;
+    public ParticleSystem ps1,ps2;
     private float jumpTimer;
     private float jumpResetTime = 2f;
     public bool canJump = true;
@@ -19,7 +19,9 @@ public class JumpEnemy : MonoBehaviour {
     private GameObject player;
     [SerializeField]
     public Transform groundDetection;
-    
+    [SerializeField]
+    private SpriteRenderer sp;
+    private bool facingRight = true;
     [SerializeField]
     private Slider HealthBar;
     // Use this for initialization
@@ -35,10 +37,10 @@ public class JumpEnemy : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        Vector3 HBpos = new Vector3(transform.position.x, transform.position.y + .5f, transform.position.z);
+        Vector3 HBpos = new Vector3(transform.position.x, transform.position.y + .8f, transform.position.z);
         HealthBar.value = enemyHealth;
         HealthBar.transform.position = HBpos;
-        
+        Flip();
         jumpTimer -= Time.deltaTime;
         if(jumpTimer < 0)
         {
@@ -63,7 +65,23 @@ public class JumpEnemy : MonoBehaviour {
     {
         rb.velocity = new Vector2(0, jumpSpeed );
     }
-
+    private void Flip()
+    {
+        if ((transform.position.x < player.transform.position.x))
+        {
+            if (facingRight)
+            {
+                sp.flipX = true;
+            }
+        }
+        if ((transform.position.x > player.transform.position.x))
+        {
+            if (facingRight)
+            {
+                sp.flipX = false;
+            }
+        }
+    }
     private void OnTriggerEnter2D(Collider2D col)
     {
         if(col.tag == "Weapon")
@@ -77,9 +95,10 @@ public class JumpEnemy : MonoBehaviour {
             {
                 rb.velocity = new Vector2(knockBackSpeed, 1.7f);
             }
-            Instantiate(ps, transform.position, Quaternion.identity);
+            Instantiate(ps1, transform.position, Quaternion.identity);
             if (enemyHealth <= 0)
             {
+                Instantiate(ps2, transform.position, Quaternion.identity);
                 Destroy(this.gameObject);
             }
         }
