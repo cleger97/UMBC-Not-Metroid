@@ -7,12 +7,17 @@ public class PlatformMove : MonoBehaviour {
     private float speed = 10f;
     [SerializeField]
     private float ResetTime = 3f;
+    [SerializeField]
+    private GameObject enemy;
     private float time;
     public SpriteRenderer sr;
     public BoxCollider2D bc;
-    public bool uad, sts, b = false;
-	// Use this for initialization
-	void Start () {
+    public bool uad, sts, blink, fall, shake, spawn = false;
+    public ParticleSystem ps1;
+    public Camera cam;
+
+    // Use this for initialization
+    void Start () {
         time = ResetTime;
 	}
 	
@@ -21,7 +26,7 @@ public class PlatformMove : MonoBehaviour {
         //Vector3 pos = new Vector3(transform.position.x + 5, transform.position.y, transform.position.z);
         if(uad)
             UpAndDown();
-        if(b)
+        if(blink)
             Blink();
         if(sts)
             SideToSide();
@@ -69,5 +74,36 @@ public class PlatformMove : MonoBehaviour {
             time -= Time.deltaTime;
             if (time < -ResetTime) { time = ResetTime; }
         }  
+    }
+    void Break()
+    {
+        bc.enabled = false;
+        sr.enabled = false ;
+    }
+    void Spawn()
+    {
+      var numEnemies = 5;
+        for(int i = 0; i < numEnemies; i++)
+        {
+            Instantiate(enemy, new Vector3(transform.position.x-7+2*i, transform.position.y+10, transform.position.z), Quaternion.identity);
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if(col.tag == "Player" && fall)
+        {
+            Break();
+            Instantiate(ps1, transform.position, Quaternion.identity);
+        }
+        if (col.tag == "Player" && shake)
+        {
+            cam.GetComponent<RipplePostProcessor>().ripple = true;
+            shake = false;
+        }
+        if (col.tag == "Player" && spawn)
+        {
+            Spawn();
+            spawn = false;
+        }
     }
 }
