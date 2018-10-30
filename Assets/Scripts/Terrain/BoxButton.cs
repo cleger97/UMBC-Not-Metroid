@@ -5,8 +5,9 @@ using UnityEngine;
 public class BoxButton : MonoBehaviour {
     [SerializeField]
     private GameObject block;
-	// Use this for initialization
-	void Start () {
+    public Camera cam;
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
@@ -20,6 +21,7 @@ public class BoxButton : MonoBehaviour {
         if(col.tag == "Weapon")
         {
             Instantiate(block, new Vector3(transform.position.x + 1.5f, transform.position.y + 8, transform.position.z), Quaternion.identity);
+            cam.GetComponent<RipplePostProcessor>().ripple = true;
             Destroy(this.gameObject);
         }
     }
