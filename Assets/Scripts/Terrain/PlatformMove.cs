@@ -12,7 +12,7 @@ public class PlatformMove : MonoBehaviour {
     private float time;
     public SpriteRenderer sr;
     public BoxCollider2D bc;
-    public bool uad, sts, blink, fall, shake, spawn = false;
+    public bool uad, sts, blink, fall, ripple, spawn, shake = false;
     public ParticleSystem ps1;
     public Camera cam;
 
@@ -30,6 +30,8 @@ public class PlatformMove : MonoBehaviour {
             Blink();
         if(sts)
             SideToSide();
+        if (shake)
+            Shake();
     }
     void SideToSide()
     {
@@ -88,22 +90,34 @@ public class PlatformMove : MonoBehaviour {
             Instantiate(enemy, new Vector3(transform.position.x-7+2*i, transform.position.y+10, transform.position.z), Quaternion.identity);
         }
     }
-    private void OnTriggerEnter2D(Collider2D col)
+    void Shake()
+    {
+        Vector3 curCamPos = cam.transform.position;
+        Vector3 retCam = curCamPos;
+        curCamPos = new Vector3(curCamPos.x + 1, curCamPos.y + 1, curCamPos.z + 1);
+        curCamPos = retCam;
+    }
+        private void OnTriggerEnter2D(Collider2D col)
     {
         if(col.tag == "Player" && fall)
         {
             Break();
             Instantiate(ps1, transform.position, Quaternion.identity);
         }
-        if (col.tag == "Player" && shake)
+        if (col.tag == "Player" && ripple)
         {
             cam.GetComponent<RipplePostProcessor>().ripple = true;
-            shake = false;
+            ripple = false;
         }
         if (col.tag == "Player" && spawn)
         {
             Spawn();
             spawn = false;
+        }
+        if (col.tag == "Player" && shake)
+        {
+            Shake();
+            shake = false;
         }
     }
 }

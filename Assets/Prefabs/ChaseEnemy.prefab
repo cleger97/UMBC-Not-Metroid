@@ -240,9 +240,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPatrol: 0
   enemyHealth: 6
-  activeDistance: 10.2
+  activeDistance: 15.41
   speed: 2.38
-  knockBackSpeed: 3.18
+  knockBackSpeed: 3.98
   ps1: {fileID: 198960643568958960, guid: b4434d3fe7549ca46924a73a69cc029f, type: 2}
   ps2: {fileID: 198059512307964708, guid: 290611bdb6a097643acc3ba822c1ceb8, type: 2}
   rb: {fileID: 50476095975474596}

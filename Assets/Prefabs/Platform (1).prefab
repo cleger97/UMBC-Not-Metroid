@@ -80,11 +80,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 4.92
   ResetTime: 1.79
+  enemy: {fileID: 0}
   sr: {fileID: 212518654334860890}
   bc: {fileID: 61851646861338532}
   uad: 0
   sts: 0
-  b: 1
+  blink: 0
+  fall: 0
+  ripple: 0
+  spawn: 0
+  ps1: {fileID: 0}
+  cam: {fileID: 0}
 --- !u!212 &212518654334860890
 SpriteRenderer:
   m_ObjectHideFlags: 1
