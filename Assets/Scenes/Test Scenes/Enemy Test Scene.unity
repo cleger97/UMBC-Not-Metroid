@@ -194,6 +194,27 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 114458671542484852, guid: 70699e74efa84d54cb8120a67771bd17,
+        type: 2}
+      propertyPath: fall
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114458671542484852, guid: 70699e74efa84d54cb8120a67771bd17,
+        type: 2}
+      propertyPath: ps1
+      value: 
+      objectReference: {fileID: 198493509908910520, guid: d5c02e6896a409e4fa7cdfc67a8f30b7,
+        type: 2}
+    - target: {fileID: 114458671542484852, guid: 70699e74efa84d54cb8120a67771bd17,
+        type: 2}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 519420031}
+    - target: {fileID: 61851646861338532, guid: 70699e74efa84d54cb8120a67771bd17,
+        type: 2}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 70699e74efa84d54cb8120a67771bd17, type: 2}
   m_IsPrefabAsset: 0
@@ -413,7 +434,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RippleMaterial: {fileID: 2100000, guid: f2d637462faf23745b835fa6c6711415, type: 2}
   MaxAmount: 5
+  ripple: 0
   Friction: 0.9
+  platform: {fileID: 0}
 --- !u!1001 &624229185
 Prefab:
   m_ObjectHideFlags: 0
@@ -588,11 +611,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2.2
   ResetTime: 1.68
+  enemy: {fileID: 0}
   sr: {fileID: 789447732}
   bc: {fileID: 789447731}
   uad: 1
-  sts: 1
-  b: 0
+  sts: 0
+  blink: 0
+  fall: 0
+  ripple: 0
+  spawn: 0
+  shake: 0
+  ps1: {fileID: 0}
+  cam: {fileID: 0}
 --- !u!61 &789447731
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -846,6 +876,16 @@ Prefab:
     - target: {fileID: 4977004252930076, guid: ee579dfc2a391254cb1fea19ec422655, type: 2}
       propertyPath: m_RootOrder
       value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 114546912611328660, guid: ee579dfc2a391254cb1fea19ec422655,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 50422306752227032, guid: ee579dfc2a391254cb1fea19ec422655,
+        type: 2}
+      propertyPath: m_GravityScale
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee579dfc2a391254cb1fea19ec422655, type: 2}
@@ -1147,6 +1187,36 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 942dfa33d789bec48887bd47e12b09ef, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &1543603991 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1516453521336354, guid: ee579dfc2a391254cb1fea19ec422655,
+    type: 2}
+  m_PrefabInternal: {fileID: 1070395656}
+--- !u!114 &1543603998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1543603991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bb0e59c18223a74e9130406772382b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5.1
+  ResetTime: 1.24
+  enemy: {fileID: 0}
+  sr: {fileID: 0}
+  bc: {fileID: 0}
+  uad: 1
+  sts: 0
+  blink: 0
+  fall: 0
+  ripple: 0
+  spawn: 0
+  shake: 0
+  ps1: {fileID: 0}
+  cam: {fileID: 0}
 --- !u!1 &1565831847
 GameObject:
   m_ObjectHideFlags: 0
@@ -1178,11 +1248,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 4.92
   ResetTime: 0.99
+  enemy: {fileID: 0}
   sr: {fileID: 1565831850}
   bc: {fileID: 1565831849}
   uad: 0
   sts: 1
-  b: 0
+  blink: 0
+  fall: 0
+  ripple: 0
+  spawn: 0
+  shake: 0
+  ps1: {fileID: 0}
+  cam: {fileID: 0}
 --- !u!61 &1565831849
 BoxCollider2D:
   m_ObjectHideFlags: 0
