@@ -10,7 +10,7 @@ public class MenuHandle : MonoBehaviour {
     public static MenuHandle instance {
         get {
             if (inst == null) {
-                GameObject instTomake = Instantiate(Resources.Load("Prefabs/UI Canvas")) as GameObject;
+                GameObject instTomake = Instantiate(Resources.Load("Prefabs/Menu UI Canvas")) as GameObject;
                 DontDestroyOnLoad(inst);
                 inst = instTomake.GetComponent<MenuHandle>();
                 return inst;
@@ -36,6 +36,10 @@ public class MenuHandle : MonoBehaviour {
     public GameObject returnButton;
     public GameObject controlMenu;
 
+    AudioSource SFX;
+    public AudioClip backClip;
+    public AudioClip selectClip;
+
     private MenuSelect selectInst = null;
 
     void Awake() {
@@ -52,17 +56,23 @@ public class MenuHandle : MonoBehaviour {
 
     void Start() {
         selectInst = (MenuSelect) gameObject.GetComponent<MenuSelect>();
-
+        SFX = gameObject.GetComponent<AudioSource>();
         continueButton.transform.GetChild(0).GetComponent<Button>().onClick.AddListener (ResumeGame);
         restartButton.transform.GetChild(0).GetComponent<Button>().onClick.AddListener (RestartLoad);
     }
 
     void Update() {
         //TODO: Add if at first level, disable pause
+        
         if (Input.GetButtonDown("Menu")) {
             if (!paused) {
+                SFX.clip = selectClip;
+                SFX.Play();
                 Pause();
+                
             } else {
+                SFX.clip = backClip;
+                SFX.Play();
                 ResumeGame();
             }
         }

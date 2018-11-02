@@ -8,10 +8,21 @@ public class MenuSelect : MonoBehaviour {
     int currentlySelected = 0;
 	List<Transform> objects = null;
 
+    AudioSource SFX;
+    public AudioClip switchClip;
+    public AudioClip backClip;
+    public AudioClip selectClip;
+
+    
+
     bool isPaused;
 
     float maxInputTimer = 0.2f;
     float inputTimer = 0f;
+
+    public void Start() {
+        SFX = gameObject.GetComponent<AudioSource>();
+    }
 
 	public void Pause(List<Transform> objects) {
         this.objects = objects;
@@ -29,6 +40,8 @@ public class MenuSelect : MonoBehaviour {
         if (objects == null) { return; }
 
         if (Input.GetButtonDown("Submit") ) {
+            SFX.clip = selectClip;
+            SFX.Play();
             MenuHandle.instance.InputButton(objects[currentlySelected].name);
         }
 
@@ -43,6 +56,8 @@ public class MenuSelect : MonoBehaviour {
         int vert = (int) Input.GetAxisRaw("Vertical");
         if (vert == 0) { return; }
 
+        SFX.clip = switchClip;
+
         if (vert < 0) {
             currentlySelected--;
             if (currentlySelected < 0) { 
@@ -56,6 +71,8 @@ public class MenuSelect : MonoBehaviour {
             }
             select.position = objects[currentlySelected].position;
         }
+
+        SFX.Play();
 
         inputTimer = maxInputTimer;
         return;
