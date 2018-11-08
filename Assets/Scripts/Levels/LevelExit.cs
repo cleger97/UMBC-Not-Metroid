@@ -26,7 +26,10 @@ public class LevelExit : MonoBehaviour {
     }
 	void OnTriggerEnter2D(Collider2D collider) {
         // TODO: Get LevelTransitionHandler pair, move to different scene in that position
-        Debug.Log("fired");
-        LevelTransitionHandler.instance.LoadNewScene(goToID, otherSceneName);
+        if (collider.tag == "Player")
+        {
+            Debug.Log("fired");
+            LevelTransitionHandler.instance.LoadNewScene(goToID, otherSceneName);
+        }
     }
 }   
