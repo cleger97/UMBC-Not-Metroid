@@ -35,6 +35,7 @@ public class MenuHandle : MonoBehaviour {
     public GameObject restartButton;
     public GameObject returnButton;
     public GameObject controlMenu;
+    public GameObject musicVolSlider;
 
     AudioSource SFX;
     public AudioClip backClip;
@@ -86,6 +87,7 @@ public class MenuHandle : MonoBehaviour {
 		returnButton.SetActive (false);
 		text.SetActive (false);
 		controlMenu.SetActive (false);
+        musicVolSlider.SetActive(false);
     }
 
     private void Pause() {
@@ -97,7 +99,8 @@ public class MenuHandle : MonoBehaviour {
 		continueButton.SetActive(true);
         restartButton.SetActive(true);
 		//returnButton.SetActive(true); 
-		//controlMenu.SetActive (true); 
+		//controlMenu.SetActive (true);
+        musicVolSlider.SetActive(true); 
 
         List<Transform> pauseObjects = new List<Transform>() {continueButton.transform, restartButton.transform};
         selectInst.Pause(pauseObjects);
@@ -121,6 +124,7 @@ public class MenuHandle : MonoBehaviour {
         Disable();
         LevelTransitionHandler.instance.LoadNewScene(LevelTransitionHandler.lastLoad, SceneManager.GetActiveScene().name);
         Time.timeScale = 1;
+        paused = false;
         selectInst.Unpause();
     }
 

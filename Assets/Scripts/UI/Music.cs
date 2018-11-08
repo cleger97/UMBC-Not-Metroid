@@ -6,10 +6,12 @@ public class Music : MonoBehaviour {
 
     public static Music inst = null;
 
+    AudioSource audio;
     
 	// Use this for initialization
-	void Start () {
-        AudioSource audio = gameObject.GetComponent<AudioSource>();
+	void Start () {        
+        audio = gameObject.GetComponent<AudioSource>();
+
         if (inst == null) {
             DontDestroyOnLoad(this);
             inst = this;
@@ -19,5 +21,12 @@ public class Music : MonoBehaviour {
         }
 		
 	}
+
+    void Update() {
+        if (AudioVolumeController.inst != null) {
+            audio.volume = AudioVolumeController.MusicVolPercent;
+        }
+        
+    }
 	
 }
