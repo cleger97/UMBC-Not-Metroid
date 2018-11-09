@@ -102,7 +102,7 @@ public class MenuHandle : MonoBehaviour {
 		//controlMenu.SetActive (true);
         musicVolSlider.SetActive(true); 
 
-        List<Transform> pauseObjects = new List<Transform>() {continueButton.transform, restartButton.transform};
+        List<Transform> pauseObjects = new List<Transform>() {continueButton.transform, restartButton.transform, musicVolSlider.transform};
         selectInst.Pause(pauseObjects);
 
 		select.SetActive (true);

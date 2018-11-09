@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MenuSelect : MonoBehaviour {
 
@@ -35,7 +36,7 @@ public class MenuSelect : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        //Debug.Log(currentlySelected);
+        Debug.Log(currentlySelected);
         if (!isPaused) { return; }
         if (objects == null) { return; }
 
@@ -43,6 +44,15 @@ public class MenuSelect : MonoBehaviour {
             SFX.clip = selectClip;
             SFX.Play();
             MenuHandle.instance.InputButton(objects[currentlySelected].name);
+        }
+
+        if (Input.GetAxisRaw("Horizontal") != 0) {
+            float horiz = Input.GetAxisRaw("Horizontal");
+            if (objects[currentlySelected].name == "Audio Volume") {
+                Slider s = objects[currentlySelected].GetComponent<Slider>();
+
+                s.value += (Mathf.Sign(horiz) * Mathf.Ceil( Mathf.Abs(horiz) )) * 0.025f; 
+            }
         }
 
         if (inputTimer > 0f) {
@@ -58,13 +68,13 @@ public class MenuSelect : MonoBehaviour {
 
         SFX.clip = switchClip;
 
-        if (vert < 0) {
+        if (vert > 0) {
             currentlySelected--;
             if (currentlySelected < 0) { 
                 currentlySelected = objects.Count - 1;
             }
             select.position = objects[currentlySelected].position;
-        } else if (vert > 0) {
+        } else if (vert < 0) {
             currentlySelected++;
             if (currentlySelected > objects.Count - 1) { 
                 currentlySelected = 0;
