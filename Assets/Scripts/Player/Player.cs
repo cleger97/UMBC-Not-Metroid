@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     private Vector3 velocity;
     private float velocityXSmoothing;
     private bool facingRight = true;
-    private bool doubleJump = false;
+    public bool doubleJump = false;
     private Controller2D controller;
     private Animator animator;
     private FloatTimer inputScale;
@@ -24,6 +24,8 @@ public class Player : MonoBehaviour
     private FloatTimer accelerationTimeGrounded;
     private BoolTimer dashOnCooldown;
     private BoxCollider2D collider;
+    private int platforms = 1;
+
     private void Awake()
     {
         if (instance != null)
@@ -82,17 +84,18 @@ public class Player : MonoBehaviour
         }
         
         // Handle Dashing
+        /*
         if (Input.GetButtonDown("Dash") && !dashOnCooldown.Value)
         {
             velocity.x = (facingRight) ? jumpVelocity * 1f : -jumpVelocity * 1f;
-            velocity.y = jumpVelocity * 1.25f;
-            accelerationTimeAirborne.UpdateValue(.25f, 1f);
-            accelerationTimeGrounded.UpdateValue(.25f, 1f);
+            velocity.y = jumpVelocity * 0.5f;
+            //accelerationTimeAirborne.UpdateValue(.25f, 1f);
+            //accelerationTimeGrounded.UpdateValue(.25f, 1f);
             inputScale.UpdateValue(.25f, .25f);
             dashOnCooldown.UpdateValue(.5f, true);
 
         }
-
+        */
         // Handle jumps
         if (Input.GetButtonDown("Jump")) {
             if (controller.collisions.below) // Regular jump
@@ -117,26 +120,29 @@ public class Player : MonoBehaviour
         // Add gravity
         velocity.y += gravity * Time.deltaTime;
 
+        /*
         if (input.x > 0 && controller.collisions.right && !Physics2D.Raycast(collider.bounds.max + Vector3.up * 0.1f, Vector2.right, 0.015625f)) {
             velocity = Vector2.zero;
             velocity.y = 4f;
 
         }
-        if (input.x < 0 && controller.collisions.left && !Physics2D.Raycast(collider.bounds.max - new Vector3(collider.bounds.size.x, 0) + Vector3.up * 0.1f, Vector2.left, 0.015625f)) {
+        if (input.x < 0 && controller.collisions.left && !Physics2D.Raycast(collider.bounds.max - new Vector3(collider.bounds.size.x, 0) + Vector3.up * 0.1f, Vector2.left, 0.015625f * 2f)) {
             velocity = Vector2.zero;
             velocity.y = 4f;
 
         }
+        */
         // Finally, send movement velocity to controller
         controller.Move(velocity * Time.deltaTime);
 
         // Handle platform placement
-        if (Input.GetButtonDown("Platform"))
+        if (Input.GetButtonDown("Platform") && platforms > 0)
         {
-            //Vector3 offset = velocity / moveSpeed + Vector3.down;
-            Vector3 offset = (transform.localScale * Vector2.right * 3 + Vector2.up) * 2;
+            Vector3 offset = velocity / moveSpeed + Vector3.down;
+            //Vector3 offset = (transform.localScale * Vector2.right * 3 + Vector2.up) * 2;
             GameObject newPlatform = Instantiate(platform, transform.position + offset, Quaternion.identity, DynamicPlatformContainer.instance.transform);
             DynamicPlatformContainer.instance.ValidateCount();
+            platforms--;
         }
 
         // Handle attacking
