@@ -560,7 +560,7 @@ Prefab:
     - target: {fileID: 114167701991875602, guid: 84399c872ed662a47993f0f04b8ed1cf,
         type: 2}
       propertyPath: otherSceneName
-      value: Enemy Test Scene
+      value: First Tiled Level
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84399c872ed662a47993f0f04b8ed1cf, type: 2}
