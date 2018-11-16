@@ -15,6 +15,10 @@ public class LevelTransitionHandler : MonoBehaviour {
 
     public static int lastLoad = -1;
 
+    private float timer = 0f;
+
+    public float MAXTimer = 2f;
+
     void Awake() {
         if (instance == null) {
             DontDestroyOnLoad(this);
@@ -26,6 +30,14 @@ public class LevelTransitionHandler : MonoBehaviour {
         SceneManager.sceneLoaded += OnSceneLoad;
 
         lastScene = SceneManager.GetActiveScene();
+    }
+
+    void Update() {
+        if (timer > 0f) {
+            timer -= Time.deltaTime;
+        } else if (timer < 0f) {
+            timer = 0f;
+        }
     }
 
     void OnSceneLoad(Scene scene, LoadSceneMode mode) {
@@ -62,9 +74,16 @@ public class LevelTransitionHandler : MonoBehaviour {
             }
         }
         idOnLoad = -1; // don't move objects that load in other ways
+        timer = MAXTimer;
     }
 
     public void LoadNewScene(int id, string scene) {
+
+        if (timer != 0f) {
+            Debug.Log("Minimum time not elapsed");
+            return;
+        }
+        
         Debug.Log("firing");
         idOnLoad = id;
 

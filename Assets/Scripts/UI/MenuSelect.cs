@@ -36,7 +36,7 @@ public class MenuSelect : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        Debug.Log(currentlySelected);
+        //Debug.Log(currentlySelected);
         if (!isPaused) { return; }
         if (objects == null) { return; }
 
