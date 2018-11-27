@@ -12,6 +12,7 @@ TagManager:
   - Camera
   - Virtual Camera
   - UI
+  - Active Terrain
   layers:
   - Default
   - TransparentFX
@@ -25,7 +26,7 @@ TagManager:
   - Player
   - Platform
   - Door
-  - 
+  - Active Terrain
   - 
   - 
   - 

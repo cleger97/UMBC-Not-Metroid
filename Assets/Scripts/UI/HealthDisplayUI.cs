@@ -6,23 +6,26 @@ public class HealthDisplayUI : MonoBehaviour {
     public Animator camShake;
     public Slider healthBar;
     [SerializeField]
-    private int health = 5;
-    
+    public PlayerHP player;
+
 	// Use this for initialization
 	void Start () {
-        
+        player = Player.instance.gameObject.GetComponent<PlayerHP>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        healthBar.value = health;
-       // camShake.Play();
+        healthBar.value = player.currentHP / player.maxHP;
+        //camShake.Play();
         //for testing
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            health--;
+        //if (Input.GetKeyDown(KeyCode.P))
+        //{
+        //    health--;
             
-            camShake.Play("CameraShakeAnim");
-        }
+        //    camShake.Play("CameraShakeAnim");
+        //}
+
+
+
 	}
 }
