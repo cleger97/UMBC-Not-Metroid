@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 198178072953301866}
   - component: {fileID: 199625148186931184}
   m_Layer: 0
-  m_Name: JumpEnemyDeathParticle
+  m_Name: FrogDeathParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
