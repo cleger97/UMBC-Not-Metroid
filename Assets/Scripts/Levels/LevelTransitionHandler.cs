@@ -56,10 +56,13 @@ public class LevelTransitionHandler : MonoBehaviour {
     // third -> adjust player position accordingly
     // fourth -> return.
     IEnumerator UnloadScene() {
-        AsyncOperation unload = SceneManager.UnloadSceneAsync(lastScene); 
-        yield return unload;
-        FinishLoad();
-        yield break;
+        if (lastScene != null) {
+            AsyncOperation unload = SceneManager.UnloadSceneAsync(lastScene); 
+            yield return unload;
+            FinishLoad();
+            yield break;
+        }
+        
     }
 
     private void FinishLoad() {

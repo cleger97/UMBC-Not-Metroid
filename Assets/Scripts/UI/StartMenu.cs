@@ -17,7 +17,7 @@ public class StartMenu : MonoBehaviour {
 
 	void LoadGame() {
 		Debug.Log("Loading Game...");
-		LevelTransitionHandler.instance.LoadNewScene(0,"Jungle Scene");
+		LevelTransitionHandler.instance.LoadNewScene(0,"First Tiled Level");
 	}
 
 	void Update() {

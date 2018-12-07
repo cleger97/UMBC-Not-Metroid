@@ -21,7 +21,7 @@ public class JumpEnemyV2 : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         controller = GetComponent<Controller2D>();
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = Player.instance.gameObject;
         jumpTimer = gameObject.AddComponent<BoolTimer>().Constructor(true);
         updateInput = gameObject.AddComponent<BoolTimer>().Constructor(true);
 

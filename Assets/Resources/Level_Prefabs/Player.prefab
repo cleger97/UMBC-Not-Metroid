@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 50516390470564594}
   - component: {fileID: 95943172307136540}
   - component: {fileID: 114035755459053566}
+  - component: {fileID: 114164933810191602}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -70,7 +71,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1717481386824200}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -22.11, y: 0.74, z: -0}
+  m_LocalPosition: {x: -37.64, y: 0.68, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4126436983252672}
@@ -109,7 +110,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.0046691895, y: 0.4948879}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -120,7 +121,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.64, y: 0.64}
+  m_Size: {x: 1.2842865, y: 0.9854877}
   m_EdgeRadius: 0
 --- !u!61 &61104888995476408
 BoxCollider2D:
@@ -166,6 +167,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114035755459053566
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1717481386824200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b95243033c78843b12212d6105f68e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 250
+  currentHP: 250
+  isDead: 0
+--- !u!114 &114164933810191602
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
