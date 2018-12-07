@@ -6,7 +6,7 @@ public class GlobalScene : MonoBehaviour {
 	public static GlobalScene instance {
 		get {
 			if (inst == null) {
-				GameObject instanceToMake = Instantiate(Resources.Load("Prefabs/Global")) as GameObject;
+				GameObject instanceToMake = Instantiate(Resources.Load("Level_Prefabs/Global")) as GameObject;
 				inst = instanceToMake.GetComponent<GlobalScene>();
 				DontDestroyOnLoad(inst);
 				return inst;

@@ -12,6 +12,8 @@ public class LevelExit : MonoBehaviour {
 
     public GlobalScene GManager;
 
+    public bool isEnabled = true;
+
     void Awake() {
 
     }
@@ -25,6 +27,9 @@ public class LevelExit : MonoBehaviour {
 
     }
 	void OnTriggerEnter2D(Collider2D collider) {
+        if (!isEnabled) {
+            return;
+        }
         // TODO: Get LevelTransitionHandler pair, move to different scene in that position
         if (collider.tag == "Player")
         {

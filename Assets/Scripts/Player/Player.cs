@@ -47,6 +47,11 @@ public class Player : MonoBehaviour
         dashOnCooldown = gameObject.AddComponent<BoolTimer>().Constructor(false);
     }
 
+    public void UpdateJumpHeight(float jumpHeight) {
+        gravity = -(2 * jumpHeight) / Mathf.Pow(timeToJumpApex, 2);
+        jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
+    }
+
     void Update()
     {
         // Reset velocity if collision above or below

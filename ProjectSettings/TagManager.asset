@@ -13,6 +13,7 @@ TagManager:
   - Virtual Camera
   - UI
   - Active Terrain
+  - Augments
   layers:
   - Default
   - TransparentFX
@@ -27,7 +28,7 @@ TagManager:
   - Platform
   - Door
   - Active Terrain
-  - 
+  - Powerups
   - 
   - 
   - 

@@ -10,7 +10,7 @@ public class MenuHandle : MonoBehaviour {
     public static MenuHandle instance {
         get {
             if (inst == null) {
-                GameObject instTomake = Instantiate(Resources.Load("Prefabs/Menu UI Canvas")) as GameObject;
+                GameObject instTomake = Instantiate(Resources.Load("Level_Prefabs/Menu UI Canvas")) as GameObject;
                 DontDestroyOnLoad(inst);
                 inst = instTomake.GetComponent<MenuHandle>();
                 return inst;
@@ -26,6 +26,8 @@ public class MenuHandle : MonoBehaviour {
     private static MenuHandle inst = null;
 
     private bool paused = false;
+
+    private bool allowedToUnpause = true;
 
    
     public GameObject text;
@@ -60,12 +62,13 @@ public class MenuHandle : MonoBehaviour {
         SFX = gameObject.GetComponent<AudioSource>();
         continueButton.transform.GetChild(0).GetComponent<Button>().onClick.AddListener (ResumeGame);
         restartButton.transform.GetChild(0).GetComponent<Button>().onClick.AddListener (RestartLoad);
+        returnButton.transform.GetChild(0).GetComponent<Button>().onClick.AddListener (ReturnLoad);
     }
 
     void Update() {
         //TODO: Add if at first level, disable pause
         
-        if (Input.GetButtonDown("Menu")) {
+        if (Input.GetButtonDown("Menu") && allowedToUnpause) {
             if (!paused) {
                 SFX.clip = selectClip;
                 SFX.Play();
@@ -80,6 +83,7 @@ public class MenuHandle : MonoBehaviour {
     }
 
     private void Disable() {
+        allowedToUnpause = true;
         select.SetActive (false);
 		GameOverScreen.SetActive (false);
 		continueButton.SetActive (false);
@@ -92,22 +96,41 @@ public class MenuHandle : MonoBehaviour {
 
     private void Pause() {
         paused = true;  
+        allowedToUnpause = true;
         text.SetActive(true);
 		text.GetComponent<Text> ().text = "Paused";
 		text.GetComponent<Text>().color = Color.blue;
 
 		continueButton.SetActive(true);
         restartButton.SetActive(true);
-		//returnButton.SetActive(true); 
+		returnButton.SetActive(true); 
 		//controlMenu.SetActive (true);
         musicVolSlider.SetActive(true); 
 
-        List<Transform> pauseObjects = new List<Transform>() {continueButton.transform, restartButton.transform, musicVolSlider.transform};
+        List<Transform> pauseObjects = new List<Transform>() {continueButton.transform, restartButton.transform, returnButton.transform, musicVolSlider.transform};
         selectInst.Pause(pauseObjects);
 
 		select.SetActive (true);
 
 		Time.timeScale = 0;
+    }
+
+    public void GameOver() {
+        paused = true;
+        allowedToUnpause = false;
+        text.SetActive(true);
+        text.GetComponent<Text>().text = "Game Over";
+        text.GetComponent<Text>().color = Color.red;
+
+        restartButton.SetActive(true);
+
+        List<Transform> pauseObjects = new List<Transform>(){ restartButton.transform };
+
+        selectInst.Pause(pauseObjects);
+
+        select.SetActive(true);
+        
+        Time.timeScale = 0;
     }
 
     public void InputButton(string button) {
@@ -117,6 +140,9 @@ public class MenuHandle : MonoBehaviour {
         }
         if (button.Equals("Continue")) {
             ResumeGame();
+        }
+        if (button.Equals("Return")) {
+            ReturnLoad();
         }
     }
 
@@ -133,6 +159,14 @@ public class MenuHandle : MonoBehaviour {
         Disable();
         paused = false;
         Time.timeScale = 1;
+        selectInst.Unpause();
+    }
+
+    private void ReturnLoad() {
+        Disable();
+        LevelTransitionHandler.instance.ReturnToMain();
+        Time.timeScale = 1;
+        paused = false;
         selectInst.Unpause();
     }
 }

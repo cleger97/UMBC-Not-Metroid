@@ -29,7 +29,9 @@ public class CameraControl : MonoBehaviour {
 
 		CinemachineVirtualCamera camera2d = cameraGO.GetComponent<CinemachineVirtualCamera>();
 
-		GameObject p = GameObject.Find("Player");
+		camera2d.m_Lens.OrthographicSize = 5f;
+
+		GameObject p = Player.instance.gameObject;
 		camera2d.Follow = p.transform;
 	}
 	

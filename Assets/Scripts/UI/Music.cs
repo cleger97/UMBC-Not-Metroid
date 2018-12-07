@@ -28,5 +28,14 @@ public class Music : MonoBehaviour {
         }
         
     }
+
+    public void Toggle() {
+        if (audio.isPlaying) {
+            audio.Pause();
+        } else {
+            audio.Play();
+        }
+        
+    }
 	
 }

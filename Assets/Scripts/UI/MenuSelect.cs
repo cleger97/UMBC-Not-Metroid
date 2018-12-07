@@ -27,6 +27,14 @@ public class MenuSelect : MonoBehaviour {
 
 	public void Pause(List<Transform> objects) {
         this.objects = objects;
+    
+        if (objects.Count == 0) {
+            Debug.LogWarning("Pause had no arguments; menu broken");
+            return;
+        }
+
+        select.position = objects[0].position;
+
         isPaused = true;
     }
 

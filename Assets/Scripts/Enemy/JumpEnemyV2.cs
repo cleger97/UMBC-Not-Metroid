@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class JumpEnemyV2 : MonoBehaviour {
+
+    public float maxHP = 3f;
+    public float currentHP = 3f;
     public float aggroRange = 5f;
     public float moveSpeed = 5f;
     public float jumpTime = 2f;
@@ -52,4 +55,20 @@ public class JumpEnemyV2 : MonoBehaviour {
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
 	}
+
+    void OnTriggerEnter2D(Collider2D collider) {
+        if (collider.tag == "Player") {
+            Debug.Log("hit");
+            collider.gameObject.GetComponent<PlayerHP>().TakeDamage(20);
+        }
+
+        if (collider.tag == "Weapon") {
+            Debug.Log("got hit");
+            currentHP--;
+            if (currentHP <= 0) {
+                Destroy(this.gameObject);
+            }
+
+        }
+    }
 }

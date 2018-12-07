@@ -64,15 +64,16 @@ public class LevelTransitionHandler : MonoBehaviour {
 
     private void FinishLoad() {
         Transform player = Player.instance.transform;
-         GameObject[] doors = GameObject.FindGameObjectsWithTag("Door");
+        GameObject[] doors = GameObject.FindGameObjectsWithTag("Door");
 
-         foreach(GameObject door in doors) {
+        foreach(GameObject door in doors) {
             LevelExit doorScript = door.GetComponent<LevelExit>();
             if (doorScript == null) continue;
             if (doorScript.thisId == LevelTransitionHandler.idOnLoad) {
                 player.position = door.transform.GetChild(0).position;
             }
         }
+        player.gameObject.SetActive(true);
         idOnLoad = -1; // don't move objects that load in other ways
         timer = MAXTimer;
     }
@@ -89,18 +90,13 @@ public class LevelTransitionHandler : MonoBehaviour {
 
         lastScene = SceneManager.GetActiveScene();
 
-        //var allObjects = GameObject.FindObjectsOfType(typeof(Transform)) as Transform[];
-
-        //foreach (Transform t in allObjects)
-        //{
-        //    GameObject.Destroy(t.gameObject);
-        //}
-        
-        //Application.LoadLevelAdditive(Application.loadedLevel);
-
-
         SceneManager.LoadScene(scene, LoadSceneMode.Additive);                
 
+    }
+
+    public void ReturnToMain() {
+        SceneManager.LoadScene("Start Menu");
+        Player.instance.gameObject.SetActive(false);
     }
     
 
