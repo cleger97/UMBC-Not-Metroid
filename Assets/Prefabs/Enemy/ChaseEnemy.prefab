@@ -56,10 +56,10 @@ GameObject:
   - component: {fileID: 50476095975474596}
   - component: {fileID: 61668025024788148}
   - component: {fileID: 61102272545652788}
-  - component: {fileID: 114121498225814972}
+  - component: {fileID: 114403840332008152}
   m_Layer: 0
-  m_Name: RaptorEnemy
-  m_TagString: Untagged
+  m_Name: ChaseEnemy
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -149,7 +149,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1334101205911880}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.734969, y: -1.7231822, z: 0}
+  m_LocalPosition: {x: -10.938168, y: -2.0464892, z: 0}
   m_LocalScale: {x: 4, y: 4, z: 4}
   m_Children:
   - {fileID: 4130475752686006}
@@ -189,7 +189,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.14484, y: -0.022353888}
+  m_Offset: {x: 0.05910778, y: -0.026807725}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -200,7 +200,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.1972704, y: 0.07082009}
+  m_Size: {x: 0.3071835, y: 0.2555889}
   m_EdgeRadius: 0
 --- !u!61 &61668025024788148
 BoxCollider2D:
@@ -225,32 +225,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.276412, y: 0.19701159}
+  m_Size: {x: 0.13519931, y: 0.19701159}
   m_EdgeRadius: 0
---- !u!114 &114121498225814972
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1334101205911880}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 274d88ee3bab806479a050f070ee053d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isPatrol: 0
-  enemyHealth: 6
-  activeDistance: 15.41
-  speed: 2.38
-  knockBackSpeed: 3.98
-  ps1: {fileID: 198960643568958960, guid: b4434d3fe7549ca46924a73a69cc029f, type: 2}
-  ps2: {fileID: 198059512307964708, guid: 290611bdb6a097643acc3ba822c1ceb8, type: 2}
-  rb: {fileID: 50476095975474596}
-  chaseDistance: 6.54
-  player: {fileID: 0}
-  groundDetection: {fileID: 4130475752686006}
-  sp: {fileID: 212854549995897908}
-  HealthBar: {fileID: 114919329426641174}
 --- !u!114 &114216062244377896
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -299,6 +275,29 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114403840332008152
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1334101205911880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2706c1866853874198c8bcac0409f90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 3.46
+  activeDistance: 8.35
+  enemyHealth: 8
+  sp: {fileID: 212854549995897908}
+  knockBackSpeed: 0
+  ps1: {fileID: 198960643568958960, guid: b4434d3fe7549ca46924a73a69cc029f, type: 2}
+  ps2: {fileID: 198059512307964708, guid: 290611bdb6a097643acc3ba822c1ceb8, type: 2}
+  movingRight: 1
+  player: {fileID: 0}
+  HealthBar: {fileID: 114919329426641174}
+  groundDetection: {fileID: 4130475752686006}
+  chaseDistance: 12.31
 --- !u!114 &114544843669613036
 MonoBehaviour:
   m_ObjectHideFlags: 1

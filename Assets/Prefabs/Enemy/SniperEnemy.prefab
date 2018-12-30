@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 50890506322456782}
   - component: {fileID: 61775430410656340}
   - component: {fileID: 61033194544177522}
-  - component: {fileID: 114680698395443228}
+  - component: {fileID: 114060511934496448}
   m_Layer: 0
   m_Name: SniperEnemy
   m_TagString: Sniper
@@ -136,7 +136,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1291889457870656}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.077402, y: -1.3408116, z: 0}
+  m_LocalPosition: {x: -5.2320156, y: -2.083434, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4197981273874432}
@@ -189,7 +189,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.17110658, y: 0.04034376}
+  m_Offset: {x: 0.012242198, y: -0.0037854016}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -200,7 +200,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.43359137, y: 0.1563462}
+  m_Size: {x: 0.48654628, y: 0.5799846}
   m_EdgeRadius: 0
 --- !u!61 &61775430410656340
 BoxCollider2D:
@@ -214,7 +214,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0066189766, y: 0.017031014}
+  m_Offset: {x: 0.0022068024, y: -0.0050335526}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -225,7 +225,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.43672752, y: 0.58023}
+  m_Size: {x: 0.2072568, y: 0.53610086}
   m_EdgeRadius: 0
 --- !u!114 &114046926922105654
 MonoBehaviour:
@@ -254,6 +254,41 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114060511934496448
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1291889457870656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f41ed44047aadd34f93f66a028ffa4e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0
+  activeDistance: 0
+  stoppingDistance: 0
+  retreatDistance: 0
+  shootingDistance: 9.4
+  enemyHealth: 4
+  sp: {fileID: 212989163569154002}
+  knockBackSpeed: 3
+  ps1: {fileID: 198960643568958960, guid: b4434d3fe7549ca46924a73a69cc029f, type: 2}
+  ps2: {fileID: 198168223443683460, guid: 02843e33ecd2e3548a1da7f4ccd2e27f, type: 2}
+  rb: {fileID: 0}
+  patrol: 0
+  sniper: 0
+  canShoot: 0
+  shotReset: 3
+  movingRight: 1
+  player: {fileID: 0}
+  HealthBar: {fileID: 114730190390463016}
+  groundDetection: {fileID: 4197981273874432}
+  _laserPrefab: {fileID: 1670236163638520, guid: 580c5023f7da36c4b83b2b23d8f7fead,
+    type: 2}
+  canShoot: 0
+  shootingDistance: 7.86
+  shotReset: 3
 --- !u!114 &114264421585163544
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -318,31 +353,6 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
---- !u!114 &114680698395443228
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1291889457870656}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb1be3c2e3134d049927bbafd97506a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canShoot: 0
-  shootingDistance: 10
-  enemyHealth: 6
-  knockBackSpeed: 2.5
-  shotReset: 2
-  ps1: {fileID: 198960643568958960, guid: b4434d3fe7549ca46924a73a69cc029f, type: 2}
-  ps2: {fileID: 198168223443683460, guid: 02843e33ecd2e3548a1da7f4ccd2e27f, type: 2}
-  rb: {fileID: 50890506322456782}
-  player: {fileID: 0}
-  _laserPrefab: {fileID: 1670236163638520, guid: 580c5023f7da36c4b83b2b23d8f7fead,
-    type: 2}
-  groundDetection: {fileID: 4197981273874432}
-  sp: {fileID: 212989163569154002}
-  HealthBar: {fileID: 114730190390463016}
 --- !u!114 &114730190390463016
 MonoBehaviour:
   m_ObjectHideFlags: 1

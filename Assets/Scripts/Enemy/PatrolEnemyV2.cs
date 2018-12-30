@@ -1,39 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class PatrolEnemy : MonoBehaviour {
-
-    public float speed;
-    public float knockBackSpeed;
-    public float activeDistance;
-    public int enemyHealth;
-    public ParticleSystem ps1, ps2;
-    private bool isPatrol = false;
-    private bool movingRight = true;
-    [SerializeField]
-    private Rigidbody2D rb;
-    [SerializeField]
-    private GameObject player;
-    
-    public Transform groundDetection;
-    [SerializeField]
-    private Slider HealthBar;
-   
+public class PatrolEnemyV2 : Enemy {
+    private bool isPatrol = true;
+    private bool facingRight = true;
+    //private Rigidbody2D rb;
     // Use this for initialization
-    void Start () {
-        player = GameObject.FindGameObjectWithTag("Player");
-        rb = GameObject.FindObjectOfType<Rigidbody2D>();
+    public override void Start () {
+        base.Start();
+        //rb = GameObject.FindObjectOfType<Rigidbody2D>();
     }
 	
 	// Update is called once per frame
 	void Update () {
-        Vector3 HBpos = new Vector3(transform.position.x, transform.position.y + .5f, transform.position.z);
+        Vector3 HBpos = new Vector3(transform.position.x, transform.position.y + .8f, transform.position.z);
         HealthBar.value = enemyHealth;
         HealthBar.transform.position = HBpos;
-        //localScale.x = enemyHealth * .05f;
-        //healthBar.transform.localScale = localScale;
+        Flip();
         if (System.Math.Abs(Vector2.Distance(transform.position, player.transform.position)) > activeDistance)
         {
             isPatrol = false;
@@ -64,6 +48,24 @@ public class PatrolEnemy : MonoBehaviour {
         }
 
     }
+    public void Flip()
+    {
+        Debug.Log("in flip");
+        if ((transform.position.x < player.transform.position.x))
+        {
+            if (facingRight)
+            {
+                sp.flipX = true;
+            }
+        }
+        if ((transform.position.x > player.transform.position.x))
+        {
+            if (facingRight)
+            {
+                sp.flipX = false;
+            }
+        }
+    }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Wall")
@@ -81,37 +83,29 @@ public class PatrolEnemy : MonoBehaviour {
         }
         if (other.tag == "Weapon")
         {
-            enemyHealth--;
-            if (transform.position.x < player.transform.position.x)
-            {
-                rb.velocity = new Vector2(-knockBackSpeed, 1.7f);
-            }
-            else
-            {
-                rb.velocity = new Vector2(knockBackSpeed, 1.7f);
-            }
-            
-            Instantiate(ps1, transform.position, Quaternion.identity);
-            if (enemyHealth <= 0)
-            {
-                Instantiate(ps2, transform.position, Quaternion.identity);
-                Destroy(this.gameObject);
-            }
+            int damageAmount = 1;
+            TakeDamage(damageAmount);
+            /* enemyHealth--;
+             if (transform.position.x < player.transform.position.x)
+             {
+                 rb.velocity = new Vector2(-knockBackSpeed, 1.7f);
+             }
+             else
+             {
+                 rb.velocity = new Vector2(knockBackSpeed, 1.7f);
+             }
+
+             Instantiate(ps1, transform.position, Quaternion.identity);
+             if (enemyHealth <= 0)
+             {
+                 Instantiate(ps2, transform.position, Quaternion.identity);
+                 Destroy(this.gameObject);
+             }*/
         }
         if (other.tag == "Player")
         {
             Attack();
         }
     }
-    private void OnCollisionEnter2D(Collision2D col)
-    {
-        if (col.gameObject.tag == "Player")
-        {
-           
-        }
-    }
-    private void Attack()
-    {
-        Debug.Log("Attacking!");
-    }
 }
+

@@ -73,7 +73,7 @@ public class ChaseEnemy : MonoBehaviour {
             }
         }
     }
-    private void Flip()
+    public void Flip()
     {
         if ((transform.position.x < player.transform.position.x))
         {
