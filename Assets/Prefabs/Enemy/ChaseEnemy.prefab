@@ -293,6 +293,7 @@ MonoBehaviour:
   knockBackSpeed: 0
   ps1: {fileID: 198960643568958960, guid: b4434d3fe7549ca46924a73a69cc029f, type: 2}
   ps2: {fileID: 198059512307964708, guid: 290611bdb6a097643acc3ba822c1ceb8, type: 2}
+  rb: {fileID: 50476095975474596}
   movingRight: 1
   player: {fileID: 0}
   HealthBar: {fileID: 114919329426641174}

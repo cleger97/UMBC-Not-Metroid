@@ -5,7 +5,7 @@ using UnityEngine;
 public class ChaseEnemyV2 : Enemy {
     private bool isPatrol = true;
     private bool facingRight = true;
-    //private Rigidbody2D rb;
+
     public float chaseDistance;
     // Use this for initialization
     public override void Start () {
@@ -71,6 +71,7 @@ public class ChaseEnemyV2 : Enemy {
             }
         }
     }
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Wall")

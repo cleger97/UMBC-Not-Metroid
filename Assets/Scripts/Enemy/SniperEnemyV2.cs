@@ -6,14 +6,14 @@ public class SniperEnemyV2 : Enemy {
     private bool facingRight = true;
     [SerializeField]
     private GameObject _laserPrefab;
-    //private Rigidbody2D rb;
+    
     public bool canShoot = false;
     public float shootingDistance;
     public float shotReset = 3f;
     // Use this for initialization
     public override void Start () {
         base.Start();
-        //rb = GameObject.FindObjectOfType<Rigidbody2D>();
+        
     }
 	
 	// Update is called once per frame
@@ -40,7 +40,7 @@ public class SniperEnemyV2 : Enemy {
     }
     public void Flip()
     {
-        Debug.Log("in flip");
+        
         if ((transform.position.x < player.transform.position.x))
         {
             if (facingRight)
@@ -56,27 +56,14 @@ public class SniperEnemyV2 : Enemy {
             }
         }
     }
+   
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.tag == "Weapon")
         {
             int damageAmount = 1;
             TakeDamage(damageAmount);
-            /*enemyHealth--;
-            if (transform.position.x < player.transform.position.x)
-            {
-                rb.velocity = new Vector2(-knockBackSpeed, 1.7f);
-            }
-            else
-            {
-                rb.velocity = new Vector2(knockBackSpeed, 1.7f);
-            }
-            Instantiate(ps1, transform.position, Quaternion.identity);
-            if (enemyHealth <= 0)
-            {
-                Instantiate(ps2, transform.position, Quaternion.identity);
-                Destroy(this.gameObject);                
-            }*/
+            
         }
     }
 }

@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 114356390018832604}
   m_Layer: 0
   m_Name: PatrolEnemy
-  m_TagString: Untagged
+  m_TagString: Sniper
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -149,7 +149,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1516453521336354}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.2320156, y: -1.8716149, z: 0}
+  m_LocalPosition: {x: 4.9998713, y: -2.229685, z: 0}
   m_LocalScale: {x: 6, y: 4, z: 1}
   m_Children:
   - {fileID: 4852613859495970}
@@ -261,24 +261,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 4
   activeDistance: 7
-  stoppingDistance: 1
-  retreatDistance: 2
-  shootingDistance: 0
   enemyHealth: 4
   sp: {fileID: 212153331946654320}
   knockBackSpeed: 3
   ps1: {fileID: 198960643568958960, guid: b4434d3fe7549ca46924a73a69cc029f, type: 2}
   ps2: {fileID: 198059512307964708, guid: 290611bdb6a097643acc3ba822c1ceb8, type: 2}
-  rb: {fileID: 0}
-  patrol: 1
-  sniper: 0
-  canShoot: 0
-  shotReset: 3
   movingRight: 1
   player: {fileID: 0}
-  _laserPrefab: {fileID: 0}
   HealthBar: {fileID: 114656070105625122}
   groundDetection: {fileID: 4852613859495970}
+  rb: {fileID: 50422306752227032}
 --- !u!114 &114432488375234668
 MonoBehaviour:
   m_ObjectHideFlags: 1
