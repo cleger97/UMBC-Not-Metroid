@@ -36,7 +36,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1079111209780268}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.79, z: 0}
+  m_LocalPosition: {x: -13.65, y: 0.23, z: 0}
   m_LocalScale: {x: 0.2875, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -51,7 +51,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -73,7 +73,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1079111209780268}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4bb0e59c18223a74e9130406772382b9, type: 3}
   m_Name: 
@@ -86,10 +86,11 @@ MonoBehaviour:
   uad: 0
   sts: 0
   blink: 0
-  fall: 0
+  fall: 1
   ripple: 0
   spawn: 0
-  ps1: {fileID: 0}
+  shake: 0
+  ps1: {fileID: 198493509908910520, guid: d5c02e6896a409e4fa7cdfc67a8f30b7, type: 2}
   cam: {fileID: 0}
 --- !u!212 &212518654334860890
 SpriteRenderer:
@@ -125,7 +126,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 3a4e8128967c6664e9f7086acd0bb7d2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

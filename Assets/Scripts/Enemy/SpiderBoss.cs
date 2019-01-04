@@ -10,6 +10,8 @@ public class SpiderBoss : MonoBehaviour {
     public float attackSpeed;
     public float timeBetweenAttacks;
     public float attackDuration;
+    public ParticleSystem ps1, ps2;
+    public SpriteRenderer sp;
 
     private float attackDuration2;
     private float attackTime;
@@ -35,8 +37,8 @@ public class SpiderBoss : MonoBehaviour {
         {
             if (stages == 1)
             {
-                transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
-                anim.SetBool("isWalking", true);
+                //transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+                //anim.SetBool("isWalking", true);
                 if (Time.time >= attackTime)
                 {
                     //StartCoroutine(Attack());
@@ -62,6 +64,22 @@ public class SpiderBoss : MonoBehaviour {
             transform.position = Vector2.MoveTowards(originalPosition, targetPosition, attackSpeed*Time.deltaTime);
             //yield return null;
             yield return new WaitForSeconds(attackDuration);
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        Vector2 pos = new Vector2(col.transform.position.x, col.transform.position.y);
+        if (col.tag == "Weapon")
+        {
+            
+            health--;
+            Instantiate(ps1, pos, Quaternion.identity);
+            
+        }
+        if(health <= 0)
+        {
+            Instantiate(ps2, pos, Quaternion.identity);
+            Destroy(this.gameObject);
         }
     }
 }
