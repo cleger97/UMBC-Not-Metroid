@@ -1640,7 +1640,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1271118545}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.22, y: 0.23, z: -0.14160156}
+  m_LocalPosition: {x: 5.97, y: 0.23, z: -0.1416016}
   m_LocalScale: {x: 1.69, y: 1.78, z: 1}
   m_Children:
   - {fileID: 774221357}
@@ -1660,7 +1660,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 5
-  speed: 2.32
+  speed: 3.45
   damage: 6
   player: {fileID: 0}
   attackSpeed: 9.38
@@ -1669,6 +1669,9 @@ MonoBehaviour:
   ps1: {fileID: 198960643568958960, guid: b4434d3fe7549ca46924a73a69cc029f, type: 2}
   ps2: {fileID: 198168223443683460, guid: 02843e33ecd2e3548a1da7f4ccd2e27f, type: 2}
   sp: {fileID: 1129986731}
+  walkDistance: 3
+  _laserPrefab: {fileID: 1779474961009336, guid: 96055852f03461447bae9150dfd23eda,
+    type: 2}
 --- !u!61 &1271118549
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2462,7 +2465,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300002, guid: e30d876bcda42ef4ba74f3e2c8c3b3b9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
