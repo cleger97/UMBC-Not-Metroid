@@ -11,7 +11,7 @@ public class SpiderBoss : MonoBehaviour {
     public float attackSpeed;
     public float timeBetweenAttacks;
     public float attackDuration;
-    public ParticleSystem ps1, ps2;
+    //public ParticleSystem ps1, ps2;
     public SpriteRenderer sp;
     public float walkDistance;
     [SerializeField]
@@ -106,7 +106,7 @@ public class SpiderBoss : MonoBehaviour {
         }
 	}
     
-    private void OnTriggerEnter2D(Collider2D col)
+    /*private void OnTriggerEnter2D(Collider2D col)
     {
         Vector2 pos = new Vector2(col.transform.position.x, col.transform.position.y);
         if (col.tag == "Weapon")
@@ -121,7 +121,7 @@ public class SpiderBoss : MonoBehaviour {
             Instantiate(ps2, pos, Quaternion.identity);
             Destroy(this.gameObject);
         }
-    }
+    }*/
     private void ResetSpeed()
     {
         speed = startSpeed;
