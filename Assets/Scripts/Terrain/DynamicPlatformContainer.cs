@@ -9,7 +9,7 @@ public class DynamicPlatformContainer : MonoBehaviour {
 	public static DynamicPlatformContainer instance {
 		get {
 			if (inst == null) {
-				GameObject DPC = Instantiate(Resources.Load("Prefabs/PlatformContainer")) as GameObject;
+				GameObject DPC = Instantiate(Resources.Load("Level_Prefabs/PlatformContainer")) as GameObject;
 				inst = DPC.GetComponent<DynamicPlatformContainer>();
 				DontDestroyOnLoad(inst);
 				return inst;
