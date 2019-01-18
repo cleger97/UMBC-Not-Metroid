@@ -50,10 +50,15 @@ public class PlayerWeapon : MonoBehaviour {
 			if (selectedW.energyCost > currentEnergy) {
 				return;
 			} else {
-				currentEnergy -= selectedW.energyCost;
+
+				// if it fired successfully then deduct energy
+				if (selectedW.Fire()) {
+					currentEnergy -= selectedW.energyCost;
+				}
+				
 				Debug.Log("Current Energy Left: " + currentEnergy);
+				
 			}
-			selectedW.Fire();
 		}
 
 		if (Input.GetButtonDown("Fire2") ) {

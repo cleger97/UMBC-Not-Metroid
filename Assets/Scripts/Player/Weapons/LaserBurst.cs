@@ -15,7 +15,7 @@ public class LaserBurst : Weapon {
 	public float projectileTime = 2f;
 	private bool readyToFire = true;
 	void Awake() {
-		energyCost = 20f;
+		
 	}
 
 	void Update() {
@@ -30,7 +30,7 @@ public class LaserBurst : Weapon {
 	}
 
 	// really basic sword swing - just activate the box, but at some point an animation will be attached.
-	public override void Fire() {
+	public override bool Fire() {
 
 		if (readyToFire) {
 			
@@ -51,6 +51,11 @@ public class LaserBurst : Weapon {
 			// and we fired, wait for the next one.
 			readyToFire = false;
 			currentWeaponCD = weaponCD;
+
+			return true;
+		} else {
+
+			return false;
 		}
 	}
 

@@ -8,8 +8,9 @@ public class SwordWeapon : Weapon {
 	public float weaponCD = 0.2f;
 
 	private float currentWeaponCD = 0;
+	
+	
 	void Awake() {
-		
 		DisableWeapon();
 	}
 
@@ -30,12 +31,19 @@ public class SwordWeapon : Weapon {
 	}
 
 	// really basic sword swing - just activate the box, but at some point an animation will be attached.
-	public override void Fire() {
+	public override bool Fire() {
 		if (currentWeaponCD <= 0) {
 			weapon.GetComponent<SpriteRenderer>().enabled = true;
 			weapon.GetComponent<BoxCollider2D>().enabled = true;
 			currentWeaponCD = weaponCD;
+
+			return true;
+		} else {
+
+			return false;
 		}
 
+		
 	}
+
 }
