@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 public class SpiderBoss : MonoBehaviour {
     public int health;
     public float speed;
@@ -21,14 +22,16 @@ public class SpiderBoss : MonoBehaviour {
     private float attackDuration2;
     private float attackTime;
     private Animator anim;
-    private Slider healthBar;
+    
+    public Slider healthBar;
     private int stages;
     private Vector3 originalPosition;
+
     // Use this for initialization
     void Start () {
         player = GameObject.FindGameObjectWithTag("Player");
         anim = GetComponent<Animator>();
-        healthBar = FindObjectOfType<Slider>();
+        //healthBar = FindObjectOfType<Slider>();
         healthBar.maxValue = health;
         healthBar.value = health;
         walkLeft = true;
@@ -42,6 +45,8 @@ public class SpiderBoss : MonoBehaviour {
 	void Update () {
         if (player != null)
         {
+            health = GameObject.FindObjectOfType<SpiderBossDamage>().health;
+            healthBar.value = health;
             if (stages == 1)
             {
                 
@@ -106,22 +111,7 @@ public class SpiderBoss : MonoBehaviour {
         }
 	}
     
-    /*private void OnTriggerEnter2D(Collider2D col)
-    {
-        Vector2 pos = new Vector2(col.transform.position.x, col.transform.position.y);
-        if (col.tag == "Weapon")
-        {
-            
-            health--;
-            Instantiate(ps1, pos, Quaternion.identity);
-            
-        }
-        if(health <= 0)
-        {
-            Instantiate(ps2, pos, Quaternion.identity);
-            Destroy(this.gameObject);
-        }
-    }*/
+    
     private void ResetSpeed()
     {
         speed = startSpeed;
