@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ActionScript : MonoBehaviour {
+public abstract class ActionScript : MonoBehaviour {
 
 	// todo when levels
 
-	public virtual void Action() {}
+	public abstract void Action();
 }

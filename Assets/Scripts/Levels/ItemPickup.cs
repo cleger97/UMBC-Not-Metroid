@@ -7,9 +7,9 @@ public class ItemPickup : MonoBehaviour {
 	public GameObject itemInWorld;
 	public AudioClip ItemPickupSFX;
 	public AudioSource audio;
-	public float newJumpHeight;
 
 	public ActionScript doWhenFinished;
+    public ActionScript augment;
 
 	public GameObject itemCanvas;
 	// Use this for initialization
@@ -29,27 +29,26 @@ public class ItemPickup : MonoBehaviour {
 			audio.Play();
 
 			Debug.Log("item picked up");
-			Augment();
+			augment.Action();
 			Music.inst.Toggle();
 
 			// Pause the game.
 			Time.timeScale = 0f;
 			
 			itemCanvas.GetComponent<ItemCanvas>().StartText("High Jump", "Increased Jump Height");
-			StartCoroutine(WaitForAudio());
+			StartCoroutine(WaitForAudio(8f));
 		}
 	}
 
-	
 
-	void Augment() {
-		// High Jump
-		inst.jumpHeight = newJumpHeight;
-		inst.UpdateJumpHeight(newJumpHeight);
-	}
+	IEnumerator WaitForAudio(float duration) {
+        float startTime = Time.realtimeSinceStartup;
 
-	IEnumerator WaitForAudio() {
-		yield return new WaitUntil(() => audio.isPlaying == false);
+        while (Time.realtimeSinceStartup - startTime < duration && audio.isPlaying) {
+            yield return null;
+        }
+		
+        audio.Stop();
 		Finish();
 	}
 

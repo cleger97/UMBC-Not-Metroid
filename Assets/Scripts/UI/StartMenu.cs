@@ -21,7 +21,7 @@ public class StartMenu : MonoBehaviour {
 	}
 
 	void Update() {
-		if (Input.GetButtonDown("Fire1") || Input.GetButtonDown("Menu")) {
+		if (Input.GetButtonDown("Jump") || Input.GetButtonDown("Menu")) {
 			LoadGame();
 		}
 	}

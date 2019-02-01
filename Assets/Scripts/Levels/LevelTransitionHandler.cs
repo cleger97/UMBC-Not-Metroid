@@ -19,6 +19,8 @@ public class LevelTransitionHandler : MonoBehaviour {
 
     public float MAXTimer = 2f;
 
+    private bool requiredAsyncUnload = true;
+
     void Awake() {
         if (instance == null) {
             DontDestroyOnLoad(this);
@@ -45,7 +47,7 @@ public class LevelTransitionHandler : MonoBehaviour {
         lastLoad = idOnLoad;
         SceneManager.SetActiveScene(scene);
        
-        if (lastScene != SceneManager.GetActiveScene()) {
+        if (requiredAsyncUnload && lastScene != SceneManager.GetActiveScene()) {
             StartCoroutine(UnloadScene());
         }
     }
@@ -83,6 +85,8 @@ public class LevelTransitionHandler : MonoBehaviour {
 
     public void LoadNewScene(int id, string scene) {
 
+        requiredAsyncUnload = true;
+
         if (timer != 0f) {
             Debug.Log("Minimum time not elapsed");
             return;
@@ -98,6 +102,9 @@ public class LevelTransitionHandler : MonoBehaviour {
     }
 
     public void ReturnToMain() {
+
+        requiredAsyncUnload = false;
+
         SceneManager.LoadScene("Start Menu");
         Player.instance.gameObject.SetActive(false);
     }
