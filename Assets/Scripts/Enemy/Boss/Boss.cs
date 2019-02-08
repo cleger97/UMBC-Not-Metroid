@@ -7,6 +7,7 @@ public class Boss : MonoBehaviour {
     public float attackTime;
     public float coolDown;
     public Animator anim;
+    
     [SerializeField]
     private float speed = 3;
     private bool isAttacking = false;
@@ -15,6 +16,7 @@ public class Boss : MonoBehaviour {
         attackTime = 2;
         coolDown = 1.0f;
         anim.enabled = false;
+        
     }
 
     // Update is called once per frame
@@ -59,4 +61,5 @@ public class Boss : MonoBehaviour {
     {
         MoveRight(speed * 2);
     }
+    
 }

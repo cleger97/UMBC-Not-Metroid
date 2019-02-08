@@ -71,13 +71,13 @@ public class Player : MonoBehaviour
         if (input.x > 0 && !facingRight)
         {
             facingRight = true;
-            transform.localScale = new Vector3(1, 1, 1);
+            transform.localScale = new Vector3(.5f, .5f, .5f);
         }
 
         if (input.x < 0 && facingRight)
         {
             facingRight = false;
-            transform.localScale = new Vector3(-1, 1, 1);
+            transform.localScale = new Vector3(-.5f, .5f, .5f);
         }
 
         // Smooth the x velocity

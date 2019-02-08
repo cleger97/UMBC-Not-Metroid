@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour {
     public ParticleSystem ps;
+    public int damageAmount = 10;
     [SerializeField]
     private float _speed;
     [SerializeField]
@@ -38,6 +39,7 @@ public class Projectile : MonoBehaviour {
         if (other.tag == "Player")
         {
             pos = transform.position;
+            player.GetComponent<PlayerHP>().currentHP -= damageAmount;
             Instantiate(ps, pos, Quaternion.identity);
             Destroy(this.gameObject);
         }

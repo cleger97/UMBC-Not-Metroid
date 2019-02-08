@@ -15,6 +15,9 @@ public class SpiderBoss : MonoBehaviour {
     //public ParticleSystem ps1, ps2;
     public SpriteRenderer sp;
     public float walkDistance;
+    public AudioClip[] clips;
+
+    private AudioSource source;
     [SerializeField]
     private GameObject _laserPrefab;
     private int count = 0;
@@ -39,6 +42,7 @@ public class SpiderBoss : MonoBehaviour {
         anim.SetBool("isWalking", false);
         originalPosition = transform.position;
         startSpeed = speed;
+        source = GetComponent<AudioSource>();
     }
 	
 	// Update is called once per frame
@@ -133,5 +137,11 @@ public class SpiderBoss : MonoBehaviour {
     private void Shoot()
     {
         Instantiate(_laserPrefab, new Vector3(transform.position.x - 1, transform.position.y, transform.position.z), Quaternion.identity);
+    }
+    public void PlaySoundEffect()
+    {
+        Debug.Log("Playing slam effect");
+        source.clip = clips[0];
+        source.Play();
     }
 }

@@ -25,6 +25,6 @@ public class HealthDisplayUI : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         healthBar.value = player.currentHP / player.maxHP;
-        energyBar.value = pweapon.currentEnergy / pweapon.maxEnergy;
+        //energyBar.value = pweapon.currentEnergy / pweapon.maxEnergy;
 	}
 }
