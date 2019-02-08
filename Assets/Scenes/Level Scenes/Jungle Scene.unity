@@ -23448,6 +23448,7 @@ GameObject:
   - component: {fileID: 229683460}
   - component: {fileID: 229683461}
   - component: {fileID: 229683462}
+  - component: {fileID: 229683463}
   m_Layer: 0
   m_Name: Item - High Jump
   m_TagString: Augments
@@ -23557,9 +23558,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemInWorld: {fileID: 229683456}
   ItemPickupSFX: {fileID: 8300000, guid: c8113c1b33291944883fa3fadcb48a1a, type: 3}
-  audio: {fileID: 0}
+  audio: {fileID: 229683461}
   doWhenFinished: {fileID: 229683462}
-  augment: {fileID: 0}
+  augment: {fileID: 229683462}
   itemCanvas: {fileID: 738189002}
 --- !u!82 &229683461
 AudioSource:
@@ -23571,7 +23572,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: c8113c1b33291944883fa3fadcb48a1a, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.3
   m_Pitch: 1
@@ -23670,6 +23671,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorToActivate: {fileID: 579722360}
+--- !u!114 &229683463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 229683456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a78354a33a412a4f8080ab5fedf2fe8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: b9900fab0605d3b4795df526ac06d20c, type: 2}
 --- !u!1 &275602362
 GameObject:
   m_ObjectHideFlags: 0
@@ -24894,6 +24908,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44710ef3a848392448a0ac2ac03b6dec, type: 3}
+--- !u!1 &1372905133 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1717481386824200, guid: 942dfa33d789bec48887bd47e12b09ef,
+    type: 3}
+  m_PrefabInstance: {fileID: 920748636}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1372905143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1372905133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 663b393c7026b2144a0e5438ee5098b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toListen:
+  - {fileID: 11400000, guid: b9900fab0605d3b4795df526ac06d20c, type: 2}
 --- !u!1 &1390242106
 GameObject:
   m_ObjectHideFlags: 0

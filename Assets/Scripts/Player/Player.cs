@@ -157,5 +157,20 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void Set(string toSet, bool setting, int argc, object[] argv)
+    {
+        switch (toSet)
+        {
+            case "HighJump":
+                {
+                    UpdateJumpHeight((float)argv[0]);
+                    return;
+                }
+            default:
+                return;
+
+        }
+    }
+
 }
 
