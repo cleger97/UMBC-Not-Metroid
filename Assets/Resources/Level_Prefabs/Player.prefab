@@ -160,7 +160,7 @@ GameObject:
   - component: {fileID: 605956692}
   m_Layer: 9
   m_Name: Weapon
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -234,7 +234,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 605956690}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -293,7 +293,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1616709619}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -362,7 +362,7 @@ Transform:
   m_GameObject: {fileID: 1717481386824200}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -37.64, y: 0.68, z: -0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 14499888}
   - {fileID: 1616709620}
@@ -406,7 +406,7 @@ SpriteRenderer:
   m_SortingLayerID: 1216742773
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300002, guid: 7902d1413bff3451d837daa00cbb4a67, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b25adde3f615453438c4779900789e20, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -430,18 +430,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.48507768}
+  m_Offset: {x: -0.44129193, y: -0.34827745}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
-    oldSize: {x: 1.28125, y: 0.96875}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 4, y: 4}
     newSize: {x: 0.64, y: 0.64}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.2838707, y: 0.96628535}
+  m_Size: {x: 0.9428103, y: 2.632996}
   m_EdgeRadius: 0
 --- !u!114 &114891426085680746
 MonoBehaviour:
