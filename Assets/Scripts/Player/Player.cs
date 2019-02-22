@@ -78,6 +78,7 @@ public class Player : MonoBehaviour
         {
             facingRight = false;
             transform.localScale = new Vector3(-.5f, .5f, .5f);
+            //transform.position = new Vector3(transform.position.x  - 0.08f, transform.position.y, transform.position.z);
         }
 
         // Smooth the x velocity

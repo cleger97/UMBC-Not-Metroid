@@ -36,7 +36,7 @@ public class LaserBurst : Weapon {
 			
 			Vector3 currentPos = transform.position;
 
-			GameObject laser = Instantiate(weapon, currentPos, Quaternion.identity, null);
+			GameObject laser = Instantiate(weapon, new Vector3(currentPos.x, currentPos.y -0.45f, currentPos.z), Quaternion.identity, null);
 
 			// TODO: Set up vertical angles.
 			float directionX = Mathf.Sign( Player.instance.transform.position.x - this.transform.position.x ) * -1;
