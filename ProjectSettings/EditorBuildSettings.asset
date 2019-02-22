@@ -24,7 +24,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Test Scenes/Level Test Scene 3.unity
     guid: 61ba35f3b06628d4aa9940d96e3a0efd
   - enabled: 1
-    path: Assets/Scenes/Level Scenes/First Tiled Level.unity
+    path: Assets/Scenes/Jesse Final Scenes/First Tiled Level.unity
     guid: d3f8d1cbc9a2d9c4898df95b620a0b15
   - enabled: 1
     path: Assets/Scenes/Test Scenes/Enemy Test Scene.unity
