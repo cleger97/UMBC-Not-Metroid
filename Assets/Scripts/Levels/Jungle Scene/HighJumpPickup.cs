@@ -12,6 +12,8 @@ public class HighJumpPickup : ActionScript {
 		doorToActivate.GetComponent<SpriteRenderer>().enabled = true;
 
 		doorToActivate.GetComponent<BoxCollider2D>().enabled = true;
+
+        gameObject.GetComponent<HighJump>().Action();
 	}
 
 	public void Start() {}

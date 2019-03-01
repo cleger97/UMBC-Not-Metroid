@@ -20,11 +20,29 @@ public class HealthDisplayUI : MonoBehaviour {
             Debug.LogError("Player HP or Weapon not initialized");
             Destroy(this);
         }
-	}
+
+        if (healthBar == null && transform.childCount > 0)
+        {
+            healthBar = transform.GetChild(0).gameObject.GetComponent<Slider>();
+            if (healthBar.name != "Health Slider")
+            {
+                Debug.LogError("Health bar incorrectly init");
+            }
+        }
+        if (energyBar == null && transform.childCount > 1)
+        {
+            energyBar = transform.GetChild(1).gameObject.GetComponent<Slider>();
+            if (energyBar.name != "Energy Slider")
+            {
+                Debug.LogError("Energy bar incorrectly init");
+            }
+        }
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
         healthBar.value = player.currentHP / player.maxHP;
-        //energyBar.value = pweapon.currentEnergy / pweapon.maxEnergy;
+        energyBar.value = pweapon.currentEnergy / pweapon.maxEnergy;
 	}
 }

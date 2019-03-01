@@ -83,6 +83,8 @@ public class Player : MonoBehaviour
 
         // Smooth the x velocity
         float targetVelocityX = input.x * moveSpeed * inputScale.Value;
+        //float targetVelocityX = 0f;
+
 
         if (!dashOnCooldown.Value && Mathf.Abs(input.x) > 0 || controller.collisions.below) {
             velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded.Value : accelerationTimeAirborne.Value);
