@@ -6,7 +6,7 @@ public class EnergyRegenPickup : MonoBehaviour
 {
     private float regenTime;
     [SerializeField] private PlayerWeapon regen;
-
+    private AudioSource source;
     private SpriteRenderer sr;
     private bool pickedUp = false;
     public float regenBoostTime;
@@ -15,6 +15,7 @@ public class EnergyRegenPickup : MonoBehaviour
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
+        source = FindObjectOfType<AudioSource>();
     }
 
     // Update is called once per frame
@@ -32,10 +33,11 @@ public class EnergyRegenPickup : MonoBehaviour
     {
         if (col.tag == "Player")
         {
+            source.Play();
             pickedUp = true;
             sr.enabled = false;
             regenTime = regenBoostTime;
-            regen.energyRegen *= 5f;
+            regen.energyRegen *= 15f;
         }
     }
 }

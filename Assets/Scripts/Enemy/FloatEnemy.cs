@@ -11,6 +11,7 @@ public class FloatEnemy : MonoBehaviour
     [SerializeField]
     float m_speed = 1.0f;
 
+    [SerializeField] private GameObject pickUp;
     [SerializeField]
     float m_amplitude = 1.0f;
 
@@ -69,6 +70,7 @@ public class FloatEnemy : MonoBehaviour
         }
         if(other.tag == "Weapon")
         {
+            Instantiate(pickUp, transform.position, transform.rotation);
             Destroy(this.gameObject);
         }
         if(other.tag == "Wall")

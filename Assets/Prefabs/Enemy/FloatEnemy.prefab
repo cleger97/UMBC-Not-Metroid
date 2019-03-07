@@ -134,6 +134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageAmount: 20
   m_speed: 1
+  pickUp: {fileID: 5799175614131446999, guid: 11667357cfbb6b64ea0a3ef7e870afe4, type: 3}
   m_amplitude: 2
   m_period: 2
   m_radius: 1

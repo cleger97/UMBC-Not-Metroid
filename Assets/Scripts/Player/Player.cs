@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
     public float baseAccelerationTimeGrounded = .05f;
     public float moveSpeed = 8;
     public GameObject platform;
+    public AudioSource audio;
+    public AudioClip [] clips;
 
     private float gravity;
     private float jumpVelocity;
@@ -108,16 +110,24 @@ public class Player : MonoBehaviour
         if (Input.GetButtonDown("Jump")) {
             if (controller.collisions.below) // Regular jump
             {
+                audio.clip = clips[0];
+                audio.Play();
                 velocity.y = jumpVelocity;
             } else if (controller.collisions.left) { // Left wall jump
+                audio.clip = clips[0];
+                audio.Play();
                 velocity.y = jumpVelocity;
                 velocity.x = jumpVelocity / 1.5f;
                 inputScale.UpdateValue(.1f, 0);
             } else if (controller.collisions.right) { // Right wall jump
+                audio.clip = clips[0];
+                audio.Play();
                 velocity.y = jumpVelocity;
                 velocity.x = -jumpVelocity / 1.5f;
                 inputScale.UpdateValue(.1f, 0);
             } else if (!doubleJump) {    // Double jump
+                audio.clip = clips[0];
+                audio.Play();
                 velocity.y = jumpVelocity;
                 doubleJump = true;
             }
