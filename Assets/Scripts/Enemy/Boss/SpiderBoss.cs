@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class SpiderBoss : MonoBehaviour {
-    public int health;
+    public int health = 10;
     public float speed;
     private float startSpeed;
     public int damage;
@@ -16,7 +16,8 @@ public class SpiderBoss : MonoBehaviour {
     public SpriteRenderer sp;
     public float walkDistance;
     public AudioClip[] clips;
-
+    private bool flip = false;
+    private float flipTime = 0;
     private AudioSource source;
     [SerializeField]
     private GameObject _laserPrefab;
@@ -49,6 +50,15 @@ public class SpiderBoss : MonoBehaviour {
 	void Update () {
         if (player != null)
         {
+            if (flip)
+            {
+                flipTime -= Time.deltaTime;
+            }
+
+            if (!anim.GetBool("newCharge2") && !anim.GetBool("newCharge3"))
+            {
+                Flip();
+            }
             health = GameObject.FindObjectOfType<SpiderBossDamage>().health;
             healthBar.value = health;
             if (stages == 1)
@@ -137,6 +147,39 @@ public class SpiderBoss : MonoBehaviour {
     private void Shoot()
     {
         Instantiate(_laserPrefab, new Vector3(transform.position.x - 1, transform.position.y, transform.position.z), Quaternion.identity);
+    }
+
+    public void Flip()
+    {
+        if (player.transform.position.x+1 > transform.position.x)
+        {
+            if (!flip)
+            {
+                flipTime = 1f;
+                flip = true;
+            }
+
+            Quaternion rot = new Quaternion(0, 180, 0, 0);
+            if (flipTime < 0)
+            {
+                transform.rotation = rot;
+                flip = false;
+            }
+        }
+        else if(player.transform.position.x - 1 < transform.position.x)
+        {
+            if (!flip)
+            {
+                flipTime = 1f;
+                flip = true;
+            }
+            Quaternion rot = new Quaternion(0, 0, 0, 0);
+            if (flipTime < 0)
+            {
+                transform.rotation = rot;
+                flip = false;
+            }
+        }
     }
     public void PlaySoundEffect()
     {

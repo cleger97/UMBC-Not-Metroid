@@ -1397,7 +1397,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 695874804}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.16, y: 1.93, z: 0}
+  m_LocalPosition: {x: 20, y: 1.93, z: 0}
   m_LocalScale: {x: 0.07646062, y: 1.4833351, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1903,6 +1903,7 @@ MonoBehaviour:
   ps1: {fileID: 198651301276877452, guid: c94013fe536ce714a95b8a19297de8fe, type: 3}
   ps2: {fileID: 198569259849734850, guid: e84308144cdfa2449b4d3599d81aa5e8, type: 3}
   boss: {fileID: 1271118545}
+  sr: {fileID: 1129986731}
 --- !u!1001 &1155015719
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2231,7 +2232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f77f3dc137cc2d4a91d79303c1af40e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 5
+  health: 18
   speed: 3.45
   damage: 6
   player: {fileID: 0}
@@ -2671,7 +2672,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1565831847}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.03, y: 6.29, z: 0}
+  m_LocalPosition: {x: 18.81, y: 6.29, z: 0}
   m_LocalScale: {x: 0.2875, y: 0.1357, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3056,8 +3057,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1901023585}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.825, y: -3.022, z: 0}
-  m_LocalScale: {x: 2.1717377, y: 0.1, z: 1}
+  m_LocalPosition: {x: 2.062, y: -3.022, z: 0}
+  m_LocalScale: {x: 3.1945589, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7

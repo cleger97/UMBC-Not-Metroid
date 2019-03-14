@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpiderBossAttack : MonoBehaviour
 {
-    public int damageAmount = 15;
+    public int damageAmount = 50;
     // Start is called before the first frame update
     void Start()
     {
