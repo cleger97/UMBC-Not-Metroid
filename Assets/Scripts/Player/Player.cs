@@ -56,6 +56,9 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        // Animator data
+        bool isJumping = false;
+
         // Reset velocity if collision above or below
         // Reset double jump if collision below
         if (controller.collisions.above)
@@ -113,6 +116,7 @@ public class Player : MonoBehaviour
                 audio.clip = clips[0];
                 audio.Play();
                 velocity.y = jumpVelocity;
+                isJumping = true;
             } else if (controller.collisions.left) { // Left wall jump
                 audio.clip = clips[0];
                 audio.Play();
@@ -130,6 +134,7 @@ public class Player : MonoBehaviour
                 audio.Play();
                 velocity.y = jumpVelocity;
                 doubleJump = true;
+                isJumping = true;
             }
         }
         // Ignore platform if pressing down
@@ -150,6 +155,9 @@ public class Player : MonoBehaviour
 
         }
         */
+        // Handle animator motions
+        HandleAnimator(isJumping);
+
         // Finally, send movement velocity to controller
         controller.Move(velocity * Time.deltaTime);
 
@@ -163,11 +171,42 @@ public class Player : MonoBehaviour
             platforms--;
         }
 
+        
+    }
+
+    public void HandleAnimator(bool isJumping) {
+        // Reset triggers
+        animator.ResetTrigger("Attack");
+        animator.ResetTrigger("Jump");
+
+        Debug.Log(velocity.x);
+
+        Vector2 input = new Vector2( Input.GetAxisRaw("Horizontal") , Input.GetAxisRaw("Vertical") );
+
+        if (input.x == 0) {
+            animator.SetBool("isWalking", false);
+        }
+
         // Handle attacking
         if (Input.GetButtonDown("Fire1"))
         {
             animator.SetTrigger("Attack");
         }
+
+        else if (isJumping) {
+            animator.SetTrigger("Jump");
+        } 
+
+        else if (Mathf.Abs(input.x) > 0) {
+            animator.SetBool("isWalking", true);
+        }
+
+        else {
+            // default
+            return;
+        }
+
+
     }
 
     public void Set(string toSet, bool setting, int argc, object[] argv)
