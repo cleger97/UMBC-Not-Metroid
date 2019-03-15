@@ -27,15 +27,12 @@ public class Player : MonoBehaviour
     private BoolTimer dashOnCooldown;
     private BoxCollider2D collider;
     private int platforms = 1;
-    private PlayerWeapon weapon;
 
     private float groundingDelay = 0f;
     private float maxGroundingDelay = 0.15f;
 
-
     private void Awake()
     {
-        weapon = FindObjectOfType<PlayerWeapon>();
         if (instance != null)
         {
             Destroy(this.gameObject);
@@ -62,9 +59,6 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        // Animator data
-        bool isJumping = false;
-
         // Reset velocity if collision above or below
         // Reset double jump if collision below
         if (controller.collisions.above)
@@ -75,6 +69,19 @@ public class Player : MonoBehaviour
         {
             velocity.y = 0;
             doubleJump = false;
+        } else
+        {
+            if (controller.collisions.lastJumpState)
+            {
+                groundingDelay = maxGroundingDelay;
+            } else
+            {
+                if (groundingDelay > 0)
+                {
+                    groundingDelay -= Time.deltaTime;
+                    if (groundingDelay < 0) { groundingDelay = 0; }
+                }
+            }
         }
 
         // Get input and flip direction if necessary
@@ -101,7 +108,7 @@ public class Player : MonoBehaviour
             velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded.Value : accelerationTimeAirborne.Value);
 
         }
-
+        
         // Handle Dashing
         /*
         if (Input.GetButtonDown("Dash") && !dashOnCooldown.Value)
@@ -116,8 +123,7 @@ public class Player : MonoBehaviour
         }
         */
         // Handle jumps
-        if (Input.GetButtonDown("Jump"))
-        {
+        if (Input.GetButtonDown("Jump")) {
             if (controller.collisions.below || groundingDelay > 0) // Regular jump
             {
                 audio.clip = clips[0];
@@ -125,31 +131,23 @@ public class Player : MonoBehaviour
                 velocity.y = jumpVelocity;
 
                 groundingDelay = 0;
-                isJumping = true;
-            }
-            else if (controller.collisions.left)
-            { // Left wall jump
+            } else if (controller.collisions.left) { // Left wall jump
                 audio.clip = clips[0];
                 audio.Play();
                 velocity.y = jumpVelocity;
                 velocity.x = jumpVelocity / 1.5f;
                 inputScale.UpdateValue(.1f, 0);
-            }
-            else if (controller.collisions.right)
-            { // Right wall jump
+            } else if (controller.collisions.right) { // Right wall jump
                 audio.clip = clips[0];
                 audio.Play();
                 velocity.y = jumpVelocity;
                 velocity.x = -jumpVelocity / 1.5f;
                 inputScale.UpdateValue(.1f, 0);
-            }
-            else if (!doubleJump)
-            {    // Double jump
+            } else if (!doubleJump) {    // Double jump
                 audio.clip = clips[0];
                 audio.Play();
                 velocity.y = jumpVelocity;
                 doubleJump = true;
-                isJumping = true;
             }
         }
         // Ignore platform if pressing down
@@ -170,11 +168,13 @@ public class Player : MonoBehaviour
 
         }
         */
-        // Handle animator motions
-        HandleAnimator(isJumping);
+        // Save last jump state
+        controller.collisions.lastJumpState = controller.collisions.below;
 
         // Finally, send movement velocity to controller
         controller.Move(velocity * Time.deltaTime);
+
+        
 
         // Handle platform placement
         if (Input.GetButtonDown("Platform") && platforms > 0)
@@ -186,53 +186,11 @@ public class Player : MonoBehaviour
             platforms--;
         }
 
-        
-    }
-
-    public void ProjectileSpawn()
-    {
-        LaserBurst laser = FindObjectOfType<LaserBurst>();
-        laser.ProjectileSpawn();
-    }
-    public void HandleAnimator(bool isJumping) {
-        // Reset triggers
-        animator.ResetTrigger("Attack");
-        animator.ResetTrigger("Jump");
-
-        Debug.Log(velocity.x);
-
-        Vector2 input = new Vector2( Input.GetAxisRaw("Horizontal") , Input.GetAxisRaw("Vertical") );
-
-        if (input.x == 0) {
-            animator.SetBool("isWalking", false);
-        }
-
         // Handle attacking
         if (Input.GetButtonDown("Fire1"))
         {
-            if(weapon.currentWeapon == 1)
-            { animator.SetTrigger("Attack");}
-
-            if (weapon.currentWeapon == 0)
-            {
-                animator.SetTrigger("BeamAttack");
-            }
+            animator.SetTrigger("Attack");
         }
-
-        else if (isJumping) {
-            animator.SetTrigger("Jump");
-        } 
-
-        else if (Mathf.Abs(input.x) > 0) {
-            animator.SetBool("isWalking", true);
-        }
-
-        else {
-            // default
-            return;
-        }
-
-
     }
 
     public void Set(string toSet, bool setting, int argc, object[] argv)

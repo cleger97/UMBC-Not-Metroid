@@ -239,6 +239,8 @@ public class Controller2D : MonoBehaviour
         public bool above, below;
         public bool left, right;
 
+        public bool lastJumpState;
+
         public bool climbingSlope;
         public bool descendingSlope;
         public float slopeAngle, slopeAngleOld;

@@ -14,8 +14,10 @@ public class LaserBurst : Weapon {
 
 	public float projectileTime = 2f;
 	private bool readyToFire = true;
+
+
 	void Awake() {
-		
+        
 	}
 
 	void Update() {

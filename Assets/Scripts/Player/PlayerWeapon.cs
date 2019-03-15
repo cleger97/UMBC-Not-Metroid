@@ -61,7 +61,7 @@ public class PlayerWeapon : MonoBehaviour {
 			}
 		}
 
-		if (Input.GetButtonDown("Fire2") ) {
+		if (Input.GetButtonDown("SwitchWeapon") ) {
 			Debug.Log("Weapon Switch fired");
 
 			if (currentWeapon + 1 == listOfWeapons.Count) {
