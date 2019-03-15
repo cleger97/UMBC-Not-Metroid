@@ -5,9 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(Player))]
 public class PlayerWeapon : MonoBehaviour {
 
-	private List<GameObject> listOfWeapons;
+	[HideInInspector] public List<GameObject> listOfWeapons;
 	public GameObject weapon;
-	private int currentWeapon;
+	[HideInInspector]public int currentWeapon;
 	public float maxEnergy;
 	public float currentEnergy;
 	public float energyRegen;

@@ -27,9 +27,10 @@ public class Player : MonoBehaviour
     private BoolTimer dashOnCooldown;
     private BoxCollider2D collider;
     private int platforms = 1;
-
+    private PlayerWeapon weapon;
     private void Awake()
     {
+        weapon = FindObjectOfType<PlayerWeapon>();
         if (instance != null)
         {
             Destroy(this.gameObject);
@@ -174,6 +175,11 @@ public class Player : MonoBehaviour
         
     }
 
+    public void ProjectileSpawn()
+    {
+        LaserBurst laser = FindObjectOfType<LaserBurst>();
+        laser.ProjectileSpawn();
+    }
     public void HandleAnimator(bool isJumping) {
         // Reset triggers
         animator.ResetTrigger("Attack");
@@ -190,7 +196,13 @@ public class Player : MonoBehaviour
         // Handle attacking
         if (Input.GetButtonDown("Fire1"))
         {
-            animator.SetTrigger("Attack");
+            if(weapon.currentWeapon == 1)
+            { animator.SetTrigger("Attack");}
+
+            if (weapon.currentWeapon == 0)
+            {
+                animator.SetTrigger("BeamAttack");
+            }
         }
 
         else if (isJumping) {
