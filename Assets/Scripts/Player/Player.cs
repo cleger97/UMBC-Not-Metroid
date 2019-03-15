@@ -64,6 +64,7 @@ public class Player : MonoBehaviour
     {
         // Animator data
         bool isJumping = false;
+        bool isAttacking = false;
 
         // Reset velocity if collision above or below
         // Reset double jump if collision below
@@ -170,8 +171,12 @@ public class Player : MonoBehaviour
 
         }
         */
+
+        weapon.UpdateState();
+        isAttacking = weapon.isAttacking;
+
         // Handle animator motions
-        HandleAnimator(isJumping);
+        HandleAnimator(isJumping, isAttacking);
 
         // Finally, send movement velocity to controller
         controller.Move(velocity * Time.deltaTime);
@@ -194,12 +199,13 @@ public class Player : MonoBehaviour
         LaserBurst laser = FindObjectOfType<LaserBurst>();
         laser.ProjectileSpawn();
     }
-    public void HandleAnimator(bool isJumping) {
+
+    public void HandleAnimator(bool isJumping, bool isAttacking) {
         // Reset triggers
         animator.ResetTrigger("Attack");
         animator.ResetTrigger("Jump");
 
-        Debug.Log(velocity.x);
+        //Debug.Log(velocity.x);
 
         Vector2 input = new Vector2( Input.GetAxisRaw("Horizontal") , Input.GetAxisRaw("Vertical") );
 
@@ -208,10 +214,12 @@ public class Player : MonoBehaviour
         }
 
         // Handle attacking
-        if (Input.GetButtonDown("Fire1"))
+        if (isAttacking)
         {
             if(weapon.currentWeapon == 1)
-            { animator.SetTrigger("Attack");}
+            {
+                animator.SetTrigger("Attack");
+            }
 
             if (weapon.currentWeapon == 0)
             {

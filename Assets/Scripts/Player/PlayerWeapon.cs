@@ -14,6 +14,7 @@ public class PlayerWeapon : MonoBehaviour {
 
 	public float swingTime;
 
+    public bool isAttacking;
 
 	void Start() {
 		listOfWeapons = new List<GameObject>();
@@ -31,7 +32,8 @@ public class PlayerWeapon : MonoBehaviour {
 	}
 
 	// Update is called once per frame
-	void Update () {
+	public void UpdateState () {
+        isAttacking = false;
 		if (currentEnergy < maxEnergy) {
 			currentEnergy += energyRegen * Time.deltaTime;
 			
@@ -54,6 +56,7 @@ public class PlayerWeapon : MonoBehaviour {
 				// if it fired successfully then deduct energy
 				if (selectedW.Fire()) {
 					currentEnergy -= selectedW.energyCost;
+                    isAttacking = true;
 				}
 				
 				Debug.Log("Current Energy Left: " + currentEnergy);
