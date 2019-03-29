@@ -41,8 +41,15 @@ public class LaserBurst : Weapon {
         float directionX = Mathf.Sign(Player.instance.transform.position.x - this.transform.position.x) * -1;
         laser.GetComponent<Rigidbody2D>().velocity = new Vector2((projectileSpeed * directionX), 0);
     }
-	// really basic sword swing - just activate the box, but at some point an animation will be attached.
-	public override bool Fire() {
+    // really basic sword swing - just activate the box, but at some point an animation will be attached.
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.tag == "Enemy")
+        {
+            Destroy(this.gameObject);
+        }
+    }
+    public override bool Fire() {
 
 		if (readyToFire) {
 			

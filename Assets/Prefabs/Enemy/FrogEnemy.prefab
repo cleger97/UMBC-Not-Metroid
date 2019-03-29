@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 61043588008775576}
   - component: {fileID: 61526600341968488}
   - component: {fileID: 114057542799422142}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: FrogEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -193,7 +193,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224875386368789498}
   - component: {fileID: 114788168934614120}
-  m_Layer: 5
+  m_Layer: 15
   m_Name: EnemySlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -279,7 +279,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4381028298901464}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: groundDetection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -309,7 +309,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 224125035189804492}
-  m_Layer: 5
+  m_Layer: 15
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -347,7 +347,7 @@ GameObject:
   - component: {fileID: 224597650835759018}
   - component: {fileID: 222267847297161472}
   - component: {fileID: 114193951553402242}
-  m_Layer: 5
+  m_Layer: 15
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -422,7 +422,7 @@ GameObject:
   - component: {fileID: 223274075276501522}
   - component: {fileID: 114927097082796390}
   - component: {fileID: 114011247023668776}
-  m_Layer: 5
+  m_Layer: 15
   m_Name: EnemyCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -520,7 +520,7 @@ GameObject:
   - component: {fileID: 224475077720874870}
   - component: {fileID: 222911879869934862}
   - component: {fileID: 114481176599473720}
-  m_Layer: 5
+  m_Layer: 15
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}

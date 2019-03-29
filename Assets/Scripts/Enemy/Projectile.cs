@@ -45,8 +45,8 @@ public class Projectile : MonoBehaviour {
         }
         if(other.tag == "Weapon")
         {
-            Debug.Log("Reflect");
-            transform.position = Vector2.MoveTowards(transform.position, enemy.transform.position, _speed * Time.deltaTime);
+           // Debug.Log("Reflect");
+            //transform.position = Vector2.MoveTowards(transform.position, enemy.transform.position, _speed * Time.deltaTime);
         }
     }
 }

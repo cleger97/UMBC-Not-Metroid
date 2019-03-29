@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 14499891}
   - component: {fileID: 14499890}
   - component: {fileID: 14499889}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Laser Burst
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -158,7 +158,7 @@ GameObject:
   - component: {fileID: 605956691}
   - component: {fileID: 605956693}
   - component: {fileID: 605956692}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Weapon
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -264,7 +264,7 @@ GameObject:
   - component: {fileID: 1616709620}
   - component: {fileID: 1616709622}
   - component: {fileID: 1616709621}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Slash Weapon
   m_TagString: Weapon
   m_Icon: {fileID: 0}
