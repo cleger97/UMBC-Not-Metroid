@@ -55,7 +55,25 @@ public class Player : MonoBehaviour
         dashOnCooldown = gameObject.AddComponent<BoolTimer>().Constructor(false);
     }
 
+    private void Start()
+    {
+        if (audio != null)
+        {
+            if (AudioVolumeController.inst != null)
+            {
+                audio.volume = AudioVolumeController.SFXVolPercent;
+            } else
+            {
                 audio.volume = 1;
+            }
+
+        } else
+        {
+            Debug.LogWarning("Audio not initalized");
+        }
+
+    }
+
     public void UpdateJumpHeight(float jumpHeight) {
         gravity = -(2 * jumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
