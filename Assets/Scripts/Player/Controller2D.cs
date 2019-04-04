@@ -248,6 +248,8 @@ public class Controller2D : MonoBehaviour
 
         public void Reset()
         {
+            lastJumpState = below;
+
             above = below = false;
             left = right = false;
             climbingSlope = false;

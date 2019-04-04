@@ -55,6 +55,7 @@ public class Player : MonoBehaviour
         dashOnCooldown = gameObject.AddComponent<BoolTimer>().Constructor(false);
     }
 
+                audio.volume = 1;
     public void UpdateJumpHeight(float jumpHeight) {
         gravity = -(2 * jumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
@@ -76,6 +77,21 @@ public class Player : MonoBehaviour
         {
             velocity.y = 0;
             doubleJump = false;
+        }
+        else
+        {
+            if (controller.collisions.lastJumpState)
+            {
+                groundingDelay = maxGroundingDelay;
+            }
+            else
+            {
+                if (groundingDelay > 0)
+                {
+                    groundingDelay -= Time.deltaTime;
+                    if (groundingDelay < 0) { groundingDelay = 0; }
+                }
+            }
         }
 
         // Get input and flip direction if necessary
