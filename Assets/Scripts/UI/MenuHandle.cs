@@ -39,6 +39,8 @@ public class MenuHandle : MonoBehaviour {
     public GameObject controlMenu;
     public GameObject musicVolSlider;
 
+    public GameObject SFXVolSlider;
+
     AudioSource SFX;
     public AudioClip backClip;
     public AudioClip selectClip;
@@ -92,6 +94,7 @@ public class MenuHandle : MonoBehaviour {
 		text.SetActive (false);
 		controlMenu.SetActive (false);
         musicVolSlider.SetActive(false);
+        SFXVolSlider.SetActive(false);
     }
 
     private void Pause() {
@@ -106,6 +109,7 @@ public class MenuHandle : MonoBehaviour {
 		returnButton.SetActive(true); 
 		//controlMenu.SetActive (true);
         musicVolSlider.SetActive(true); 
+        SFXVolSlider.SetActive(true); 
 
         List<Transform> pauseObjects = new List<Transform>() {continueButton.transform, restartButton.transform, returnButton.transform, musicVolSlider.transform};
         selectInst.Pause(pauseObjects);

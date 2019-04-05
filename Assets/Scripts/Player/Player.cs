@@ -61,7 +61,10 @@ public class Player : MonoBehaviour
         {
             if (AudioVolumeController.inst != null)
             {
+                Debug.Log("Added volume pulse");
                 audio.volume = AudioVolumeController.SFXVolPercent;
+                AudioVolumeController.inst.AddPulse(AudioType.SFX, this.gameObject);
+
             } else
             {
                 audio.volume = 1;
