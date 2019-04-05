@@ -58,6 +58,7 @@ public class Enemy : MonoBehaviour
     public void Attack()
     {
         Debug.Log("Attacking!");
+        player.GetComponent<PlayerHP>().currentHP -= 10f;
     }
 }
 

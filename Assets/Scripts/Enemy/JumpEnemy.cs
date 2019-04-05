@@ -102,18 +102,14 @@ public class JumpEnemy : MonoBehaviour {
                 Destroy(this.gameObject);
             }
         }
-    }
-    private void OnCollisionEnter2D(Collision2D col)
-    {
-        if (col.gameObject.tag == "Player")
+        if (col.tag == "Player")
         {
-         
-         
+            Attack();
         }
     }
 
     private void Attack()
     {
-        Debug.Log("Attacking!");
+        player.GetComponent<PlayerHP>().currentHP -= 20f;
     }
 }
