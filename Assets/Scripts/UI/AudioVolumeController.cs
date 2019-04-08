@@ -44,7 +44,7 @@ public class AudioVolumeController : MonoBehaviour {
         }
     }
 
-    public void AddPulse(AudioType audio, GameObject container) {
+    public void RegisterAudio(AudioType audio, GameObject container) {
         if (audio == AudioType.SFX) {
             SFXList.Add(container);
         } else if (audio == AudioType.Music) {

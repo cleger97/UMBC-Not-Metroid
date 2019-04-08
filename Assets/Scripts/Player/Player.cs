@@ -63,7 +63,7 @@ public class Player : MonoBehaviour
             {
                 Debug.Log("Added volume pulse");
                 audio.volume = AudioVolumeController.SFXVolPercent;
-                AudioVolumeController.inst.AddPulse(AudioType.SFX, this.gameObject);
+                AudioVolumeController.inst.RegisterAudio(AudioType.SFX, this.gameObject);
 
             } else
             {
@@ -84,6 +84,10 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (MenuHandle.instance != null && MenuHandle.instance.isPaused()) {
+          return;
+        }
+
         // Animator data
         bool isJumping = false;
         bool isAttacking = false;

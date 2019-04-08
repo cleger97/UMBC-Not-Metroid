@@ -16,6 +16,7 @@ TagManager:
   - Augments
   - Ground
   - Enemy
+  - UI Slider
   layers:
   - Default
   - TransparentFX

@@ -84,6 +84,10 @@ public class MenuHandle : MonoBehaviour {
         }
     }
 
+    public bool isPaused() {
+      return paused;
+    }
+
     private void Disable() {
         allowedToUnpause = true;
         select.SetActive (false);
@@ -111,7 +115,7 @@ public class MenuHandle : MonoBehaviour {
         musicVolSlider.SetActive(true); 
         SFXVolSlider.SetActive(true); 
 
-        List<Transform> pauseObjects = new List<Transform>() {continueButton.transform, restartButton.transform, returnButton.transform, musicVolSlider.transform};
+        List<Transform> pauseObjects = new List<Transform>() {continueButton.transform, restartButton.transform, returnButton.transform, musicVolSlider.transform, SFXVolSlider.transform};
         selectInst.Pause(pauseObjects);
 
 		select.SetActive (true);

@@ -56,7 +56,7 @@ public class MenuSelect : MonoBehaviour {
 
         if (Input.GetAxisRaw("Horizontal") != 0) {
             float horiz = Input.GetAxisRaw("Horizontal");
-            if (objects[currentlySelected].name == "Audio Volume") {
+            if (objects[currentlySelected].tag == "UI Slider") {
                 Slider s = objects[currentlySelected].GetComponent<Slider>();
 
                 s.value += (Mathf.Sign(horiz) * Mathf.Ceil( Mathf.Abs(horiz) )) * 0.025f; 
