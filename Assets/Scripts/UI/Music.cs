@@ -6,7 +6,7 @@ public class Music : MonoBehaviour {
 
     public static Music inst = null;
 
-    AudioSource audio;
+    public AudioSource audio;
     
 	// Use this for initialization
 	void Start () {        
@@ -16,6 +16,11 @@ public class Music : MonoBehaviour {
             DontDestroyOnLoad(this);
             inst = this;
         } else {
+            if (Music.inst.audio.clip != this.audio.clip) {
+                Music.inst.audio.clip = this.audio.clip;
+                Music.inst.audio.Play();
+            }
+
             audio.Stop();
             Destroy(this);
         }

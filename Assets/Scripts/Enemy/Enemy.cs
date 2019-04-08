@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour
     // Use this for initialization
     public virtual void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = Player.instance.gameObject;
         
         HealthBar.transform.position = transform.position;
         HealthBar.maxValue = enemyHealth;

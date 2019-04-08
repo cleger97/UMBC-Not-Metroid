@@ -36,13 +36,24 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         weapon = FindObjectOfType<PlayerWeapon>();
-        if (instance != null)
-        {
-            Destroy(this.gameObject);
+
+        if (instance != null) {
+            Debug.Log(instance);
+            Debug.Log(instance.gameObject);
+
+            Debug.Log("Instances same: " + (instance == this));
         } else {
-            DontDestroyOnLoad(this);
-            instance = this;
+            Debug.Log("instance = null");
         }
+
+        if (instance == null)
+        {
+            DontDestroyOnLoad(this.gameObject);
+            instance = this;
+        } else {
+            Destroy(this.gameObject);
+        }
+
         controller = GetComponent<Controller2D>();
         animator = GetComponent<Animator>();
         collider = GetComponent<BoxCollider2D>();

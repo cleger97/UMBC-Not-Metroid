@@ -26,7 +26,7 @@ public class JumpEnemy : MonoBehaviour {
     private Slider HealthBar;
     // Use this for initialization
     void Start () {
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = Player.instance.gameObject;
         //rb = GetComponent<Rigidbody2D>();
         jumpTimer = jumpResetTime;
        
