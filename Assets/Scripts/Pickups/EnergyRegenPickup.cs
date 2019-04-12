@@ -16,6 +16,13 @@ public class EnergyRegenPickup : MonoBehaviour
     {
         sr = GetComponent<SpriteRenderer>();
         source = FindObjectOfType<AudioSource>();
+        
+        Player p = Player.instance;
+        if (p == null) {
+          Debug.LogWarning("No Player");
+        } else {
+          regen = Player.instance.gameObject.GetComponent<PlayerWeapon>();
+        }
     }
 
     // Update is called once per frame
