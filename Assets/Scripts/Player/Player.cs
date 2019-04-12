@@ -32,6 +32,8 @@ public class Player : MonoBehaviour
     private float groundingDelay = 0f;
     private float maxGroundingDelay = 0.15f;
 
+    //public bool isEnabled = true;
+
 
     private void Awake()
     {

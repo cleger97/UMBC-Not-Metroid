@@ -22,6 +22,11 @@ public class PlayerHP : MonoBehaviour {
         return currentHP;
     }
 
+    private void Die() {
+      MenuHandle.instance.GameOver();
+
+    }
+
     public void TakeDamage (float damage) {
         if (currentHP > 0) {
             currentHP -= damage;
@@ -29,9 +34,10 @@ public class PlayerHP : MonoBehaviour {
 
         currentHP = (currentHP < 0) ? 0 : currentHP;
 
-        if (currentHP < 0) {
+        if (currentHP <= 0) {
             Debug.LogWarning("Player died");
             isDead = true;
+            Die();
         }
 
         // visual FX for taking damage

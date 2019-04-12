@@ -49,6 +49,8 @@ public class LevelTransitionHandler : MonoBehaviour {
        
         if (requiredAsyncUnload && lastScene != SceneManager.GetActiveScene()) {
             StartCoroutine(UnloadScene());
+        } else {
+            FinishLoad();
         }
     }
 

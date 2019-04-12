@@ -110,6 +110,6 @@ public class JumpEnemy : MonoBehaviour {
 
     private void Attack()
     {
-        player.GetComponent<PlayerHP>().currentHP -= 20f;
+        player.GetComponent<PlayerHP>().TakeDamage(20f);
     }
 }

@@ -39,7 +39,7 @@ public class Projectile : MonoBehaviour {
         if (other.tag == "Player")
         {
             pos = transform.position;
-            player.GetComponent<PlayerHP>().currentHP -= damageAmount;
+            player.GetComponent<PlayerHP>().TakeDamage(damageAmount);
             Instantiate(ps, pos, Quaternion.identity);
             Destroy(this.gameObject);
         }
