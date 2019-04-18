@@ -93,14 +93,14 @@ public class NewSpiderBoss : MonoBehaviour
             Debug.LogWarning("No Detedtion Collider; won't enter threatened state");
             return;
         }
-        bool isDetected = detectionCollider.bounds.Contains(player.GetComponent<BoxCollider2D>().bounds.center);
+        bool isDetected = detectionCollider.bounds.Intersects(player.GetComponent<BoxCollider2D>().bounds);
         isThreatened = isDetected;
 
         if (attackCollider == null) {
             Debug.LogWarning("No Attack Collider; won't attack");
             return;
         }
-        bool isAttackCollide = attackCollider.bounds.Contains(player.GetComponent<BoxCollider2D>().bounds.center);
+        bool isAttackCollide = attackCollider.bounds.Intersects(player.GetComponent<BoxCollider2D>().bounds);
         isAttacking = isAttackCollide;
 
         
@@ -179,8 +179,16 @@ public class NewSpiderBoss : MonoBehaviour
         }
     }
 
-    public void StartAttack() {
+    public void AttackPart1() {
 
+    }
+
+    public void AttackPart2() {
+
+    }
+
+    public void AttackPart3() {
+        
     }
 
     public void ResolveAttack() {
