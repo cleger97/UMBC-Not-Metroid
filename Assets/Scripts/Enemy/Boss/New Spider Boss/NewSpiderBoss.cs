@@ -24,6 +24,11 @@ public class NewSpiderBoss : MonoBehaviour
 
     private int state = 0;
 
+    [SerializeField]
+    private BoxCollider2D attackCollider;
+
+    [SerializeField]
+    private BoxCollider2D detectionCollider;
 
     // boss HP bar
     public Slider healthBar;
@@ -79,6 +84,29 @@ public class NewSpiderBoss : MonoBehaviour
         return;
     }
 
+    private void CheckDetectors() {
+        if (player == null) {
+            Debug.LogError("No player");
+            return;
+        }
+        if(detectionCollider == null) {
+            Debug.LogWarning("No Detedtion Collider; won't enter threatened state");
+            return;
+        }
+        bool isDetected = detectionCollider.bounds.Contains(player.GetComponent<BoxCollider2D>().bounds.center);
+        isThreatened = isDetected;
+
+        if (attackCollider == null) {
+            Debug.LogWarning("No Attack Collider; won't attack");
+            return;
+        }
+        bool isAttackCollide = attackCollider.bounds.Contains(player.GetComponent<BoxCollider2D>().bounds.center);
+        isAttacking = isAttackCollide;
+
+        
+
+    }
+
     /*
     State System
     State 0: Idle State
@@ -93,6 +121,7 @@ public class NewSpiderBoss : MonoBehaviour
         if (MenuHandle.instance != null && MenuHandle.instance.isPaused()) { return; }
 
         UpdateAnimator(state);
+        CheckDetectors();
         switch (state) {
             // idle state
             case 0: {
