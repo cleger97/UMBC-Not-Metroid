@@ -7,10 +7,33 @@ public class PlayerHP : MonoBehaviour {
     public float maxHP = 250f;
     public float currentHP;
 
+    public float hpRegenRate = 5f;
+
+    private float timeSinceLastHit = 0f;
+
+    public float timeUntilFastRegen = 8f;
+
     public bool isDead = false;
 
     public void Start() {
         RefreshPlayer();
+    }
+
+    public void Update() {
+        if (timeSinceLastHit < timeUntilFastRegen) {
+            timeSinceLastHit += Time.deltaTime;
+        }
+
+        if (!isDead && currentHP < maxHP) {
+            if (timeSinceLastHit > timeUntilFastRegen) {
+                currentHP += hpRegenRate * 5 * Time.deltaTime;
+            } else if (timeSinceLastHit > 1f) {
+                currentHP += hpRegenRate * Time.deltaTime;
+            }   
+        }
+
+        currentHP = (currentHP > maxHP) ? maxHP : currentHP;
+
     }
 
     public void RefreshPlayer() {
@@ -39,6 +62,8 @@ public class PlayerHP : MonoBehaviour {
             isDead = true;
             Die();
         }
+
+        timeSinceLastHit = 0f;
 
         // visual FX for taking damage
     }
