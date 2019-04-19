@@ -28,7 +28,6 @@ public class SwordWeapon : Weapon {
 	void DisableWeapon() {
 		weapon.GetComponent<SpriteRenderer>().enabled = false;
 		weapon.GetComponent<BoxCollider2D>().enabled = false;
-        this.GetComponent<BoxCollider2D>().enabled = false;
 	}
 
 	// really basic sword swing - just activate the box, but at some point an animation will be attached.
@@ -36,7 +35,7 @@ public class SwordWeapon : Weapon {
 		if (currentWeaponCD <= 0) {
 			weapon.GetComponent<SpriteRenderer>().enabled = false;
 			weapon.GetComponent<BoxCollider2D>().enabled = true;
-            this.GetComponent<BoxCollider2D>().enabled = true;
+            //this.GetComponent<BoxCollider2D>().enabled = true;
             currentWeaponCD = weaponCD;
 
 			return true;

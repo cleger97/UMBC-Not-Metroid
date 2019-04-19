@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 5823018e23767d34a9faf9b987ce076c
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - ps2: {fileID: 198569259849734850, guid: e84308144cdfa2449b4d3599d81aa5e8, type: 3}
+  - healthBar: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

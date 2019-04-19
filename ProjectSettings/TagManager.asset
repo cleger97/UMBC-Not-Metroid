@@ -35,9 +35,9 @@ TagManager:
   - Boss
   - Enemy
   - Detection
-  - 
-  - 
-  - 
+  - Weapon
+  - 'Move Through: Hittable'
+  - 'Move Through: Not Hittable'
   - 
   - 
   - 

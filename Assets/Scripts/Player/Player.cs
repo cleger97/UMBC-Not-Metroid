@@ -95,6 +95,19 @@ public class Player : MonoBehaviour
         jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
     }
 
+    public float GetWeaponDamage() {
+        if (weapon == null) {
+            return 0;
+        }
+        Weapon currentWeapon = weapon.getCurrentWeapon();
+
+        if (currentWeapon == null) {
+            return 0;
+        }
+
+        return currentWeapon.damage;
+    }
+
     void Update()
     {
         if (MenuHandle.instance != null && MenuHandle.instance.isPaused()) {

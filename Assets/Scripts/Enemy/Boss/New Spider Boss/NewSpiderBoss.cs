@@ -5,16 +5,15 @@ using UnityEngine.UI;
 
 public class NewSpiderBoss : MonoBehaviour
 {
-    // "Hardened Shield" effect: Should take 10 hits, regardless of strength.
-    public int health = 10;
-    public int maxHealth = 10;
+    
     public float speed = 5;
     // damage is gonna ramp up the lower the boss is
     public float damage;
-    public float atkSpd;
+    public float atkDelay = 0f;
+    [SerializeField]
+    private float maxAtkDelay = 5f;
 
     public bool isThreatened = false;
-
     public bool isAttacking = false;
 
     private bool flip = false;
@@ -22,6 +21,7 @@ public class NewSpiderBoss : MonoBehaviour
 
     private bool isFacingLeft = true;
 
+    [SerializeField]
     private int state = 0;
 
     [SerializeField]
@@ -30,8 +30,7 @@ public class NewSpiderBoss : MonoBehaviour
     [SerializeField]
     private BoxCollider2D detectionCollider;
 
-    // boss HP bar
-    public Slider healthBar;
+    
     private Player player;
     private Animator anim;
 
@@ -43,12 +42,6 @@ public class NewSpiderBoss : MonoBehaviour
         player = Player.instance;
         anim = GetComponent<Animator>();
 
-        health = maxHealth;
-
-        if (healthBar != null) {
-            healthBar.maxValue = health;
-            healthBar.value = health;
-        }
         
 
         ResetAnimator();
@@ -120,6 +113,14 @@ public class NewSpiderBoss : MonoBehaviour
         if (player == null) {return;}
         if (MenuHandle.instance != null && MenuHandle.instance.isPaused()) { return; }
 
+        if (atkDelay > 0) {
+            atkDelay -= Time.deltaTime;
+            atkDelay = (atkDelay >= 0) ? atkDelay : 0;
+            if (atkDelay == 0) {
+                ResolveAttack();
+            }
+        }
+
         UpdateAnimator(state);
         CheckDetectors();
         switch (state) {
@@ -168,6 +169,9 @@ public class NewSpiderBoss : MonoBehaviour
             case 2: {
                 // Start attack
                 // When finished will handle itself
+                if (atkDelay == 0) {
+                    atkDelay = maxAtkDelay;
+                }
 
                 break;
             }
@@ -192,6 +196,7 @@ public class NewSpiderBoss : MonoBehaviour
     }
 
     public void ResolveAttack() {
+        Debug.Log("Resolve called");
         if (isThreatened) {
             state = 1;
         } else {
@@ -200,4 +205,8 @@ public class NewSpiderBoss : MonoBehaviour
         isAttacking = false;
     }
 
+
+    public void DebugLog() {
+        Debug.Log("Debug animator event fired");
+    }
 }

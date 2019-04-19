@@ -31,6 +31,13 @@ public class PlayerWeapon : MonoBehaviour {
 		}
 	}
 
+	public Weapon getCurrentWeapon() {
+		if (listOfWeapons.Count == 0) {
+			return null;
+		}
+		return listOfWeapons[currentWeapon].GetComponent<Weapon>();
+	}
+
 	// Update is called once per frame
 	public void UpdateState () {
         isAttacking = false;
