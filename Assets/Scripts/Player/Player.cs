@@ -14,12 +14,12 @@ public class Player : MonoBehaviour
     public AudioClip [] clips;
 
     private float gravity;
-    private float jumpVelocity;
-    private Vector3 velocity;
+    [HideInInspector]public float jumpVelocity;
+    [HideInInspector]public Vector3 velocity;
     private float velocityXSmoothing;
     private bool facingRight = true;
     public bool doubleJump = false;
-    private Controller2D controller;
+    [HideInInspector]public Controller2D controller;
     private Animator animator;
     private FloatTimer inputScale;
     private FloatTimer accelerationTimeAirborne;

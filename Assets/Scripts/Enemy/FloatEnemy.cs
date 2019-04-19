@@ -77,5 +77,14 @@ public class FloatEnemy : MonoBehaviour
         {
             m_speed *= -1;
         }
-    }   
+    }
+    void OnTriggerExit2D(Collider2D collider)
+    {
+        if (collider.tag == "Player")
+        {
+            Debug.Log("hitExit");
+            collider.gameObject.GetComponent<PlayerHP>().TakeDamage(10);
+        }
+    }
+    
 }

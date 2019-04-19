@@ -24,6 +24,8 @@ public class JumpEnemy : MonoBehaviour {
     private bool facingRight = true;
     [SerializeField]
     private Slider HealthBar;
+
+    private float hitResetTime = 1f;
     // Use this for initialization
     void Start () {
         player = Player.instance.gameObject;
@@ -101,15 +103,38 @@ public class JumpEnemy : MonoBehaviour {
                 Instantiate(ps2, transform.position, Quaternion.identity);
                 Destroy(this.gameObject);
             }
+            
         }
         if (col.tag == "Player")
         {
+           
             Attack();
         }
     }
-
+    void OnTriggerExit2D(Collider2D collider)
+    {
+        if (collider.tag == "Player")
+        {
+            Debug.Log("hitExit");
+            collider.gameObject.GetComponent<PlayerHP>().TakeDamage(10);
+        }
+    }
+    void OnTriggerStay2D(Collider2D collider)
+    {
+        if (collider.tag == "Player")
+        {
+            Debug.Log("hitStay");
+            hitResetTime -= Time.deltaTime;
+            if (hitResetTime <= 0)
+            {
+                collider.gameObject.GetComponent<PlayerHP>().TakeDamage(10);
+                hitResetTime = 1f;
+            }
+        }
+    }
     private void Attack()
     {
         player.GetComponent<PlayerHP>().TakeDamage(20f);
+        
     }
 }
