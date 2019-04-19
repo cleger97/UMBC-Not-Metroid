@@ -9,6 +9,10 @@ public class NSpiderBossHealth : MonoBehaviour
     public int health = 10;
     public int maxHealth = 10;
 
+    [SerializeField]
+    private NewSpiderBoss boss;
+
+
     public ParticleSystem ps2;
     // Start is called before the first frame update
 
@@ -20,6 +24,10 @@ public class NSpiderBossHealth : MonoBehaviour
         if (healthBar != null) {
             healthBar.maxValue = health;
             healthBar.value = health;
+        }
+
+        if (boss == null) {
+            boss = this.GetComponent<NewSpiderBoss>();
         }
     }
 
@@ -38,6 +46,10 @@ public class NSpiderBossHealth : MonoBehaviour
             // explode into particles
             Instantiate(ps2, transform.position, Quaternion.identity);
             Destroy(gameObject);
+        }
+
+        if ((float) health / (float) maxHealth < 0.4) {
+            boss.Enrage();
         }
 
         if (healthBar == null) {return;}

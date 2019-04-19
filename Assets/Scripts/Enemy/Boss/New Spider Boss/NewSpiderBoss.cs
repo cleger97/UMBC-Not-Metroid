@@ -21,6 +21,8 @@ public class NewSpiderBoss : MonoBehaviour
 
     private bool isFacingLeft = true;
 
+    private bool isEnraged = false;
+
     [SerializeField]
     private int state = 0;
 
@@ -37,7 +39,7 @@ public class NewSpiderBoss : MonoBehaviour
     private int animState = 0;
 
   // Start is called before the first frame update
-  void Start()
+    void Start()
     {
         player = Player.instance;
         anim = GetComponent<Animator>();
@@ -183,18 +185,17 @@ public class NewSpiderBoss : MonoBehaviour
         }
     }
 
-    public void AttackPart1() {
+    public void Enrage() {
+        if (isEnraged) {
+            return;
+        }
+        isEnraged = true;
 
+        anim.speed = 1.5f;
+        speed = 1.5f * speed;
+        maxAtkDelay = 1.5f;
+        this.GetComponent<SpriteRenderer>().color = Color.blue;
     }
-
-    public void AttackPart2() {
-
-    }
-
-    public void AttackPart3() {
-        
-    }
-
     public void ResolveAttack() {
         Debug.Log("Resolve called");
         if (isThreatened) {
