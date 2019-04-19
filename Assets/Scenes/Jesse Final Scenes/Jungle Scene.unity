@@ -31235,7 +31235,7 @@ PrefabInstance:
     - target: {fileID: 224166740296532254, guid: 30d2992ec4c706f43829615f96b2764a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 224166740296532254, guid: 30d2992ec4c706f43829615f96b2764a,
         type: 3}
@@ -33161,7 +33161,7 @@ PrefabInstance:
     - target: {fileID: 114167701991875602, guid: 84399c872ed662a47993f0f04b8ed1cf,
         type: 3}
       propertyPath: otherSceneName
-      value: _PreBossLevel
+      value: Spider Boss Level
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84399c872ed662a47993f0f04b8ed1cf, type: 3}
@@ -33872,7 +33872,7 @@ PrefabInstance:
     - target: {fileID: 224063576952775970, guid: 103603c7aaab7b043a6ee97178e82716,
         type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 224063576952775970, guid: 103603c7aaab7b043a6ee97178e82716,
         type: 3}
@@ -33912,7 +33912,7 @@ PrefabInstance:
     - target: {fileID: 224063576952775970, guid: 103603c7aaab7b043a6ee97178e82716,
         type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 224063576952775970, guid: 103603c7aaab7b043a6ee97178e82716,
         type: 3}
