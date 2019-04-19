@@ -12,10 +12,12 @@ public class SwitchTrack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       musicObject = Music.inst;
+       
     }
 
     public void Switch() {
+        musicObject = Music.inst;
+
         musicObject.SwitchTrack(switchTo);
         hasSwitched = true;
     }

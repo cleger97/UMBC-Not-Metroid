@@ -7,15 +7,26 @@ public class Music : MonoBehaviour {
     public static Music inst = null;
 
     public AudioSource audio;
+
+    private bool detonate = false;
     
+    void Awake() {
+        if (inst == null)
+        {
+            DontDestroyOnLoad(this.gameObject);
+            inst = this;
+        }
+        else
+        { 
+            detonate = true;
+        }
+    }
+
 	// Use this for initialization
-	void Awake () {        
+	void Start () {        
         audio = gameObject.GetComponent<AudioSource>();
 
-        if (inst == null) {
-            DontDestroyOnLoad(this);
-            inst = this;
-        } else {
+        if (detonate) {
             if (Music.inst.audio.clip != this.audio.clip) {
                 Music.inst.audio.clip = this.audio.clip;
                 Music.inst.audio.Play();
