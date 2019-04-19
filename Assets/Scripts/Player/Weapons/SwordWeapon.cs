@@ -5,7 +5,7 @@ using UnityEngine;
 public class SwordWeapon : Weapon {
 
 	public GameObject weapon;
-	public float weaponCD = 0.2f;
+	public float weaponCD = 0.5f;
 
 	private float currentWeaponCD = 0;
 	

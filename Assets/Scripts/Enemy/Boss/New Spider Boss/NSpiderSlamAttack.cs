@@ -13,6 +13,7 @@ public class NSpiderSlamAttack : MonoBehaviour
 
     public float SlamAttackDamage = 50f;
 
+    // These are wired to animators
     public void SlamAttack1() {
         Slam1.Enable();
     }

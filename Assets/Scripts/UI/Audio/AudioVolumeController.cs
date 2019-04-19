@@ -7,8 +7,8 @@ public enum AudioType {SFX, Music};
 
 public class AudioVolumeController : MonoBehaviour {
 
-    public static float MusicVolPercent = 1;
-    public static float SFXVolPercent = 1;
+    public static float MusicVolPercent = 0.5f;
+    public static float SFXVolPercent = 0.5f;
 
     public Slider musicSlider;
 
@@ -33,6 +33,9 @@ public class AudioVolumeController : MonoBehaviour {
     void Start() {
         SFXList = new List<GameObject>();
         MusicList = new List<GameObject>();
+
+        musicSlider.value = MusicVolPercent;
+        SFXSlider.value = SFXVolPercent;
     }
     void Update() {
         if (pulse) {

@@ -9,7 +9,7 @@ public class Music : MonoBehaviour {
     public AudioSource audio;
     
 	// Use this for initialization
-	void Start () {        
+	void Awake () {        
         audio = gameObject.GetComponent<AudioSource>();
 
         if (inst == null) {
@@ -26,6 +26,11 @@ public class Music : MonoBehaviour {
         }
 		
 	}
+
+    public void SwitchTrack(AudioClip clip) {
+        audio.clip = clip;
+        audio.Play();
+    }
 
     void Update() {
         if (AudioVolumeController.inst != null) {

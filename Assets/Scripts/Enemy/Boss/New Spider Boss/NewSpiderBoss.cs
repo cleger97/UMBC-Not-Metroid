@@ -32,6 +32,10 @@ public class NewSpiderBoss : MonoBehaviour
     [SerializeField]
     private BoxCollider2D detectionCollider;
 
+    public float flipDelay = 1f;
+
+    public float MAXFlipDelay = 1f;
+
     
     private Player player;
     private Animator anim;
@@ -137,21 +141,42 @@ public class NewSpiderBoss : MonoBehaviour
             }
             // walk at player
             case 1: {
-                // walk at player
-                Vector3 direction = - this.transform.position + player.transform.position;
-                float xDirection = Mathf.Sign(direction.x);
+                SwitchTrack trackSwitcher = this.gameObject.GetComponent<SwitchTrack>();
+                if (trackSwitcher != null && !trackSwitcher.hasSwitched) {
+                    trackSwitcher.Switch();
+                }
 
-                if (isFacingLeft && (xDirection == 1)) {
+                // walk at player
+                Vector3 direction = player.transform.position - this.transform.position;
+
+                bool flipRight = (player.transform.position.x + 1 > transform.position.x);
+
+                bool flipLeft = (player.transform.position.x - 1 < transform.position.x);
+
+                float xDirection = (isFacingLeft) ? -1 : 1;
+
+                if (isFacingLeft && flipRight) {
+                    if (flipDelay <= 0) {
+                        Quaternion rot = new Quaternion(0, 180, 0, 0);
+                        transform.rotation = rot;
+                        isFacingLeft = false;
+                        flipDelay = MAXFlipDelay;
+                    } else {
+                        flipDelay -= Time.deltaTime;
+                    }
                     // Flip
-                    Quaternion rot = new Quaternion(0, 180, 0, 0);
-                    transform.rotation = rot;
-                    isFacingLeft = false;
+                    
                 }                
-                else if (!isFacingLeft && (xDirection == -1)) {
-                    // Flip
-                    Quaternion rot = new Quaternion(0, 0, 0, 0);
-                    transform.rotation = rot;
-                    isFacingLeft = true;
+                else if (!isFacingLeft && flipLeft) {
+                        // Flip
+                    if (flipDelay <= 0){
+                        Quaternion rot = new Quaternion(0, 0, 0, 0);
+                        transform.rotation = rot;
+                        isFacingLeft = true;
+                        flipDelay = MAXFlipDelay;
+                    } else {
+                        flipDelay -= Time.deltaTime;
+                    }
                 }
 
                 Vector3 newPosition = new Vector3(xDirection * speed * Time.deltaTime + transform.position.x, transform.position.y, transform.position.z);

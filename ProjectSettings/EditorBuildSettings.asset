@@ -30,7 +30,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Jesse Final Scenes/Second Leve.unity
     guid: 398d763b070fa48d6ac109a924eb633f
   - enabled: 1
-    path: Assets/Scenes/Spider Boss Level.unity
+    path: Assets/Scenes/Jesse Final Scenes/Spider Boss Level.unity
     guid: e35976834151d6745a19545e24ab36c6
   - enabled: 1
     path: Assets/Scenes/Test Scenes/Enemy Test Scene.unity

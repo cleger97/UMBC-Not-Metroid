@@ -551,6 +551,7 @@ GameObject:
   - component: {fileID: 7118310117684871190}
   - component: {fileID: 1884926728}
   - component: {fileID: 7793826369543020682}
+  - component: {fileID: 8317421289540225043}
   m_Layer: 14
   m_Name: Spider Boss
   m_TagString: Enemy
@@ -702,7 +703,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
-  maxHealth: 20
+  maxHealth: 35
+  boss: {fileID: 0}
   ps2: {fileID: 198569259849734850, guid: e84308144cdfa2449b4d3599d81aa5e8, type: 3}
   healthBar: {fileID: 0}
 --- !u!114 &7793826369543020682
@@ -720,4 +722,18 @@ MonoBehaviour:
   Slam1: {fileID: 466101813}
   Slam2: {fileID: 178737994}
   Slam3: {fileID: 164933341}
-  SlamAttackDamage: 50
+  SlamAttackDamage: 25
+--- !u!114 &8317421289540225043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7118310117684871180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ce831ab201b29049a787085ba597ff8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicObject: {fileID: 0}
+  switchTo: {fileID: 8300000, guid: 141839e4000e4614189ab941caa104a2, type: 3}
