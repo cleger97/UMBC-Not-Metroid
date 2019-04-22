@@ -18,8 +18,13 @@ public class SwitchTrack : MonoBehaviour
     public void Switch() {
         musicObject = Music.inst;
 
-        musicObject.SwitchTrack(switchTo);
-        hasSwitched = true;
+        if (musicObject != null) {
+            musicObject.SwitchTrack(switchTo);
+            hasSwitched = true;
+        } else {
+            Debug.LogWarning("Null music object, no switch");
+        }
+        
     }
 
 }

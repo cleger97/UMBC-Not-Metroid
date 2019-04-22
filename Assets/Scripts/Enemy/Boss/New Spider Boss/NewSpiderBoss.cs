@@ -26,7 +26,7 @@ public class NewSpiderBoss : MonoBehaviour
     [SerializeField]
     private int state = 0;
     [SerializeField]
-    private GameObject _laserPrefab;
+    private GameObject projectilePrefab;
     [SerializeField]
     private BoxCollider2D attackCollider;
 
@@ -36,6 +36,12 @@ public class NewSpiderBoss : MonoBehaviour
     public float flipDelay = 1f;
 
     public float MAXFlipDelay = 1f;
+
+    public float shootDistance = 15f;
+
+    public float currentShootDelay = 0f;
+    public float minShootDelay = 4f;
+    public float forceShootDelay = 10f;
 
     
     private Player player;
@@ -63,6 +69,7 @@ public class NewSpiderBoss : MonoBehaviour
         anim.SetBool("Idle", false);
         anim.ResetTrigger("Attack");
         anim.SetBool("Walk", false);
+        anim.ResetTrigger("WebAttack");
 
         //anim.SetBool("Idle", true);
         //state = 0;
@@ -78,6 +85,7 @@ public class NewSpiderBoss : MonoBehaviour
             case 0: anim.SetBool("Idle", true); break;
             case 1: anim.SetBool("Walk", true); break;
             case 2: anim.SetTrigger("Attack"); break;
+            case 3: anim.SetTrigger("WebAttack"); break;
             default: break;
         }
         animState = state;
@@ -126,6 +134,10 @@ public class NewSpiderBoss : MonoBehaviour
             if (atkDelay == 0) {
                 ResolveAttack();
             }
+        }
+
+        if (currentShootDelay < forceShootDelay) {
+            currentShootDelay += Time.deltaTime;
         }
 
         UpdateAnimator(state);
@@ -182,14 +194,17 @@ public class NewSpiderBoss : MonoBehaviour
 
                 Vector3 newPosition = new Vector3(xDirection * speed * Time.deltaTime + transform.position.x, transform.position.y, transform.position.z);
                 transform.position = newPosition;
-                
+
+                float distance = Mathf.Abs(player.transform.position.x - transform.position.x);
                 if (!isThreatened) {
                     state = 0;
-                }
-
-                if (isAttacking) {
+                } else if ((distance > shootDistance && currentShootDelay > minShootDelay) || (currentShootDelay > forceShootDelay)){
+                    state = 3;
+                } else if (isAttacking) {
                     state = 2;
                 }
+                    
+                
 
                 break;
             }
@@ -201,6 +216,12 @@ public class NewSpiderBoss : MonoBehaviour
                     atkDelay = maxAtkDelay;
                 }
 
+                break;
+            }
+
+            // web attack
+            // handles itself for the most part
+            case 3: {
                 break;
             }
 
@@ -231,9 +252,13 @@ public class NewSpiderBoss : MonoBehaviour
         }
         isAttacking = false;
     }
+
+    public void ResolveShoot() {
+        currentShootDelay = 0f;
+    }
     public void Shoot()
     {
-        Instantiate(_laserPrefab, new Vector3(transform.position.x - 1, transform.position.y, transform.position.z), Quaternion.identity);
+        Instantiate(projectilePrefab, new Vector3(transform.position.x - 1, transform.position.y, transform.position.z), Quaternion.identity);
     }
 
     public void DebugLog() {
