@@ -25,7 +25,8 @@ public class NewSpiderBoss : MonoBehaviour
 
     [SerializeField]
     private int state = 0;
-
+    [SerializeField]
+    private GameObject _laserPrefab;
     [SerializeField]
     private BoxCollider2D attackCollider;
 
@@ -230,7 +231,10 @@ public class NewSpiderBoss : MonoBehaviour
         }
         isAttacking = false;
     }
-
+    public void Shoot()
+    {
+        Instantiate(_laserPrefab, new Vector3(transform.position.x - 1, transform.position.y, transform.position.z), Quaternion.identity);
+    }
 
     public void DebugLog() {
         Debug.Log("Debug animator event fired");

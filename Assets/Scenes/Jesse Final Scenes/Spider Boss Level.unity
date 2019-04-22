@@ -582,6 +582,22 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 7118310117684871184, guid: 8f8df68ab50cc70478d9b33568035a75,
+        type: 3}
+      propertyPath: _laserPrefab
+      value: 
+      objectReference: {fileID: 1779474961009336, guid: 96055852f03461447bae9150dfd23eda,
+        type: 3}
+    - target: {fileID: 2121400683790641711, guid: 8f8df68ab50cc70478d9b33568035a75,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2121400683790641711, guid: 8f8df68ab50cc70478d9b33568035a75,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f8df68ab50cc70478d9b33568035a75, type: 3}
 --- !u!1001 &943271000

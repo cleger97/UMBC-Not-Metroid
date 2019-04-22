@@ -144,7 +144,7 @@ public class SpiderBoss : MonoBehaviour {
         anim.SetBool("newCharge2", false);
         anim.SetBool("newCharge3", true);
     }
-    private void Shoot()
+    public void Shoot()
     {
         Instantiate(_laserPrefab, new Vector3(transform.position.x - 1, transform.position.y, transform.position.z), Quaternion.identity);
     }
