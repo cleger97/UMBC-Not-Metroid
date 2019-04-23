@@ -319,6 +319,8 @@ GameObject:
   - component: {fileID: 3183336415540421979}
   - component: {fileID: 4992809839507467784}
   - component: {fileID: 1474917754}
+  - component: {fileID: 1372905134}
+  - component: {fileID: 1372905143}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -437,7 +439,16 @@ MonoBehaviour:
   audio: {fileID: 1474917754}
   clips:
   - {fileID: 8300000, guid: 935f95c972e6abf4fb9aa41bcc2c8442, type: 3}
+  jumpVelocity: 0
+  velocity: {x: 0, y: 0, z: 0}
   doubleJump: 0
+  controller: {fileID: 0}
+  hitstunMAX: 0.1
+  currentHitstun: 0
+  isHitstun: 0
+  hitstunKBSmooth: 1
+  kbVel: 5
+  yKBVel: 5
 --- !u!114 &114573432671248324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -508,8 +519,11 @@ MonoBehaviour:
   maxHP: 250
   currentHP: 250
   hpRegenRate: 5
+  timeSinceLastHit: 0
   timeUntilFastRegen: 8
+  immFrames: 0.4
   isDead: 0
+  invincible: 0
 --- !u!114 &4992809839507467784
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -626,3 +640,29 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1372905134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1717481386824200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6231682b58b2c904a9e919091caa187d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1372905143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1717481386824200}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 663b393c7026b2144a0e5438ee5098b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toListen:
+  - {fileID: 11400000, guid: b9900fab0605d3b4795df526ac06d20c, type: 2}

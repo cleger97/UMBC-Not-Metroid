@@ -32742,26 +32742,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114891426085680746, guid: 942dfa33d789bec48887bd47e12b09ef,
-        type: 3}
-      propertyPath: hitstunMAX
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114891426085680746, guid: 942dfa33d789bec48887bd47e12b09ef,
-        type: 3}
-      propertyPath: hitstunKBSmooth
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114891426085680746, guid: 942dfa33d789bec48887bd47e12b09ef,
-        type: 3}
-      propertyPath: yKBVel
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3183336415540421979, guid: 942dfa33d789bec48887bd47e12b09ef,
-        type: 3}
-      propertyPath: immFrames
-      value: 0.4
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 942dfa33d789bec48887bd47e12b09ef, type: 3}
 --- !u!1001 &970013763
@@ -33190,38 +33170,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44710ef3a848392448a0ac2ac03b6dec, type: 3}
---- !u!1 &1372905133 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1717481386824200, guid: 942dfa33d789bec48887bd47e12b09ef,
-    type: 3}
-  m_PrefabInstance: {fileID: 920748636}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1372905134
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1372905133}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6231682b58b2c904a9e919091caa187d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1372905143
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1372905133}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 663b393c7026b2144a0e5438ee5098b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  toListen:
-  - {fileID: 11400000, guid: b9900fab0605d3b4795df526ac06d20c, type: 2}
 --- !u!1 &1379734057
 GameObject:
   m_ObjectHideFlags: 0
