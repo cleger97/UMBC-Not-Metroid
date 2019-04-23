@@ -70,17 +70,19 @@ public class LevelTransitionHandler : MonoBehaviour {
     }
 
     private void FinishLoad() {
-        Transform player = Player.instance.transform;
-        GameObject[] doors = GameObject.FindGameObjectsWithTag("Door");
+        if (Player.instance != null) {
+            Transform player = Player.instance.transform;
+            GameObject[] doors = GameObject.FindGameObjectsWithTag("Door");
 
-        foreach(GameObject door in doors) {
-            LevelExit doorScript = door.GetComponent<LevelExit>();
-            if (doorScript == null) continue;
-            if (doorScript.thisId == LevelTransitionHandler.idOnLoad) {
-                player.position = door.transform.GetChild(0).position;
+            foreach(GameObject door in doors) {
+                LevelExit doorScript = door.GetComponent<LevelExit>();
+                if (doorScript == null) continue;
+                if (doorScript.thisId == LevelTransitionHandler.idOnLoad) {
+                    player.position = door.transform.GetChild(0).position;
+                }
             }
+            player.gameObject.SetActive(true);
         }
-        player.gameObject.SetActive(true);
         idOnLoad = -1; // don't move objects that load in other ways
         timer = MAXTimer;
     }

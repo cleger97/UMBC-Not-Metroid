@@ -238,9 +238,10 @@ public class NewSpiderBoss : MonoBehaviour
         }
         isEnraged = true;
 
-        anim.speed = 1.5f;
+        anim.speed = 1f;
         speed = 1.5f * speed;
         maxAtkDelay = 1.5f;
+        forceShootDelay = 6f;
         this.GetComponent<SpriteRenderer>().color = Color.blue;
     }
     public void ResolveAttack() {
@@ -259,6 +260,12 @@ public class NewSpiderBoss : MonoBehaviour
     public void Shoot()
     {
         Instantiate(projectilePrefab, new Vector3(transform.position.x - 1, transform.position.y, transform.position.z), Quaternion.identity);
+    }
+
+    public void EnrageShoot() {
+        if (isEnraged) {
+            Instantiate(projectilePrefab, new Vector3(transform.position.x - 1, transform.position.y, transform.position.z), Quaternion.identity);
+        }
     }
 
     public void DebugLog() {

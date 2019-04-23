@@ -48,6 +48,9 @@ public class MenuHandle : MonoBehaviour
 
   public GameObject SFXVolSlider;
 
+  public Transform GameOverPositions;
+  public Transform normalPositions;
+
   AudioSource SFX;
   public AudioClip backClip;
   public AudioClip selectClip;
@@ -77,6 +80,8 @@ public class MenuHandle : MonoBehaviour
     continueButton.transform.GetChild(0).GetComponent<Button>().onClick.AddListener(ResumeGame);
     restartButton.transform.GetChild(0).GetComponent<Button>().onClick.AddListener(RestartLoad);
     returnButton.transform.GetChild(0).GetComponent<Button>().onClick.AddListener(ReturnLoad);
+
+    ResetPositions();
   }
 
   void Update()
@@ -99,6 +104,17 @@ public class MenuHandle : MonoBehaviour
         ResumeGame();
       }
     }
+  }
+
+  void ResetPositions() {
+    continueButton.transform.position = normalPositions.GetChild(0).transform.position;
+    restartButton.transform.position = normalPositions.GetChild(1).transform.position;
+    returnButton.transform.position = normalPositions.GetChild(2).transform.position;
+  }
+
+  void SetGameOverPositions() {
+    restartButton.transform.position = GameOverPositions.GetChild(0).transform.position;
+    returnButton.transform.position = GameOverPositions.GetChild(1).transform.position;
   }
 
   public bool isPaused()
@@ -125,8 +141,10 @@ public class MenuHandle : MonoBehaviour
     paused = true;
     allowedToUnpause = true;
     text.SetActive(true);
-    text.GetComponent<Text>().text = "Paused";
-    text.GetComponent<Text>().color = Color.blue;
+    //text.GetComponent<Text>().text = "Paused";
+    //text.GetComponent<Text>().color = Color.blue;
+
+    ResetPositions();
 
     continueButton.SetActive(true);
     restartButton.SetActive(true);
@@ -147,9 +165,10 @@ public class MenuHandle : MonoBehaviour
   {
     paused = true;
     allowedToUnpause = false;
-    text.SetActive(true);
-    text.GetComponent<Text>().text = "Game Over";
-    text.GetComponent<Text>().color = Color.red;
+
+    SetGameOverPositions();
+
+    GameOverScreen.SetActive(true);
 
     restartButton.SetActive(true);
     returnButton.SetActive(true);
