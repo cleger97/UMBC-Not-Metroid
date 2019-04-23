@@ -32,6 +32,16 @@ public class Player : MonoBehaviour
     private float groundingDelay = 0f;
     private float maxGroundingDelay = 0.15f;
 
+    public float hitstunMAX = 0.4f;
+    public float currentHitstun = 0f;
+    public bool isHitstun = false;
+
+    public float hitstunKBSmooth = 0.8f;
+
+    public float kbVel = 5f;
+    public float yKBVel = 3f;
+
+
     //public bool isEnabled = true;
 
 
@@ -145,102 +155,101 @@ public class Player : MonoBehaviour
             }
         }
 
-        // Get input and flip direction if necessary
-        Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxis("Vertical"));
-        if (input.x > 0 && !facingRight)
-        {
-            facingRight = true;
-            transform.localScale = new Vector3(.5f, .5f, .5f);
-        }
+        if (isHitstun) {
 
-        if (input.x < 0 && facingRight)
-        {
-            facingRight = false;
-            transform.localScale = new Vector3(-.5f, .5f, .5f);
-            //transform.position = new Vector3(transform.position.x  - 0.08f, transform.position.y, transform.position.z);
-        }
+            currentHitstun -= Time.deltaTime;
+            if (currentHitstun <= 0) {
+                isHitstun = false;
+                currentHitstun = 0;
+            }
 
-        // Smooth the x velocity
-        float targetVelocityX = input.x * moveSpeed * inputScale.Value;
-        //float targetVelocityX = 0f;
+        } else {
 
-
-        if (!dashOnCooldown.Value && Mathf.Abs(input.x) > 0 || controller.collisions.below) {
-            velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded.Value : accelerationTimeAirborne.Value);
-
-        }
-
-        // Handle Dashing
-        /*
-        if (Input.GetButtonDown("Dash") && !dashOnCooldown.Value)
-        {
-            velocity.x = (facingRight) ? jumpVelocity * 1f : -jumpVelocity * 1f;
-            velocity.y = jumpVelocity * 0.5f;
-            //accelerationTimeAirborne.UpdateValue(.25f, 1f);
-            //accelerationTimeGrounded.UpdateValue(.25f, 1f);
-            inputScale.UpdateValue(.25f, .25f);
-            dashOnCooldown.UpdateValue(.5f, true);
-
-        }
-        */
-        // Handle jumps
-        if (Input.GetButtonDown("Jump"))
-        {
-            if (controller.collisions.below || groundingDelay > 0) // Regular jump
+            // Get input and flip direction if necessary
+            Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxis("Vertical"));
+            if (input.x > 0 && !facingRight)
             {
-                audio.clip = clips[0];
-                audio.Play();
-                velocity.y = jumpVelocity;
+                facingRight = true;
+                transform.localScale = new Vector3(.5f, .5f, .5f);
+            }
 
-                groundingDelay = 0;
-                isJumping = true;
+            if (input.x < 0 && facingRight)
+            {
+                facingRight = false;
+                transform.localScale = new Vector3(-.5f, .5f, .5f);
+                //transform.position = new Vector3(transform.position.x  - 0.08f, transform.position.y, transform.position.z);
             }
-            else if (controller.collisions.left)
-            { // Left wall jump
-                audio.clip = clips[0];
-                audio.Play();
-                velocity.y = jumpVelocity;
-                velocity.x = jumpVelocity / 1.5f;
-                inputScale.UpdateValue(.1f, 0);
+
+            // Smooth the x velocity
+            float targetVelocityX = input.x * moveSpeed * inputScale.Value;
+            //float targetVelocityX = 0f;
+
+
+            if (!dashOnCooldown.Value && Mathf.Abs(input.x) > 0 || controller.collisions.below) {
+                velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded.Value : accelerationTimeAirborne.Value);
+
             }
-            else if (controller.collisions.right)
-            { // Right wall jump
-                audio.clip = clips[0];
-                audio.Play();
-                velocity.y = jumpVelocity;
-                velocity.x = -jumpVelocity / 1.5f;
-                inputScale.UpdateValue(.1f, 0);
+
+            // Handle Dashing
+            /*
+            if (Input.GetButtonDown("Dash") && !dashOnCooldown.Value)
+            {
+                velocity.x = (facingRight) ? jumpVelocity * 1f : -jumpVelocity * 1f;
+                velocity.y = jumpVelocity * 0.5f;
+                //accelerationTimeAirborne.UpdateValue(.25f, 1f);
+                //accelerationTimeGrounded.UpdateValue(.25f, 1f);
+                inputScale.UpdateValue(.25f, .25f);
+                dashOnCooldown.UpdateValue(.5f, true);
+
             }
-            else if (!doubleJump)
-            {    // Double jump
-                audio.clip = clips[0];
-                audio.Play();
-                velocity.y = jumpVelocity;
-                doubleJump = true;
-                isJumping = true;
+            */
+            // Handle jumps
+            if (Input.GetButtonDown("Jump"))
+            {
+                if (controller.collisions.below || groundingDelay > 0) // Regular jump
+                {
+                    audio.clip = clips[0];
+                    audio.Play();
+                    velocity.y = jumpVelocity;
+
+                    groundingDelay = 0;
+                    isJumping = true;
+                }
+                else if (controller.collisions.left)
+                { // Left wall jump
+                    audio.clip = clips[0];
+                    audio.Play();
+                    velocity.y = jumpVelocity;
+                    velocity.x = jumpVelocity / 1.5f;
+                    inputScale.UpdateValue(.1f, 0);
+                }
+                else if (controller.collisions.right)
+                { // Right wall jump
+                    audio.clip = clips[0];
+                    audio.Play();
+                    velocity.y = jumpVelocity;
+                    velocity.x = -jumpVelocity / 1.5f;
+                    inputScale.UpdateValue(.1f, 0);
+                }
+                else if (!doubleJump)
+                {    // Double jump
+                    audio.clip = clips[0];
+                    audio.Play();
+                    velocity.y = jumpVelocity;
+                    doubleJump = true;
+                    isJumping = true;
+                }
             }
+            // Ignore platform if pressing down
+            controller.ignorePlatform = input.y < 0;
+
+            // Add gravity
+            velocity.y += gravity * Time.deltaTime;
+
+            weapon.UpdateState();
+            isAttacking = weapon.isAttacking;
+
         }
-        // Ignore platform if pressing down
-        controller.ignorePlatform = input.y < 0;
-
-        // Add gravity
-        velocity.y += gravity * Time.deltaTime;
-
-        /*
-        if (input.x > 0 && controller.collisions.right && !Physics2D.Raycast(collider.bounds.max + Vector3.up * 0.1f, Vector2.right, 0.015625f)) {
-            velocity = Vector2.zero;
-            velocity.y = 4f;
-
-        }
-        if (input.x < 0 && controller.collisions.left && !Physics2D.Raycast(collider.bounds.max - new Vector3(collider.bounds.size.x, 0) + Vector3.up * 0.1f, Vector2.left, 0.015625f * 2f)) {
-            velocity = Vector2.zero;
-            velocity.y = 4f;
-
-        }
-        */
-
-        weapon.UpdateState();
-        isAttacking = weapon.isAttacking;
 
         // Handle animator motions
         HandleAnimator(isJumping, isAttacking);
@@ -259,6 +268,17 @@ public class Player : MonoBehaviour
         }
 
         
+    }
+
+    public void DamageKnockback() {
+
+        Vector3 negativeVelocity = new Vector3(Mathf.Sign(velocity.x) * -1 * kbVel, yKBVel, velocity.z);
+
+        this.velocity = negativeVelocity * hitstunKBSmooth;
+
+        isHitstun = true;
+        currentHitstun = hitstunMAX;
+
     }
 
     public void ProjectileSpawn()

@@ -9,11 +9,16 @@ public class PlayerHP : MonoBehaviour {
 
     public float hpRegenRate = 5f;
 
+    [SerializeField]
     private float timeSinceLastHit = 0f;
 
     public float timeUntilFastRegen = 8f;
 
+    public float immFrames = 0.2f;
+
     public bool isDead = false;
+
+    public bool invincible = false;
 
     public void Start() {
         RefreshPlayer();
@@ -51,11 +56,19 @@ public class PlayerHP : MonoBehaviour {
     }
 
     public void TakeDamage (float damage) {
-        if (currentHP > 0) {
-            currentHP -= damage;
+        if (timeSinceLastHit < immFrames) {
+            return;
         }
 
-        currentHP = (currentHP < 0) ? 0 : currentHP;
+        if (!invincible) {
+            if (currentHP > 0)
+            {
+                currentHP -= damage;
+            }
+
+            currentHP = (currentHP < 0) ? 0 : currentHP;
+        }
+        
 
         if (currentHP <= 0) {
             Debug.LogWarning("Player died");
@@ -64,6 +77,13 @@ public class PlayerHP : MonoBehaviour {
         }
 
         timeSinceLastHit = 0f;
+
+        if (Player.instance.isHitstun)
+        {
+            return;
+        }
+
+        Player.instance.DamageKnockback();
 
         // visual FX for taking damage
     }

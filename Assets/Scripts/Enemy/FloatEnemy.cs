@@ -66,7 +66,7 @@ public class FloatEnemy : MonoBehaviour
         if (other.tag == "Player")
         {
             Debug.Log("Hitting the player");
-            other.GetComponent<PlayerHP>().currentHP -= damageAmount;
+            other.GetComponent<PlayerHP>().TakeDamage(damageAmount);
         }
         if(other.tag == "Weapon")
         {
