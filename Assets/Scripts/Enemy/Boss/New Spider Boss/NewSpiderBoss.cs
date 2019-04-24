@@ -225,6 +225,29 @@ public class NewSpiderBoss : MonoBehaviour
             // web attack
             // handles itself for the most part
             case 3: {
+                // always face player.
+
+                Vector3 direction = player.transform.position - this.transform.position;
+
+                bool flipRight = (player.transform.position.x > transform.position.x);
+
+                bool flipLeft = (player.transform.position.x < transform.position.x);
+
+                float xDirection = (isFacingLeft) ? -1 : 1;
+
+                if (isFacingLeft && flipRight) {
+                    Quaternion rot = new Quaternion(0, 180, 0, 0);
+                    transform.rotation = rot;
+                    isFacingLeft = false;
+                    flipDelay = MAXFlipDelay;
+                }                
+                else if (!isFacingLeft && flipLeft) {
+                    Quaternion rot = new Quaternion(0, 0, 0, 0);
+                    transform.rotation = rot;
+                    isFacingLeft = true;
+                    flipDelay = MAXFlipDelay;
+                }
+
                 break;
             }
 
@@ -243,7 +266,7 @@ public class NewSpiderBoss : MonoBehaviour
 
         anim.speed = 1f;
         speed = 1.5f * speed;
-        maxAtkDelay = 1.5f;
+        maxAtkDelay = GetComponent<NSpiderSlamAttack>().SlamAttackDelayEnraged;
         forceShootDelay = 6f;
         this.GetComponent<SpriteRenderer>().color = Color.blue;
     }

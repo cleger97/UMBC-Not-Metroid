@@ -258,7 +258,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 487861239}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -284,7 +284,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 487861239}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 42384ddf05961b548ab1a48f4b30748a, type: 3}
   m_Name: 
@@ -1015,17 +1015,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f222bcac51a8cd847906590077376b1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 3
   damage: 0
   atkDelay: 0
   maxAtkDelay: 5
   isThreatened: 0
   isAttacking: 0
   state: 0
+  projectilePrefab: {fileID: 1779474961009336, guid: 96055852f03461447bae9150dfd23eda,
+    type: 3}
   attackCollider: {fileID: 1391775260}
   detectionCollider: {fileID: 1167494777}
   flipDelay: 1
   MAXFlipDelay: 1
+  shootDistance: 15
+  currentShootDelay: 0
+  minShootDelay: 4
+  forceShootDelay: 10
 --- !u!50 &7118310117684871190
 Rigidbody2D:
   serializedVersion: 4
@@ -1034,11 +1040,11 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7118310117684871180}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 38.37292
+  m_Mass: 100
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -1060,7 +1066,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
-  maxHealth: 35
+  maxHealth: 60
   boss: {fileID: 0}
   ps2: {fileID: 198569259849734850, guid: e84308144cdfa2449b4d3599d81aa5e8, type: 3}
   healthBar: {fileID: 5898603339522240821}
@@ -1079,7 +1085,8 @@ MonoBehaviour:
   Slam1: {fileID: 466101813}
   Slam2: {fileID: 178737994}
   Slam3: {fileID: 164933341}
-  SlamAttackDamage: 25
+  SlamAttackDamage: 50
+  SlamAttackDelay: 2
 --- !u!114 &8317421289540225043
 MonoBehaviour:
   m_ObjectHideFlags: 0

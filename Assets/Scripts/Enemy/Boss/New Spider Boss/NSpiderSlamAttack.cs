@@ -15,6 +15,8 @@ public class NSpiderSlamAttack : MonoBehaviour
 
     public float SlamAttackDelay = 2f;
 
+    public float SlamAttackDelayEnraged = 1f;
+
     // These are wired to animators
     public void SlamAttack1() {
         Slam1.Enable();
