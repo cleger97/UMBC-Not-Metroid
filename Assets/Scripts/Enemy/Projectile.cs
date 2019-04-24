@@ -18,7 +18,7 @@ public class Projectile : MonoBehaviour {
     {
         enemy = GameObject.FindGameObjectWithTag("Sniper");
         player = GameObject.FindGameObjectWithTag("Player");
-        projectilePath = player.transform.position;
+        projectilePath = (player.transform.position - this.transform.position).normalized;
         reflectPath = this.transform.position;
        // ps = GameObject.FindObjectOfType<ParticleSystem>();
     }
@@ -26,20 +26,15 @@ public class Projectile : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        transform.position = Vector2.MoveTowards(transform.position, projectilePath, _speed * Time.deltaTime);
-        if(transform.position == projectilePath)
-        {
-            pos = transform.position;
-            Instantiate(ps, pos, Quaternion.identity);
-            Destroy(this.gameObject);
-        }
+        transform.position = transform.position + (projectilePath * _speed *  Time.deltaTime);
+        
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
         {
             pos = transform.position;
-            player.GetComponent<PlayerHP>().TakeDamage(damageAmount);
+            player.GetComponent<PlayerHP>().TakeDamage(damageAmount, true, false);
             Instantiate(ps, pos, Quaternion.identity);
             Destroy(this.gameObject);
         }
@@ -47,6 +42,12 @@ public class Projectile : MonoBehaviour {
         {
            // Debug.Log("Reflect");
             //transform.position = Vector2.MoveTowards(transform.position, enemy.transform.position, _speed * Time.deltaTime);
+        }
+
+        if (other.tag == "Wall") {
+            pos = transform.position;
+            Instantiate(ps, pos, Quaternion.identity);
+            Destroy(this.gameObject);
         }
     }
 }

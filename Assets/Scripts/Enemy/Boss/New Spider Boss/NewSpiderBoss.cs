@@ -210,10 +210,13 @@ public class NewSpiderBoss : MonoBehaviour
             }
             // slam attack
             case 2: {
+                if (GetComponent<NSpiderSlamAttack>() == null) {
+                    return;
+                }
                 // Start attack
                 // When finished will handle itself
                 if (atkDelay == 0) {
-                    atkDelay = maxAtkDelay;
+                    atkDelay = GetComponent<NSpiderSlamAttack>().SlamAttackDelay;
                 }
 
                 break;

@@ -588,6 +588,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1779474961009336, guid: 96055852f03461447bae9150dfd23eda,
         type: 3}
+    - target: {fileID: 7118310117684871184, guid: 8f8df68ab50cc70478d9b33568035a75,
+        type: 3}
+      propertyPath: projectilePrefab
+      value: 
+      objectReference: {fileID: 1779474961009336, guid: 96055852f03461447bae9150dfd23eda,
+        type: 3}
+    - target: {fileID: 7118310117684871184, guid: 8f8df68ab50cc70478d9b33568035a75,
+        type: 3}
+      propertyPath: speed
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2121400683790641711, guid: 8f8df68ab50cc70478d9b33568035a75,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -596,6 +607,23 @@ PrefabInstance:
     - target: {fileID: 2121400683790641711, guid: 8f8df68ab50cc70478d9b33568035a75,
         type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1884926728, guid: 8f8df68ab50cc70478d9b33568035a75, type: 3}
+      propertyPath: maxHealth
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 7793826369543020682, guid: 8f8df68ab50cc70478d9b33568035a75,
+        type: 3}
+      propertyPath: SlamAttackDamage
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 487861241, guid: 8f8df68ab50cc70478d9b33568035a75, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 487861242, guid: 8f8df68ab50cc70478d9b33568035a75, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -893,7 +921,7 @@ GameObject:
   - component: {fileID: 1437617725}
   m_Layer: 8
   m_Name: Ground
-  m_TagString: Ground
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15959,7 +15987,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

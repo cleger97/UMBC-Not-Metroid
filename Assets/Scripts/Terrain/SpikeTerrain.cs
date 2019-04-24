@@ -22,14 +22,8 @@ public class SpikeTerrain : MonoBehaviour {
 
     void Update() {
         if (colliding != null) {
-            colliding.GetComponent<PlayerHP>().TakeDamage(DamagePerSecond * Time.deltaTime);
+            colliding.GetComponent<PlayerHP>().TakeDamage(DamagePerSecond * Time.deltaTime, false, false);
         }
     }
 
-    /* void OnTriggerStay2D(Collider2D collider) {
-        Debug.Log("Damage Tick");
-        if (collider.tag.Equals("Player")) {
-            collider.GetComponent<PlayerHP>().TakeDamage(DamagePerSecond * Time.deltaTime);
-        }
-    } */
 }

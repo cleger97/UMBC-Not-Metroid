@@ -55,8 +55,8 @@ public class PlayerHP : MonoBehaviour {
 
     }
 
-    public void TakeDamage (float damage) {
-        if (timeSinceLastHit < immFrames) {
+    public void TakeDamage (float damage, bool kb = true, bool hasImmFrames = true) {
+        if (timeSinceLastHit < immFrames && hasImmFrames) {
             return;
         }
 
@@ -78,7 +78,7 @@ public class PlayerHP : MonoBehaviour {
 
         timeSinceLastHit = 0f;
 
-        if (Player.instance.isHitstun)
+        if (Player.instance.isHitstun || !kb)
         {
             return;
         }
