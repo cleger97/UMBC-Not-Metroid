@@ -44,10 +44,28 @@ public class Player : MonoBehaviour
 
     //public bool isEnabled = true;
 
+    private void OnEnable() {
+        if (instance == null || instance == this)
+        {
+            DontDestroyOnLoad(this.gameObject);
+            instance = this;
+        } else {
+            Destroy(this.gameObject);
+        }
+    }
+
 
     private void Awake()
     {
         weapon = FindObjectOfType<PlayerWeapon>();
+
+        if (instance == null || instance == this)
+        {
+            DontDestroyOnLoad(this.gameObject);
+            instance = this;
+        } else {
+            Destroy(this.gameObject);
+        }
 
         if (instance != null) {
             Debug.Log(instance);
@@ -58,13 +76,14 @@ public class Player : MonoBehaviour
             Debug.Log("instance = null");
         }
 
-        if (instance == null)
+    /*  if (instance == null)
         {
             DontDestroyOnLoad(this.gameObject);
             instance = this;
         } else {
             Destroy(this.gameObject);
         }
+    */
 
         controller = GetComponent<Controller2D>();
         animator = GetComponent<Animator>();
@@ -155,15 +174,15 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (isHitstun) {
+        //if (isHitstun) {
 
-            currentHitstun -= Time.deltaTime;
-            if (currentHitstun <= 0) {
-                isHitstun = false;
-                currentHitstun = 0;
-            }
+        //    currentHitstun -= Time.deltaTime;
+        //    if (currentHitstun <= 0) {
+        //        isHitstun = false;
+        //        currentHitstun = 0;
+        //    }
 
-        } else {
+        //} else {
 
             // Get input and flip direction if necessary
             Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxis("Vertical"));
@@ -249,7 +268,7 @@ public class Player : MonoBehaviour
             weapon.UpdateState();
             isAttacking = weapon.isAttacking;
 
-        }
+        //}
 
         // Handle animator motions
         HandleAnimator(isJumping, isAttacking);

@@ -1655,7 +1655,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 1947260053736822}
   GameOverScreen: {fileID: 1497012645098618}
-  VictoryScreen: {fileID: 0}
+  VictoryScreen: {fileID: 1994748391493571638}
   select: {fileID: 1674650390156214}
   continueButton: {fileID: 1345198194268004}
   restartButton: {fileID: 1795765825893286}
