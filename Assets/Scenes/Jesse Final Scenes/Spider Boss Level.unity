@@ -2682,38 +2682,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7118310117684871190, guid: 8f8df68ab50cc70478d9b33568035a75,
-        type: 3}
-      propertyPath: m_BodyType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7118310117684871190, guid: 8f8df68ab50cc70478d9b33568035a75,
-        type: 3}
-      propertyPath: m_Mass
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 1185700132048397493, guid: 8f8df68ab50cc70478d9b33568035a75,
-        type: 3}
-      propertyPath: m_Constraints
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7118310117684871184, guid: 8f8df68ab50cc70478d9b33568035a75,
-        type: 3}
-      propertyPath: _laserPrefab
-      value: 
-      objectReference: {fileID: 1779474961009336, guid: 96055852f03461447bae9150dfd23eda,
-        type: 3}
-    - target: {fileID: 7118310117684871184, guid: 8f8df68ab50cc70478d9b33568035a75,
-        type: 3}
-      propertyPath: projectilePrefab
-      value: 
-      objectReference: {fileID: 1779474961009336, guid: 96055852f03461447bae9150dfd23eda,
-        type: 3}
-    - target: {fileID: 7118310117684871184, guid: 8f8df68ab50cc70478d9b33568035a75,
-        type: 3}
-      propertyPath: speed
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 2121400683790641711, guid: 8f8df68ab50cc70478d9b33568035a75,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -2722,23 +2690,6 @@ PrefabInstance:
     - target: {fileID: 2121400683790641711, guid: 8f8df68ab50cc70478d9b33568035a75,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1884926728, guid: 8f8df68ab50cc70478d9b33568035a75, type: 3}
-      propertyPath: maxHealth
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 7793826369543020682, guid: 8f8df68ab50cc70478d9b33568035a75,
-        type: 3}
-      propertyPath: SlamAttackDamage
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 487861241, guid: 8f8df68ab50cc70478d9b33568035a75, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 487861242, guid: 8f8df68ab50cc70478d9b33568035a75, type: 3}
-      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -2951,6 +2902,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114891369460815594, guid: 103603c7aaab7b043a6ee97178e82716,
+        type: 3}
+      propertyPath: VictoryScreen
+      value: 
+      objectReference: {fileID: 1994748391493571638}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 103603c7aaab7b043a6ee97178e82716, type: 3}
 --- !u!1 &1151721610
@@ -43298,3 +43254,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1994748391493571638 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1994748391493571638, guid: 103603c7aaab7b043a6ee97178e82716,
+    type: 3}
+  m_PrefabInstance: {fileID: 986003428}
+  m_PrefabAsset: {fileID: 0}

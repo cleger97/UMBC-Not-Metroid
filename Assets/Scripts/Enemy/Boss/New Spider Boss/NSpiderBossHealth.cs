@@ -45,6 +45,7 @@ public class NSpiderBossHealth : MonoBehaviour
             // death stuff
             // explode into particles
             Instantiate(ps2, transform.position, Quaternion.identity);
+            MenuHandle.instance.Victory();
             Destroy(gameObject);
         }
 

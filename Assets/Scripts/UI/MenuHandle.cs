@@ -39,6 +39,7 @@ public class MenuHandle : MonoBehaviour
 
   public GameObject text;
   public GameObject GameOverScreen;
+  public GameObject VictoryScreen;
   public GameObject select;
   public GameObject continueButton;
   public GameObject restartButton;
@@ -117,6 +118,10 @@ public class MenuHandle : MonoBehaviour
     returnButton.transform.position = GameOverPositions.GetChild(1).transform.position;
   }
 
+  void SetVictoryPositions() {
+    returnButton.transform.position = GameOverPositions.GetChild(0).transform.position;
+  }
+
   public bool isPaused()
   {
     return paused;
@@ -127,6 +132,7 @@ public class MenuHandle : MonoBehaviour
     allowedToUnpause = true;
     select.SetActive(false);
     GameOverScreen.SetActive(false);
+    VictoryScreen.SetActive(false);
     continueButton.SetActive(false);
     restartButton.SetActive(false);
     returnButton.SetActive(false);
@@ -181,6 +187,27 @@ public class MenuHandle : MonoBehaviour
 
     Time.timeScale = 0;
   }
+
+  public void Victory()
+  {
+    paused = true;
+    allowedToUnpause = false;
+
+    SetVictoryPositions();
+
+    VictoryScreen.SetActive(true);
+
+    returnButton.SetActive(true);
+
+    List<Transform> pauseObjects = new List<Transform>() { returnButton.transform };
+
+    selectInst.Pause(pauseObjects);
+
+    select.SetActive(true);
+
+    Time.timeScale = 0;
+  }
+
 
   public void InputButton(string button)
   {
